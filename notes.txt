@@ -1,0 +1,34 @@
+Steps
+=====
+- Account Creation
+
+Form fields
+-----------
+First Name
+Last Name
+Email Address
+Password
+Confirm Password
+
+- Activate Account by clicking link in email.
+- Activation done. 'Start Application' page.
+- Welcome and Instructions page - Application Parts, Deadlines, Progress Status.
+
+Application Sections - Ashesi
+=============================
+1. Personal Information
+  - Photo
+  - Name
+  - Email Address
+2. Scholarships
+3. Housing Information
+4. Family Information
+5. Sponsor Information
+6. Academic History
+7. Extracurricular Activities & Interests
+8. Travel Information
+9. Work Experience
+10. Career Aspirations
+11. Personal Essay
+12. Additional Information
+13. Examination Details
