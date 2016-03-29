@@ -128,3 +128,11 @@ STATIC_URL = '/static/'
 
 # App-specific settings
 ACCOUNT_ACTIVATION_DAYS = 7
+
+DEFAULT_FROM_EMAIL = 'test@example.com'
+
+EMAIL_HOST = '74.55.86.74'
+
+EMAIL_HOST_USER = 'deone'
+
+EMAIL_HOST_PASSWORD = '@dune369'

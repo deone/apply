@@ -1,0 +1,7 @@
+You are registered!
+
+Click on this link to activate your account; http://{{ site.domain }}/accounts/activate/{{ activation_key }}/.
+
+Note that the link expires in {{ expiration_days }} days.
+
+Regards,

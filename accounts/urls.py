@@ -24,7 +24,7 @@ urlpatterns = [
         ActivationView.as_view(),
         name='registration_activate'),
     url(r'^register/$',
-        ApplyRegistrationView.as_view(),
+        RegistrationView.as_view(),
         name='registration_register'),
     url(r'^register/complete/$',
         TemplateView.as_view(
