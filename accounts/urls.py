@@ -7,7 +7,7 @@ HMAC activation workflow.
 from django.conf.urls import include, url
 from django.views.generic.base import TemplateView
 
-from registration.backends.hmac.views import ActivationView, RegistrationView
+from registration.backends.hmac.views import ActivationView
 
 from .views import ApplyRegistrationView
 

@@ -11,6 +11,6 @@ class ApplyRegistrationForm(RegistrationForm):
         super(ApplyRegistrationForm, self).__init__(*args, **kwargs)
         self.fields.pop('username')
 
-    def save(self):
+    def save(self, commit=False):
         self.instance.username = self.cleaned_data['email']
         return super(ApplyRegistrationForm, self).save()
