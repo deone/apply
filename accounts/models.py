@@ -1,5 +1,13 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.dispatch import receiver
 
-# Create your models here.
+from registration.signals import user_registered
+
+
+@receiver(user_registered)
+def user_created(sender, user, request, **kwargs):
+    user.first_name = kwargs['first_name']
+    user.last_name = kwargs['last_name']
+    user.save()
