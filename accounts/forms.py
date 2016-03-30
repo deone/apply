@@ -11,8 +11,8 @@ class ApplyRegistrationForm(RegistrationForm):
         super(ApplyRegistrationForm, self).__init__(*args, **kwargs)
         self.fields.pop('username')
         self.fields['email'].widget = forms.TextInput(attrs={'class': 'form-control'})
-        self.fields['password1'].widget = forms.TextInput(attrs={'class': 'form-control'})
-        self.fields['password2'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['password1'].widget = forms.PasswordInput(attrs={'class': 'form-control'})
+        self.fields['password2'].widget = forms.PasswordInput(attrs={'class': 'form-control'})
 
     def save(self, commit=False):
         self.instance.username = self.cleaned_data['email']

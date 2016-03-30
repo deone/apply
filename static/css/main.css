@@ -40,3 +40,23 @@ html, body {
 .width-50 {
   width: 50%;
 }
+
+/* Buttons */
+.btn-primary {
+  background-color: #ba9077;
+  color: #fff;
+  border: none;
+}
+.btn-primary:hover, .btn-primary:active {
+  background-color: #b56969;
+}
+
+/* Forms */
+.form-horizontal .errorlist {
+  list-style: none;
+  margin-left: 8em;
+  color: #e62739;
+}
+.help-text {
+  font-size: 90%;
+}
