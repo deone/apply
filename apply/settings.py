@@ -129,6 +129,9 @@ STATIC_URL = '/static/'
 
 
 #### App-specific settings
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
 # Registration
 ACCOUNT_ACTIVATION_DAYS = 7
