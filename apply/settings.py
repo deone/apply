@@ -128,13 +128,25 @@ STATIC_URL = '/static/'
 
 
 
-# App-specific settings
+#### App-specific settings
+
+# Registration
 ACCOUNT_ACTIVATION_DAYS = 7
 
+# Email
 DEFAULT_FROM_EMAIL = 'test@example.com'
-
 EMAIL_HOST = '74.55.86.74'
-
 EMAIL_HOST_USER = 'deone'
-
 EMAIL_HOST_PASSWORD = '@dune369'
+
+
+# Payments
+APPLICATION_FEE = '50'
+STORE_NAME = 'The Apply App'
+
+PAYMENT_DESCRIPTION = 'Application Fee'
+PAYMENT_MASTER_KEY = 'cef70167-7dec-458e-b5bf-1befb4196565'
+
+# - Test API
+PAYMENT_TEST_URL = 'https://app.mpowerpayments.com/sandbox-api/v1/checkout-invoice/create'
+PAYMENT_TEST_PRIVATE_KEY = 'test_private_-TBbZrbdchpR6RZ9aB6g9Hx6-wk'
