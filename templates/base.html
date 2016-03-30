@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Apply App &mdash; {% block page_title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load staticfiles %}
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+    <!-- JS -->
+    <!-- <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
+
+    {% block extra_js %}{% endblock %}
+
+    <link href='http://fonts.googleapis.com/css?family=Abel:400' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <nav class="navbar navbar-default header">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#apply-navbar-collapse" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand brand" href="#">Apply</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="apply-navbar-collapse">
+
+          {% block nav_items %}
+          {% endblock %}
+
+          <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                {{ user.first_name }} <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="{% url 'logout' %}">
+                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                    Logout
+                  </a>
+                </li>
+                </ul>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+
+      </div>
+    </nav> 
+
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="container-fluid">
+      {% block app_body %}
+      {% endblock %}
+    </div>
+
+  </body>
+</html>
