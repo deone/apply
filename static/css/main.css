@@ -7,4 +7,36 @@ html, body {
 }
 .brand {
   font-size: 150%;
+  color: #fff;
+}
+
+/* Nav */
+.navbar-default {
+  background: #3fb0ac;
+  border: none;
+}
+.navbar-default .navbar-brand {
+  color: #fff;
+}
+
+/* App body */
+.mid {
+  margin: 0 auto;
+}
+.sheet {
+  padding: 0 5em 3em 5em;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  border: solid 1px #eee;
+  -webkit-box-shadow: 3px 3px 2px 0px rgba(207,205,207,1);
+  -moz-box-shadow: 3px 3px 2px 0px rgba(207,205,207,1);
+  box-shadow: 3px 3px 2px 0px rgba(207,205,207,1);
+}
+
+/* Widths */
+.width-90 {
+  width: 90%;
+}
+.width-50 {
+  width: 50%;
 }
