@@ -1,5 +1,9 @@
+@font-face {
+  font-family: Akkurat;
+  src: url('../fonts/akkurat_regular.otf');
+}
 html, body {
-  font-family: 'Abel', sans-serif;
+  font-family: 'Akkurat', 'Abel', sans-serif;
 }
 .header {
   margin-bottom: 0;
