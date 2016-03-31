@@ -1,12 +1,31 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
 {% block page_title %}Apply{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-theme.css' %}">
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> -->
+{% endblock %}
+
 {% block extra_js %}
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
   $('#form-tabs a').click(function (e) {
     e.preventDefault();
     $(this).tab('show');
+  });
+
+  $(function() {
+    $('#id_date_of_birth').datepicker({
+      showOn: "button",
+      buttonImage: "{% static 'img/calendar.png' %}",
+      changeMonth: true,
+      changeYear: true,
+      dateFormat: 'dd-mm-yy',
+      yearRange: '-50:-15'
+    });
   });
 </script>
 {% endblock %}

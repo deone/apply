@@ -1,9 +1,20 @@
 <div class="col-sm-8">
-  <form method="post">
+  <form method="post" class="form-horizontal">
+
+    <h2>Personal Information</h2>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
     <fieldset>
-      <h2>Personal Information</h2>
-      {% csrf_token %}
-      {{ form }}
+
+      <div class="form-group">
+        {{ form.date_of_birth.errors }}
+        <label for="{{ form.date_of_birth.id_for_label }}" class="col-sm-3 control-label">{{ form.date_of_birth.label }}</label>
+        <div class="col-sm-9">
+          {{ form.date_of_birth }}
+        </div>
+      </div>
+
     </fieldset>
   </form>
 </div>

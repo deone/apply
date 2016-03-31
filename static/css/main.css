@@ -3,7 +3,7 @@
   src: url('../fonts/akkurat_regular.otf');
 }
 html, body {
-  font-family: 'Akkurat', 'Abel', sans-serif;
+  font-family: 'Akkurat', sans-serif;
 }
 .header {
   margin-bottom: 0;
@@ -58,6 +58,13 @@ html, body {
 }
 
 /* Forms */
+.tab-pane form {
+  width: 90%;
+}
+#id_date_of_birth {
+  width: 92%;
+  display: inline-block;
+}
 .form-horizontal .errorlist {
   list-style: none;
   margin-left: 8em;
@@ -71,6 +78,9 @@ label {
 }
 form h2 {
   font-size: 130%;
+  margin-bottom: 25px;
+  padding-bottom: 1em;
+  border-bottom: solid 1px #eee;
 }
 
 /* Tabs */
