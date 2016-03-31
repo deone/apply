@@ -66,3 +66,8 @@ html, body {
 .help-text {
   font-size: 90%;
 }
+
+/* Tabs */
+.nav-tabs {
+  font-size: 88%;
+}

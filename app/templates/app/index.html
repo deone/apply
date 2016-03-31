@@ -2,4 +2,55 @@
 
 {% block page_title %}Application Form{% endblock %}
 
-Welcome {{ user }}!
+{% block extra_js %}
+<script>
+  $('#form-tabs a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  });
+</script>
+{% endblock %}
+
+{% block app_body %}
+<div class="mid width-90">
+  <div class="row">
+    <div class="page-header">
+      <h1>Application Form</h1>
+    </div>
+    <div>
+      <!-- Nav tabs -->
+      <ul id="form-tabs" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#personal-info" aria-controls="home" role="tab" data-toggle="tab">Personal Information</a></li>
+        <li role="presentation"><a href="#scholarships" aria-controls="scholarships" role="tab" data-toggle="tab">Scholarships</a></li>
+        <li role="presentation"><a href="#housing-info" aria-controls="housing-info" role="tab" data-toggle="tab">Housing Information</a></li>
+        <li role="presentation"><a href="#family-info" aria-controls="family-info" role="tab" data-toggle="tab">Family Information</a></li>
+        <li role="presentation"><a href="#sponsor-info" aria-controls="sponsor-info" role="tab" data-toggle="tab">Sponsor Information</a></li>
+        <li role="presentation"><a href="#academic-history" aria-controls="academic-history" role="tab" data-toggle="tab">Academic History</a></li>
+        <li role="presentation"><a href="#extra-activities" aria-controls="extra-activities" role="tab" data-toggle="tab">Extracurricular Activities</a></li>
+        <li role="presentation"><a href="#travel-info" aria-controls="travel-info" role="tab" data-toggle="tab">Travel Information</a></li>
+        <li role="presentation"><a href="#work-experience" aria-controls="work-experience" role="tab" data-toggle="tab">Work Experience</a></li>
+        <li role="presentation"><a href="#career-aspirations" aria-controls="career-aspirations" role="tab" data-toggle="tab">Career Aspirations</a></li>
+        <li role="presentation"><a href="#personal-essay" aria-controls="personal-essay" role="tab" data-toggle="tab">Personal Essay</a></li>
+        <li role="presentation"><a href="#additional-info" aria-controls="additional-info" role="tab" data-toggle="tab">Additional Information</a></li>
+        <li role="presentation"><a href="#exam-details" aria-controls="exam-details" role="tab" data-toggle="tab">Examination Details</a></li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="personal-info">Personal Information</div>
+        <div role="tabpanel" class="tab-pane" id="scholarships">Scholarships</div>
+        <div role="tabpanel" class="tab-pane" id="housing-info">...</div>
+        <div role="tabpanel" class="tab-pane" id="family-info">...</div>
+        <div role="tabpanel" class="tab-pane" id="sponsor-info">...</div>
+        <div role="tabpanel" class="tab-pane" id="academic-history">...</div>
+        <div role="tabpanel" class="tab-pane" id="extra-activities">...</div>
+        <div role="tabpanel" class="tab-pane" id="travel-info">...</div>
+        <div role="tabpanel" class="tab-pane" id="work-experience">...</div>
+        <div role="tabpanel" class="tab-pane" id="career-aspirations">...</div>
+        <div role="tabpanel" class="tab-pane" id="personal-essay">...</div>
+        <div role="tabpanel" class="tab-pane" id="additional-info">...</div>
+        <div role="tabpanel" class="tab-pane" id="exam-details">...</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
