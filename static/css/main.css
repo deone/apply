@@ -57,6 +57,12 @@ html, body {
   background-color: #b56969;
 }
 
+/* Widgets */
+.ui-datepicker-trigger {
+  border: none;
+  background: none;
+}
+
 /* Forms */
 .tab-pane form {
   width: 90%;
