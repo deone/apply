@@ -15,7 +15,7 @@ class PersonalInformation(models.Model):
     user = models.OneToOneField(User)
     middle_name = models.CharField(_('middle name'), max_length=30)
     date_of_birth = models.DateField(_('date of birth'), null=True)
-    applied_before = models.NullBooleanField(_('applied before'))
+    applied_before = models.BooleanField(_('applied before'), default=False)
     year_applied = models.CharField(_('year applied'), max_length=4, null=True)
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, null=True)
     # photo = 
