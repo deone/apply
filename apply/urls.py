@@ -5,4 +5,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^payments/', include('payments.urls', namespace='payments')),
+    url(r'^app/', include('app.urls', namespace='app')),
 ]
