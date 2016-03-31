@@ -9,7 +9,7 @@ from django.views.generic.base import TemplateView
 
 from registration.backends.hmac.views import ActivationView
 
-from .views import ApplyRegistrationView
+from .views import ApplyRegistrationView, ApplyActivationView
 
 
 urlpatterns = [
@@ -21,7 +21,7 @@ urlpatterns = [
     # The activation key can make use of any character from the
     # URL-safe base64 alphabet, plus the colon as a separator.
     url(r'^activate/(?P<activation_key>[-:\w]+)/$',
-        ActivationView.as_view(),
+        ApplyActivationView.as_view(),
         name='registration_activate'),
     url(r'^register/$',
         ApplyRegistrationView.as_view(),

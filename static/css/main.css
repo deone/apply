@@ -28,9 +28,7 @@ html, body {
   margin-top: 50px;
   margin-bottom: 100px;
   border: solid 1px #eee;
-  -webkit-box-shadow: 3px 3px 2px 0px rgba(207,205,207,1);
-  -moz-box-shadow: 3px 3px 2px 0px rgba(207,205,207,1);
-  box-shadow: 3px 3px 2px 0px rgba(207,205,207,1);
+  border-radius: 5px;
 }
 
 /* Widths */

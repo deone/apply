@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from registration.backends.hmac.views import RegistrationView
+from registration.backends.hmac.views import RegistrationView, ActivationView
 from registration import signals
 
 from .forms import ApplyRegistrationForm
@@ -14,3 +14,8 @@ class ApplyRegistrationView(RegistrationView):
 
     def get_success_url(self, user):
         return 'accounts:registration_complete'
+
+class ApplyActivationView(ActivationView):
+
+    def get_success_url(self, user):
+        return 'accounts:registration_activation_complete'
