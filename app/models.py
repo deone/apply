@@ -8,7 +8,6 @@ from django.utils.translation import ugettext_lazy as _
 class PersonalInformation(models.Model):
 
     GENDER_CHOICES = (
-        ('', 'Select'),
         ('M', 'Male'),
         ('F', 'Female'),
     )

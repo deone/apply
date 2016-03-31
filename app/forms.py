@@ -12,3 +12,4 @@ class PersonalInformationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PersonalInformationForm, self).__init__(*args, **kwargs)
         self.fields['date_of_birth'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['gender'].widget = forms.RadioSelect(choices=PersonalInformation.GENDER_CHOICES)
