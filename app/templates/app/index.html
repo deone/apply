@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block page_title %}Application Form{% endblock %}
+{% block page_title %}Apply{% endblock %}
 
 {% block extra_js %}
 <script>
@@ -15,7 +15,7 @@
 <div class="mid width-90">
   <div class="row">
     <div class="page-header">
-      <h1>Application Form</h1>
+      <h1>Ashesi University College Undergraduate Application</h1>
     </div>
     <div>
       <!-- Nav tabs -->
@@ -36,7 +36,9 @@
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="personal-info">Personal Information</div>
+        <div role="tabpanel" class="tab-pane active" id="personal-info">
+          {% include 'app/_personal_info.html' %}
+        </div>
         <div role="tabpanel" class="tab-pane" id="scholarships">Scholarships</div>
         <div role="tabpanel" class="tab-pane" id="housing-info">...</div>
         <div role="tabpanel" class="tab-pane" id="family-info">...</div>

@@ -63,8 +63,14 @@ html, body {
   margin-left: 8em;
   color: #e62739;
 }
+label {
+  font-weight: normal;
+}
 .help-text {
   font-size: 90%;
+}
+form h2 {
+  font-size: 130%;
 }
 
 /* Tabs */

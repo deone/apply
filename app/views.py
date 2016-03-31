@@ -1,4 +1,11 @@
 from django.shortcuts import render
 
+from app.forms import PersonalInformationForm
+
 def index(request):
-    return render(request, 'app/index.html', {})
+    if request.method == 'POST':
+        pass
+    else:
+        form = PersonalInformationForm()
+
+    return render(request, 'app/index.html', {'form': form})
