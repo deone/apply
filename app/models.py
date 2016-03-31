@@ -6,11 +6,20 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class PersonalInformation(models.Model):
+
+    GENDER_CHOICES = (
+        ('', 'Select'),
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
+
     user = models.OneToOneField(User)
     middle_name = models.CharField(_('middle name'), max_length=30, blank=True)
     date_of_birth = models.DateField(_('date of birth'))
     applied_before = models.BooleanField(_('applied before'))
     year_applied = models.CharField(_('year applied'), max_length=4, null=True)
+    gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES)
+    # photo = 
 
     def __str__(self):
         return '%s %s %s' % (self.user.first_name, self.middle_name, self.user.last_name)
