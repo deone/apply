@@ -134,6 +134,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
+LOGIN_URL = 'accounts:login'
+
+LOGIN_REDIRECT_URL = 'app:index'
+
 # Registration
 ACCOUNT_ACTIVATION_DAYS = 7
 
