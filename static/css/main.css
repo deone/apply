@@ -71,10 +71,17 @@ html, body {
   width: 92%;
   display: inline-block;
 }
+#id_year_applied {
+  width: 15%;
+}
 .form-horizontal .errorlist {
   list-style: none;
   margin-left: 8em;
   color: #e62739;
+}
+.radio {
+  display: inline-block;
+  width: 80px;
 }
 label {
   font-weight: normal;
