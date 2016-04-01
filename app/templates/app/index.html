@@ -11,7 +11,6 @@
 {% block extra_js %}
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="{% static 'js/jquery.percentageloader-0.2.js' %}"></script>
-<script src="{% static 'js/loader.js' %}"></script>
 <script>
   $(function() {
     $('#id_date_of_birth').datepicker({
@@ -22,6 +21,38 @@
       dateFormat: 'dd-mm-yy',
       yearRange: '-50:-15'
     });
+
+    var $topLoader = $("#topLoader").percentageLoader();
+
+    var topLoaderRunning = false;
+
+    $topLoader.percentageLoader({onready: function () {
+
+      if (topLoaderRunning) {
+        return;
+      }
+      topLoaderRunning = true;
+
+      var kb = 0;
+      var totalKb = 999;
+
+      var animateFunc = function () {
+        kb += 17;
+        progress = kb / totalKb;
+        value = {{ completion }};
+
+        $topLoader.percentageLoader({progress: progress});
+
+        if (kb < totalKb && progress < value) {
+          setTimeout(animateFunc, 25);
+        } else {
+          topLoaderRunning = false;
+        }
+      };
+
+      setTimeout(animateFunc, 25);
+
+    }});
 
   });
 </script>
