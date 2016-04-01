@@ -39,8 +39,8 @@ html, body {
   color: #fff;
 }
 .sections {
-  background: #daad86;
   padding: 0;
+  background: #98dafc;
 }
 .sections .nav {
   padding: 0;
@@ -53,12 +53,11 @@ html, body {
   border-left: solid 4px #daad86;
   font-weight: bold;
 }
-.sections .nav > li:hover,
 .sections .nav > li.active {
   background: #fff;
 }
 .sections .nav > li > a:hover {
-  background: #98dafc;
+  background: #fff;
 }
 
 /* App body */
