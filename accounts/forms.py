@@ -13,7 +13,6 @@ class LoginForm(AuthenticationForm):
 class ApplyRegistrationForm(RegistrationForm):
 
     first_name = forms.CharField(label=_('First Name'), widget=forms.TextInput(attrs={'class': 'form-control'}))
-    middle_name = forms.CharField(label=_('Middle Name'), widget=forms.TextInput(attrs={'class': 'form-control'}))
     last_name = forms.CharField(label=_('Last Name'), widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     def __init__(self, *args, **kwargs):
