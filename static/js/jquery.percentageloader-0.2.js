@@ -267,11 +267,11 @@ see the file license.txt that was included with the plugin bundle.
             (function () {
                 var fontSize, string, smallSize, heightRemaining;
                 /* Calculate the size of the font based on the canvas size */
-                fontSize = cX / 2;
+                fontSize = cX / 2.5;
 
-                percentageText.style.top = ((settings.height / 2) - (fontSize / 2)).toString() + 'px';
+                percentageText.style.top = ((settings.height / 2.25) - (fontSize / 2)).toString() + 'px';
                 percentageText.style.color = '#80a9c8';
-                percentageText.style.font = fontSize.toString() + 'px BebasNeueRegular';
+                percentageText.style.font = fontSize.toString() + 'px Akkurat';
                 percentageText.style.textShadow = '0 1px 1px #FFFFFF';
 
                 /* Calculate the text for the given percentage */
@@ -280,16 +280,16 @@ see the file license.txt that was included with the plugin bundle.
                 percentageText.innerHTML = string;
 
                 /* Calculate font and placement of small 'value' text */
-                smallSize = cX / 5.5;
+                /* smallSize = cX / 5.5;
                 valueText.style.color = '#80a9c8';
-                valueText.style.font = smallSize.toString() + 'px BebasNeueRegular';
+                valueText.style.font = smallSize.toString() + 'px Akkurat';
                 valueText.style.height = smallSize.toString() + 'px';
-                valueText.style.textShadow = 'None';
+                valueText.style.textShadow = 'None'; */
 
                 /* Ugly vertical align calculations - fit into bottom ring.
                  * The bottom ring occupes 1/6 of the diameter of the circle */
-                heightRemaining = (settings.height * 0.16666666) - smallSize;
-                valueText.style.top = ((settings.height * 0.8333333) + (heightRemaining / 4)).toString() + 'px';
+                /* heightRemaining = (settings.height * 0.16666666) - smallSize;
+                valueText.style.top = ((settings.height * 0.8333333) + (heightRemaining / 4)).toString() + 'px'; */
             }());
         };
 
