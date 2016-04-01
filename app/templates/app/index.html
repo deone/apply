@@ -6,11 +6,13 @@
 
 {% block extra_css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-theme.css' %}">
-<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.percentageloader-0.2.css' %}">
 {% endblock %}
 
 {% block extra_js %}
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="{% static 'js/jquery.percentageloader-0.2.js' %}"></script>
+<script src="{% static 'js/loader.js' %}"></script>
 <script>
   $(function() {
     $('#id_date_of_birth').datepicker({
@@ -21,6 +23,7 @@
       dateFormat: 'dd-mm-yy',
       yearRange: '-50:-15'
     });
+
   });
 </script>
 {% endblock %}
@@ -38,6 +41,7 @@
     {% include 'app/_personal_info.html' %}
   </div>
   <div class="col-sm-3 progress">
+    {% include 'app/_progress.html' %}
   </div>
 </div>
 <!-- <div class="mid width-90">
