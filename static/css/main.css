@@ -9,16 +9,12 @@ html, body {
   margin-bottom: 0;
   border-radius: 0;
 }
+
+/* Nav */
 .brand {
   font-size: 150%;
   color: #fff;
 }
-.navbar-header .navbar-brand:hover,
-.navbar-header .navbar-brand:visited {
-  color: #98dafc;
-}
-
-/* Nav */
 .school-header {
   color: #fff;
   display: inline-block;
@@ -32,9 +28,13 @@ html, body {
   border: none;
 }
 .navbar-default .navbar-brand,
-.navbar-default .navbar-nav > li > a,
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:active,
+.navbar-default .navbar-nav > li > a {
+  color: #fff;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:visited {
+  color: #98dafc;
+}
 .navbar-default .navbar-nav > li > a:visited {
   color: #fff;
 }
@@ -51,7 +51,6 @@ html, body {
   border-bottom: solid 1px #312c32;
 }
 .sections .nav > li.active {
-  font-weight: bold;
   border-left: solid 4px #daad86;
 }
 .sections .nav > li:hover,
