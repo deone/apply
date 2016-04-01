@@ -40,8 +40,8 @@ html, body {
 }
 .sections {
   background: #daad86;
-  padding: 0;
   min-height: 570px;
+  padding: 0;
 }
 .sections .nav {
   padding: 0;
@@ -101,6 +101,9 @@ html, body {
 .tab-pane form {
   width: 90%;
 }
+.main form {
+  padding-top: 3em;
+}
 #id_date_of_birth {
   width: 92%;
   display: inline-block;
@@ -123,14 +126,32 @@ label {
 .help-text {
   font-size: 90%;
 }
-form h2 {
-  font-size: 130%;
-  margin-bottom: 25px;
-  padding-bottom: 1em;
-  border-bottom: solid 1px #eee;
-}
 
-/* Tabs */
-.nav-tabs {
-  font-size: 88%;
+/* Progress */
+.progress {
+  background: #ddd;
 }
+/* .sections,
+.progress {
+  min-height: 700px;
+} */
+
+/* Messages */
+/* .messages {
+}
+.messages,
+.messages li {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.messages li.success {
+  color: #fff;
+  background: #93db70;
+}
+.messages {
+  list-style: none;
+}
+.messages li {
+  padding: .5em 0 .5em .5em;
+} */
