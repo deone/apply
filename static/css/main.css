@@ -13,10 +13,22 @@ html, body {
   font-size: 150%;
   color: #fff;
 }
+.navbar-header .navbar-brand:hover,
+.navbar-header .navbar-brand:visited {
+  color: #98dafc;
+}
 
 /* Nav */
+.school-header {
+  color: #fff;
+  display: inline-block;
+  font-size: 150%;
+  margin-top: .62em;
+  width: 79%;
+  text-align: center;
+}
 .navbar-default {
-  background: #3fb0ac;
+  background: #312c32;
   border: none;
 }
 .navbar-default .navbar-brand,
@@ -25,6 +37,29 @@ html, body {
 .navbar-default .navbar-nav > li > a:active,
 .navbar-default .navbar-nav > li > a:visited {
   color: #fff;
+}
+.sections {
+  background: #daad86;
+  padding: 0;
+  min-height: 570px;
+}
+.sections .nav {
+  padding: 0;
+}
+.sections .nav > li > a {
+  color: #312c32;
+  border-bottom: solid 1px #312c32;
+}
+.sections .nav > li.active {
+  font-weight: bold;
+  border-left: solid 4px #daad86;
+}
+.sections .nav > li:hover,
+.sections .nav > li.active {
+  background: #fff;
+}
+.sections .nav > li > a:hover {
+  background: #98dafc;
 }
 
 /* App body */
