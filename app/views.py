@@ -8,4 +8,4 @@ def index(request):
     else:
         form = PersonalInformationForm()
 
-    return render(request, 'app/index.html', {'form': form, 'completion': .74})
+    return render(request, 'app/index.html', {'form': form, 'completion': 1})

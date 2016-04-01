@@ -137,6 +137,14 @@ label {
 .progress {
   min-height: 570px;
 }
+.progress a.btn {
+  margin-top: 1em;
+}
+.progress .bg-success {
+  line-height: 3em;
+}
+
+/* Percentag Loader */
 #topLoader {
   width: 256px;
   height: 256px;
@@ -150,9 +158,6 @@ label {
 }
 #animateButton {
   width: 256px;
-}
-.progress a.btn {
-  margin-top: 2em;
 }
 
 /* Messages */
@@ -169,7 +174,7 @@ label {
 .messages {
   list-style: none;
   margin-top: 1em;
-  margin-bottom: 6.5em;
+  margin-bottom: 5.5em;
 }
 .messages li {
   padding: .5em 0 .5em .5em;
