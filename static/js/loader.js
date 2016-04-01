@@ -1,9 +1,5 @@
 $(function() {
-  var $topLoader = $("#topLoader").percentageLoader({
-    width: 256, height: 256, controllable: true, progress: 0.5, onProgressUpdate: function (val) {
-      this.setValue(Math.round(val * 100.0) + 'kj');
-    }
-  });
+  var $topLoader = $("#topLoader").percentageLoader();
 
   var topLoaderRunning = false;
 
@@ -12,6 +8,8 @@ $(function() {
     * wrap it in the below `ready` function to ensure its correct operation
     */
   $topLoader.percentageLoader({onready: function () {
+    
+    // $topLoader.percentageLoader({progress: 0.1});
     if (topLoaderRunning) {
       return;
     }
@@ -22,10 +20,12 @@ $(function() {
 
     var animateFunc = function () {
       kb += 17;
-      $topLoader.percentageLoader({progress: kb / totalKb});
-      $topLoader.percentageLoader({value: (kb.toString() + 'kb')});
+      progress = kb / totalKb;
+      value = 0.2;
 
-      if (kb < totalKb) {
+      $topLoader.percentageLoader({progress: progress});
+
+      if (kb < totalKb && progress < value) {
         setTimeout(animateFunc, 25);
       } else {
         topLoaderRunning = false;
