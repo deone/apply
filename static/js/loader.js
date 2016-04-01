@@ -12,29 +12,27 @@ $(function() {
     * wrap it in the below `ready` function to ensure its correct operation
     */
   $topLoader.percentageLoader({onready: function () {
-    $("#animateButton").click(function () {
-      if (topLoaderRunning) {
-        return;
+    if (topLoaderRunning) {
+      return;
+    }
+    topLoaderRunning = true;
+
+    var kb = 0;
+    var totalKb = 999;
+
+    var animateFunc = function () {
+      kb += 17;
+      $topLoader.percentageLoader({progress: kb / totalKb});
+      $topLoader.percentageLoader({value: (kb.toString() + 'kb')});
+
+      if (kb < totalKb) {
+        setTimeout(animateFunc, 25);
+      } else {
+        topLoaderRunning = false;
       }
-      topLoaderRunning = true;
+    };
 
-      var kb = 0;
-      var totalKb = 999;
-
-      var animateFunc = function () {
-        kb += 17;
-        $topLoader.percentageLoader({progress: kb / totalKb});
-        $topLoader.percentageLoader({value: (kb.toString() + 'kb')});
-
-        if (kb < totalKb) {
-          setTimeout(animateFunc, 25);
-        } else {
-          topLoaderRunning = false;
-        }
-      };
-
-      setTimeout(animateFunc, 25);
-    });
+    setTimeout(animateFunc, 25);
 
   }});
 });
