@@ -40,7 +40,6 @@ html, body {
 }
 .sections {
   background: #daad86;
-  min-height: 570px;
   padding: 0;
 }
 .sections .nav {
@@ -52,6 +51,7 @@ html, body {
 }
 .sections .nav > li.active {
   border-left: solid 4px #daad86;
+  font-weight: bold;
 }
 .sections .nav > li:hover,
 .sections .nav > li.active {
@@ -129,12 +129,14 @@ label {
 
 /* Progress */
 .progress {
-  background: #ddd;
+  background: #fafafa;
+  border-radius: 0;
+  margin-bottom: 0;
 }
-/* .sections,
+.sections,
 .progress {
-  min-height: 700px;
-} */
+  min-height: 570px;
+}
 
 /* Messages */
 /* .messages {
