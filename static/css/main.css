@@ -81,12 +81,12 @@ html, body {
 }
 
 /* Buttons */
-.btn-primary {
+form .btn-primary {
   background-color: #ba9077;
   color: #fff;
   border: none;
 }
-.btn-primary:hover, .btn-primary:active {
+form .btn-primary:hover, .btn-primary:active {
   background-color: #b56969;
 }
 
@@ -131,6 +131,7 @@ label {
   background: #fafafa;
   border-radius: 0;
   margin-bottom: 0;
+  text-align: center;
 }
 .sections,
 .progress {
@@ -160,7 +161,7 @@ label {
 }
 .messages li.success {
   color: #fff;
-  background: #93db70;
+  background: #5cb85c;
 }
 .messages {
   list-style: none;

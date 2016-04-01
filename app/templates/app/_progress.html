@@ -6,3 +6,9 @@
   <div id="topLoader">      
   </div>
 </div>
+
+{% if completion == 1 %}
+  <a href="#" class="btn btn-success btn-lg width-90" role="button">Submit Application</a>
+{% else %}
+  <a href="#" class="btn btn-primary btn-lg width-90 disabled" role="button">Submit Application</a>
+{% endif %}
