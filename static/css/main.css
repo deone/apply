@@ -151,6 +151,9 @@ label {
 #animateButton {
   width: 256px;
 }
+.progress a.btn {
+  margin-top: 2em;
+}
 
 /* Messages */
 .messages,
@@ -166,7 +169,7 @@ label {
 .messages {
   list-style: none;
   margin-top: 1em;
-  margin-bottom: 2em;
+  margin-bottom: 6.5em;
 }
 .messages li {
   padding: .5em 0 .5em .5em;
