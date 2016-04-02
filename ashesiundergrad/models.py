@@ -18,6 +18,7 @@ class PersonalInformation(models.Model):
         (False, 'No'),
     )
 
+    application = models.OneToOneField(Application)
     middle_name = models.CharField(_('middle name'), max_length=30)
     date_of_birth = models.DateField(_('date of birth'), null=True)
     applied_before = models.NullBooleanField(_('applied before'), choices=BOOL_CHOICES)
