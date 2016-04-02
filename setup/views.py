@@ -9,3 +9,4 @@ class ApplicationListView(ListView):
 
 class ApplicationDetailView(DetailView):
     model = Application
+    context_object_name = 'application'

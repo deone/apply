@@ -1,0 +1,18 @@
+<ul class="nav">
+  {% for section in application.applicationform_set.all %}
+    <li role="presentation"><a href="#">{{ section.form.name }}</a></li>
+  {% endfor %}
+  <!-- <li role="presentation" class="active"><a href="{% url 'app:index' %}">Personal Information</a></li>
+  <li role="presentation"><a href="{% url 'app:index' %}">Scholarships</a></li>
+  <li role="presentation"><a href="#">Housing Information</a></li>
+  <li role="presentation"><a href="#">Family Information</a></li>
+  <li role="presentation"><a href="#">Sponsor Information</a></li>
+  <li role="presentation"><a href="#">Academic History</a></li>
+  <li role="presentation"><a href="#">Extracurricular Activities</a></li>
+  <li role="presentation"><a href="#">Travel Information</a></li>
+  <li role="presentation"><a href="#">Work Experience</a></li>
+  <li role="presentation"><a href="#">Career Aspirations</a></li>
+  <li role="presentation"><a href="#">Personal Essay</a></li>
+  <li role="presentation"><a href="#">Additional Information</a></li>
+  <li role="presentation"><a href="#">Examination Details</a></li> -->
+</ul>
