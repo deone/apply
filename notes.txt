@@ -35,3 +35,4 @@ Application Sections - Ashesi
 
 - Make sure applicants are unable to fill an application that is not open.
 - Make sure applicants are unable to fill an application after specified deadline.
+- Update UserApplication.submit_date when user submits application.
