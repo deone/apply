@@ -1,0 +1,15 @@
+<ul class="messages">
+  <li class="success">Success!</li>
+</ul>
+
+<div id="container">
+  <div id="topLoader">      
+  </div>
+</div>
+
+{% if completion == 1 %}
+  <p class="bg-success width-90 mid">Application Complete!</p>
+  <a href="#" class="btn btn-success btn-lg width-90" role="button">Submit</a>
+{% else %}
+  <a href="#" class="btn btn-primary btn-lg width-90 disabled" role="button">Application Incomplete</a>
+{% endif %}
