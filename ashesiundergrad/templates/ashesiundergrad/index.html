@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 
-{% block page_title %}Apply{% endblock %}
+{% block page_title %}{{ application.get_name }}{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-theme.css' %}">
@@ -39,7 +39,7 @@
       var animateFunc = function () {
         kb += 17;
         progress = kb / totalKb;
-        value = {{ completion }};
+        value = {{ application_completion }};
 
         $topLoader.percentageLoader({progress: progress});
 
@@ -59,19 +59,19 @@
 {% endblock %}
 
 {% block org_header %}
-<h1 class="org-header">Ashesi University College Undergraduate Application</h1>
+<h1 class="org-header">{{ application.get_name }}</h1>
 {% endblock %}
 
 {% block app_body %}
 <div class="row">
   <div class="col-sm-2 sections">
-    {% include 'app/_sections.html' %}
+    {% include 'ashesiundergrad/_sections.html' %}
   </div>
   <div class="col-sm-7 main">
-    {% include 'app/_personal_info.html' %}
+    <a href="#" class="btn btn-primary btn-lg width-90" role="button" style="margin-top: 5em">Start Application</a>
   </div>
   <div class="col-sm-3 progress">
-    {% include 'app/_progress.html' %}
+    {% include '_progress.html' %}
   </div>
 </div>
 {% endblock %}
