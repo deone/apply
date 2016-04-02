@@ -48,6 +48,7 @@ class Form(models.Model):
 
 class ApplicationForm(models.Model):
     application = models.ForeignKey(Application)
+    slug = AutoSlugField(populate_from='form.name', db_index=False)
     form = models.ForeignKey(Form)
 
     def __str__(self):
