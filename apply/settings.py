@@ -137,7 +137,8 @@ STATICFILES_DIRS = (
 
 LOGIN_URL = 'accounts:login'
 
-LOGIN_REDIRECT_URL = 'app:index'
+# LOGIN_REDIRECT_URL = 'app:index'
+LOGIN_REDIRECT_URL = 'home'
 
 # Registration
 ACCOUNT_ACTIVATION_DAYS = 7

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block page_title %}My Applications{% endblock %}
+
+{% block app_body %}
+<div class="mid width-90">
+  <div class="row">
+    <h2>My Applications</h2>
+    <p>None.</p>
+    <h2>Available Applications</h2>
+    {% for application in applications %}
+      <a href="{{ application.get_absolute_url }}">{{ application }}</a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

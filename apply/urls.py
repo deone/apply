@@ -4,8 +4,10 @@ from django.contrib.auth import views as auth_views
 
 from accounts.views import ApplyRegistrationView
 from accounts.forms import LoginForm
+from setup.views import ApplicationListView
 
 urlpatterns = [
+    url(r'^$', ApplicationListView.as_view(), name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^logout/$', auth_views.logout, {'next_page': '/accounts/login/'}, name='logout'),
     url(r'^accounts/create/$', ApplyRegistrationView.as_view(), name='create_account'),
