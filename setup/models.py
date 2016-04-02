@@ -15,7 +15,7 @@ class Organization(models.Model):
 class Application(models.Model):
     name = models.CharField(_('application name'), max_length=50)
     slug = AutoSlugField(populate_from='name', db_index=False, editable=False)
-    is_open = models.BooleanField(_('is open'), default=False)
+    is_open = models.BooleanField(_('application open?'), default=False)
     deadline = models.DateTimeField()
 
     def __str__(self):
@@ -28,9 +28,18 @@ class Staff(models.Model):
     def __str__(self):
         return self.user.get_full_name()
 
+    class Meta:
+        verbose_name_plural = _('Staff')
+
 class Form(models.Model):
-    application = models.ForeignKey(Application)
     name = models.CharField(_('form name'), max_length=50)
 
     def __str__(self):
-        return '%s %s' % (self.application.name, self.name)
+        return self.name
+
+class ApplicationForm(models.Model):
+    application = models.ForeignKey(Application)
+    form = models.ForeignKey(Form)
+
+    def __str__(self):
+        return '%s %s' % (self.application.name, self.form.name)
