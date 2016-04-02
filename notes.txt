@@ -32,3 +32,6 @@ Application Sections - Ashesi
 11. Personal Essay
 12. Additional Information
 13. Examination Details
+
+- Make sure applicants are unable to fill an application that is not open.
+- Make sure applicants are unable to fill an application after specified deadline.

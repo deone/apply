@@ -46,4 +46,4 @@ class ApplicationForm(models.Model):
     form = models.ForeignKey(Form)
 
     def __str__(self):
-        return '%s %s' % (self.application.name, self.form.name)
+        return '%s %s' % (self.application.get_name(), self.form.name)
