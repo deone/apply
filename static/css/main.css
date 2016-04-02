@@ -103,6 +103,10 @@ form .btn-primary:hover, .btn-primary:active {
 .main form {
   padding-top: 3em;
 }
+.application .sections .disabled {
+  pointer-events: none;
+  cursor: default;
+}
 #id_date_of_birth {
   width: 92%;
   display: inline-block;
