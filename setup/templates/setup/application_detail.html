@@ -39,8 +39,7 @@
       var animateFunc = function () {
         kb += 17;
         progress = kb / totalKb;
-        // value = {{ completion }};
-        value = 1;
+        value = {{ application_completion }};
 
         $topLoader.percentageLoader({progress: progress});
 
@@ -69,6 +68,7 @@
     {% include 'setup/_sections.html' %}
   </div>
   <div class="col-sm-7 main">
+    {% include 'app/_personal_info.html' %}
   </div>
   <div class="col-sm-3 progress">
     {% include 'setup/_progress.html' %}
