@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'setup',
     'accounts',
     'payments',
+    'ashesiundergrad',
     'app',
 ]
 

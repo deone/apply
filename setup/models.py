@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 
 from utils import AutoSlugField
 
@@ -51,3 +52,13 @@ class ApplicationForm(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.application.get_name(), self.form.name)
+
+class UserApplication(models.Model):
+    user = models.ForeignKey(User)
+    application = models.ForeignKey(Application)
+    start_date = models.DateTimeField(_('start date'), default=timezone.now)
+    submit_date = models.DateTimeField(_('submit date'))
+    form_filled_count = models.PositiveSmallIntegerField(_('number of forms filled'), default=0)
+
+    def __str__(self):
+        return '%s %s' % (self.user.get_full_name(), self.application.get_name())
