@@ -16,5 +16,5 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^payments/', include('payments.urls', namespace='payments')),
     url(r'^apply/', include('app.urls', namespace='app')),
-    url(r'^(?P<orgname>[-.\w]+)/(?P<slug>[-.\w]+)/', include('ashesiundergrad.urls', namespace='ashesiundergrad')),
+    url(r'^(?P<orgname>[-.\w]+)/(?P<application_slug>[-.\w]+)/', include('ashesiundergrad.urls', namespace='ashesiundergrad')),
 ]

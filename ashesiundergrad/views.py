@@ -8,8 +8,8 @@ def get_application(slug):
 def compute_completion(form_filled_count, application_form_count):
     return form_filled_count / application_form_count
 
-def index(request, orgname, slug):
-    application = get_application(slug)
+def index(request, orgname, application_slug):
+    application = get_application(application_slug)
 
     try:
         userapp = UserApplication.objects.get(user=request.user, application=application)
@@ -19,5 +19,8 @@ def index(request, orgname, slug):
     return render(request, 'ashesiundergrad/index.html',
         {
           'application_completion': compute_completion(userapp.form_filled_count, application.applicationform_set.count()),
-          'application': get_application(slug),
+          'application': application
         })
+
+def test(request, orgname, application_slug, form_slug):
+    pass

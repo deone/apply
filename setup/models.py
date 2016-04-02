@@ -54,6 +54,10 @@ class ApplicationForm(models.Model):
     def __str__(self):
         return '%s %s' % (self.application.get_name(), self.form.name)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return 'application', (self.application.organization.name.lower().split(' ')[0], self.application.slug, self.slug)
+
 class UserApplication(models.Model):
     user = models.ForeignKey(User)
     application = models.ForeignKey(Application)
