@@ -22,6 +22,9 @@ class Application(models.Model):
     def __str__(self):
         return '%s %s' % (self.organization.name, self.name)
 
+    def get_name(self):
+        return '%s %s' % (self.organization.name, self.name)
+
 class Staff(models.Model):
     user = models.OneToOneField(User)
     organization = models.ForeignKey(Organization)
