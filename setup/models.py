@@ -13,13 +13,14 @@ class Organization(models.Model):
         return self.name
 
 class Application(models.Model):
+    organization = models.ForeignKey(Organization)
     name = models.CharField(_('application name'), max_length=50)
     slug = AutoSlugField(populate_from='name', db_index=False, editable=False)
     is_open = models.BooleanField(_('application open?'), default=False)
     deadline = models.DateTimeField()
 
     def __str__(self):
-        return self.name
+        return '%s %s' % (self.organization.name, self.name)
 
 class Staff(models.Model):
     user = models.OneToOneField(User)
