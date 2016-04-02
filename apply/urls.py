@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 
 from accounts.views import ApplyRegistrationView
 from accounts.forms import LoginForm
-from setup.views import ApplicationListView
+from setup.views import ApplicationListView, ApplicationDetailView
 
 urlpatterns = [
     url(r'^$', ApplicationListView.as_view(), name='home'),
@@ -16,4 +16,5 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^payments/', include('payments.urls', namespace='payments')),
     url(r'^apply/', include('app.urls', namespace='app')),
+    url(r'^(?P<orgname>[-.\w]+)/(?P<slug>[-.\w]+)/$', ApplicationDetailView.as_view(), name='application'),
 ]

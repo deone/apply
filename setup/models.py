@@ -25,6 +25,10 @@ class Application(models.Model):
     def get_name(self):
         return '%s %s' % (self.organization.name, self.name)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return 'application', (self.organization.name.lower().split(' ')[0], self.slug,)
+
 class Staff(models.Model):
     user = models.OneToOneField(User)
     organization = models.ForeignKey(Organization)
