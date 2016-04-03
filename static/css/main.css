@@ -124,6 +124,9 @@ form .btn-primary:hover, .btn-primary:active {
   margin-left: 37.5em;
   float: none;
 }
+.main .form-horizontal .errorlist {
+  margin-left: 49.3em;
+}
 .radio {
   display: inline-block;
   width: 80px;
