@@ -40,8 +40,7 @@ INSTALLED_APPS = [
     'setup',
     'accounts',
     'payments',
-    'ashesiundergrad',
-    'app',
+    'ashesiundergraduate',
 ]
 
 MIDDLEWARE_CLASSES = [

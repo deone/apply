@@ -37,3 +37,4 @@ Application Sections - Ashesi
 - Make sure applicants are unable to fill an application after specified deadline.
 - Update UserApplication.submit_date when user submits application.
 - Always update UserApplication.form_filled_count after user saves a form successfully.
+- Automate the creation of form templates.

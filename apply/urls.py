@@ -15,7 +15,6 @@ urlpatterns = [
       {'authentication_form': LoginForm, 'template_name': 'registration/login.html'}, name='login'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^payments/', include('payments.urls', namespace='payments')),
-    url(r'^apply/', include('app.urls', namespace='app')),
     url(r'^(?P<orgname>[-.\w]+)/(?P<slug>[-.\w]+)/(?P<form_slug>[-.\w]+)/$', setup_views.application_form, name='application_form'),
-    url(r'^(?P<orgname>[-.\w]+)/(?P<slug>[-.\w]+)/$', setup_views.ApplicationDetail.as_view(), name='application'),
+    url(r'^(?P<orgname>[-.\w]+)/(?P<slug>[-.\w]+)/$', setup_views.application, name='application'),
 ]
