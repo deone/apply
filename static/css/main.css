@@ -110,10 +110,19 @@ form .btn-primary:hover, .btn-primary:active {
 #id_year_applied {
   width: 15%;
 }
-.form-horizontal .errorlist {
-  list-style: none;
-  margin-left: 8em;
+.errorlist {
   color: #e62739;
+  font-size: 80%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  float: right;
+}
+.form-horizontal .errorlist {
+  display: block;
+  margin-left: 37.5em;
+  float: none;
 }
 .radio {
   display: inline-block;
