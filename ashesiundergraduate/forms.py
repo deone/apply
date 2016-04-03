@@ -1,4 +1,5 @@
 from django import forms
+from django.conf import settings
 from django.contrib.admin import widgets
 
 from .models import PersonalInformation
@@ -14,6 +15,7 @@ class PersonalInformationForm(forms.ModelForm):
         self.application = kwargs.pop('application', None)
         super(PersonalInformationForm, self).__init__(*args, **kwargs)
         self.fields['date_of_birth'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['date_of_birth'].input_formats = settings.DATE_INPUT_FORMATS
         self.fields['middle_name'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['gender'].widget = forms.RadioSelect(choices=PersonalInformation.GENDER_CHOICES)
         self.fields['applied_before'].widget = forms.RadioSelect(choices=PersonalInformation.BOOL_CHOICES)

@@ -135,9 +135,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
+DATE_INPUT_FORMATS = ('%d-%m-%Y',)
+
 LOGIN_URL = 'accounts:login'
 
-# LOGIN_REDIRECT_URL = 'app:index'
 LOGIN_REDIRECT_URL = 'home'
 
 # Registration
