@@ -1,0 +1,7 @@
+<ul class="nav">
+  {% for section in application.applicationform_set.all %}
+    {% with urlname=request.resolver_match.url_name %}
+    <li role="presentation"><a href="{{ section.slug }}">{{ section.form.name }}</a></li>
+    {% endwith %}
+  {% endfor %}
+</ul>
