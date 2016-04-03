@@ -5,7 +5,12 @@
 {% endblock %}
 
 {% block application_form %}
-<form method="post" class="form-horizontal mid width-90">
+<form action="" method="post" class="form-horizontal mid width-90">
+{% csrf_token %}
+{{ form }}
+<button type="submit" class="btn btn-primary">Save</button>
+</form>
+<!-- <form action="" method="post" class="form-horizontal mid width-90">
 
   {% csrf_token %}
   {{ form.non_field_errors }}
@@ -78,5 +83,5 @@
     </div>
 
   </fieldset>
-</form>
+</form> -->
 {% endblock %}

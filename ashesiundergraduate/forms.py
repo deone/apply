@@ -7,9 +7,11 @@ class PersonalInformationForm(forms.ModelForm):
 
     class Meta:
         model = PersonalInformation
-        exclude = ['user']
+        exclude = ['user', 'application']
 
     def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        self.application = kwargs.pop('application', None)
         super(PersonalInformationForm, self).__init__(*args, **kwargs)
         self.fields['date_of_birth'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['middle_name'].widget = forms.TextInput(attrs={'class': 'form-control'})
