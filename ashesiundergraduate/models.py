@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from setup.models import Application
+from setup.models import UserApplication
 
 class PersonalInformation(models.Model):
 
@@ -18,7 +18,7 @@ class PersonalInformation(models.Model):
         (False, 'No'),
     )
 
-    application = models.OneToOneField(Application)
+    user_application = models.OneToOneField(UserApplication)
     middle_name = models.CharField(_('middle name'), max_length=30)
     date_of_birth = models.DateField(_('date of birth'), null=True)
     applied_before = models.NullBooleanField(_('applied before'), choices=BOOL_CHOICES)
