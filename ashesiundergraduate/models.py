@@ -27,7 +27,7 @@ class PersonalInformation(models.Model):
     # photo = 
 
     def __str__(self):
-        return '%s %s %s' % (self.user.first_name, self.middle_name, self.user.last_name)
+        return '%s %s %s' % (self.user_application.user.first_name, self.middle_name, self.user_application.user.last_name)
 
 """ class Citizenship(models.Model):
     user = models.OneToOneField(User)

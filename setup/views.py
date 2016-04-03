@@ -44,6 +44,7 @@ def application_form(request, orgname, slug, form_slug):
         form = form_class(request.POST, user=request.user, application=application)
         if form.is_valid():
             form.save()
+            return redirect('application_form', orgname=orgname, slug=slug, form_slug=form_slug)
     else:
         form = form_class(user=request.user, application=application)
 
