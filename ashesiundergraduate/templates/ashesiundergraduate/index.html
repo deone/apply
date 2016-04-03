@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 
-{% block page_title %}{{ application.get_name }}{% endblock %}
+{% block page_title %}{{ application.get_name }} &mdash; {% block application_form_name %}{% endblock %}{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-theme.css' %}">
@@ -70,7 +70,9 @@
     {% include 'setup/_sections.html' %}
   </div>
   <div class="col-sm-7 main">
-    <a href="#" class="btn btn-primary btn-lg width-90" role="button" style="margin-top: 5em">Start Application</a>
+    {% block application_form %}
+      <a href="#" class="btn btn-primary btn-lg width-90" role="button" style="margin-top: 5em">Start Application</a>
+    {% endblock %}
   </div>
   <div class="col-sm-3 progress">
     {% include '_progress.html' %}

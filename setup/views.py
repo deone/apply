@@ -42,6 +42,9 @@ def application_form(request, orgname, slug, form_slug):
     template_name = '%s%s%s%s' % (registry_key, '/', form_slug, '.html')
 
     context = get_context_variables(userapp, application)
-    context.update({'form_name': unslugify(form_slug)})
+    context.update({
+      'form_name': unslugify(form_slug),
+      'form': REGISTRY[registry_key][form_slug],
+      })
 
     return render(request, template_name, context)
