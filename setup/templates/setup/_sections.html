@@ -1,0 +1,7 @@
+<ul class="nav">
+  {% for section in application.applicationform_set.all %}
+    <li role="presentation" {% if form_name == section.form.name %}class="active"{% endif %}>
+      <a href="{{ section.slug }}">{{ section.form.name }}</a>
+    </li>
+  {% endfor %}
+</ul>
