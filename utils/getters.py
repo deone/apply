@@ -13,7 +13,7 @@ def get_user_application(user, application):
     return userapp
 
 def compute_completion(form_filled_count, application_form_count):
-    return form_filled_count / application_form_count
+    return form_filled_count / float(application_form_count)
 
 def get_registry_key(org_name, application_slug):
     return '%s%s' % (org_name, application_slug.split('-')[0])

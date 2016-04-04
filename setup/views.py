@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 
-from .models import Application
 from utils.getters import get_application, get_user_application, compute_completion, get_registry_key
 from utils.registry import REGISTRY
 
+from .models import Application, SavedForm
 
 def unslugify(slug):
     unslug = ''
@@ -14,10 +14,10 @@ def unslugify(slug):
 
     return unslug[:-1]
 
-def get_context_variables(userapp, application):
+def get_context_variables(user_app, application):
 
     return {
-        'application_completion': compute_completion(userapp.form_filled_count, application.applicationform_set.count()),
+        'application_completion': compute_completion(user_app.savedform_set.count(), application.applicationform_set.count()),
         'application': application
         }
 
@@ -38,22 +38,24 @@ def application_form(request, orgname, slug, form_slug):
     registry_key = orgname + slug.split('-')[0]
     form_class =  REGISTRY[registry_key][form_slug]
     application = get_application(slug)
-    userapp = get_user_application(request.user, application)
+    user_app = get_user_application(request.user, application)
 
     if request.method == "POST":
         form = form_class(request.POST, user=request.user, application=application)
         if form.is_valid():
             form.save()
+            SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
             return redirect('application_form', orgname=orgname, slug=slug, form_slug=form_slug)
     else:
         form = form_class(user=request.user, application=application)
 
     template_name = '%s%s%s%s' % (registry_key, '/', form_slug, '.html')
 
-    context = get_context_variables(userapp, application)
+    context = get_context_variables(user_app, application)
     context.update({
       'form_name': unslugify(form_slug),
       'form': form,
+      # 'saved_forms'
       })
 
     return render(request, template_name, context)
