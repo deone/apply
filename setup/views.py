@@ -40,12 +40,15 @@ def application_form(request, orgname, slug, form_slug):
     application = get_application(slug)
     user_app = get_user_application(request.user, application)
 
+    form_slugs = [af.slug for af in application.applicationform_set.all()]
+    next_form_slug = form_slugs[form_slugs.index(form_slug) + 1]
+
     if request.method == "POST":
         form = form_class(request.POST, user=request.user, application=application)
         if form.is_valid():
             form.save()
             SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
-            return redirect('application_form', orgname=orgname, slug=slug, form_slug=form_slug)
+            return redirect('application_form', orgname=orgname, slug=slug, form_slug=next_form_slug)
     else:
         form = form_class(user=request.user, application=application)
 
@@ -55,7 +58,7 @@ def application_form(request, orgname, slug, form_slug):
     context.update({
       'form_name': unslugify(form_slug),
       'form': form,
-      # 'saved_forms'
+      'saved_forms': [sf.form_slug for sf in user_app.savedform_set.all()]
       })
 
     return render(request, template_name, context)

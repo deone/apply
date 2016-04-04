@@ -100,6 +100,10 @@ form .btn-primary:hover, .btn-primary:active {
 .tab-pane form {
   width: 90%;
 }
+.main form,
+.sections {
+  font-size: 97%;
+}
 .main form {
   padding-top: 3em;
   color: #777;

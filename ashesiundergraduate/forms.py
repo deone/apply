@@ -2,7 +2,7 @@ from django import forms
 from django.conf import settings
 from django.contrib.admin import widgets
 
-from .models import PersonalInformation
+from .models import *
 from setup.models import UserApplication
 
 class PersonalInformationForm(forms.ModelForm):
@@ -33,3 +33,14 @@ class PersonalInformationForm(forms.ModelForm):
             applied_before=self.cleaned_data['applied_before'],
             year_applied=self.cleaned_data['year_applied']
             )
+
+class ScholarshipsForm(forms.ModelForm):
+
+    class Meta:
+        model = Scholarships
+        exclude = []
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        self.application = kwargs.pop('application', None)
+        super(ScholarshipsForm, self).__init__(*args, **kwargs)
