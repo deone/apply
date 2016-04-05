@@ -1,5 +1,6 @@
-from setup.models import Application, UserApplication
 from django.shortcuts import get_object_or_404
+
+from setup.models import Application, UserApplication
 
 def get_application(slug):
     return get_object_or_404(Application, slug=slug)

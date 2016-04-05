@@ -4,8 +4,18 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from django.utils import timezone
 
 from setup.models import UserApplication
+
+ORG_NAME = 'ashesi'
+APPLICATION_NAME = 'undergraduate-application-2016'
+
+import os
+
+def get_upload_path(instance, filename):
+    now = timezone.now()
+    return os.path.join('%s/%s/%s/%s/' % (settings.MEDIA_ROOT, ORG_NAME, APPLICATION_NAME, now.strftime('%Y-%m-%d')), filename)
 
 class PersonalInformation(models.Model):
 
@@ -28,7 +38,9 @@ class PersonalInformation(models.Model):
     applied_before = models.NullBooleanField(_('applied before'), choices=BOOL_CHOICES)
     year_applied = models.CharField(_('year applied'), max_length=4, null=True)
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, null=True)
-    # photo = 
+    photo = models.ImageField(upload_to=get_upload_path, height_field='photo_height', width_field='photo_width')
+    photo_height = models.CharField(max_length=5)
+    photo_width = models.CharField(max_length=5)
 
     def to_dict(self):
         return {

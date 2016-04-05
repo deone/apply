@@ -141,6 +141,8 @@ LOGIN_URL = 'login'
 
 LOGIN_REDIRECT_URL = 'home'
 
+MEDIA_ROOT = '/Users/deone/uploads/apply/'
+
 # Registration
 ACCOUNT_ACTIVATION_DAYS = 7
 
