@@ -30,12 +30,16 @@ class ApplicationList(ListView):
 
 def application(request, orgname, slug):
     application = get_application(slug)
-    userapp = get_user_application(request.user, application)
+    user_app = get_user_application(request.user, application)
+    saved_forms = [sf.form_slug for sf in user_app.savedform_set.all()]
 
     registry_key = get_registry_key(orgname, slug)
     template_name = '%s%s%s' % (registry_key, '/', 'index.html')
 
-    return render(request, template_name, get_context_variables(userapp, application))
+    context = get_context_variables(user_app, application)
+    context.update({'saved_forms': saved_forms})
+
+    return render(request, template_name, context)
 
 @login_required
 def application_form(request, orgname, slug, form_slug):
