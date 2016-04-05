@@ -119,18 +119,8 @@ form .btn-primary:hover, .btn-primary:active {
   color: #e62739;
   font-size: 80%;
   list-style: none;
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-  float: right;
-}
-.form-horizontal .errorlist {
-  display: block;
-  margin-left: 37.5em;
-  float: none;
-}
-.main .form-horizontal .errorlist {
-  margin-left: 49.3em;
+  padding-right: 1.3em;
+  text-align: right;
 }
 .radio {
   display: inline-block;
