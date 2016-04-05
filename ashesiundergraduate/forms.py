@@ -10,7 +10,7 @@ class PersonalInformationForm(forms.ModelForm):
 
     class Meta:
         model = PersonalInformation
-        exclude = ['user_application']
+        exclude = ['user_application', 'photo_height', 'photo_width']
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
@@ -24,6 +24,7 @@ class PersonalInformationForm(forms.ModelForm):
         self.fields['applied_before'].label = 'Have you applied to Ashesi before?'
         self.fields['year_applied'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['year_applied'].required = False
+        self.fields['photo'].label = 'Passport-sized Photo'
 
     def clean_year_applied(self):
         if self.cleaned_data['applied_before'] == True and self.cleaned_data['year_applied'] == '':

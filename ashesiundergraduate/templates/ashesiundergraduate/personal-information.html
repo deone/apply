@@ -29,7 +29,7 @@
 </div>
 
 <div class="row">
-  <form action="" method="post" class="form-horizontal mid width-90">
+  <form action="" method="post" class="form-horizontal mid width-90" enctype="multipart/form-data">
 
     {% csrf_token %}
     {{ form.non_field_errors }}
@@ -61,6 +61,15 @@
       <label for="{{ form.date_of_birth.id_for_label }}" class="col-sm-3 control-label">{{ form.date_of_birth.label }}</label>
       <div class="col-sm-9">
         {{ form.date_of_birth }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      {{ form.photo.errors }}
+      <label for="{{ form.photo.id_for_label }}" class="col-sm-3 control-label">{{ form.photo.label }}</label>
+      <div class="col-sm-9">
+        {{ form.photo }}
+        <span class="help-text">{{ form.photo.help_text }}</span>
       </div>
     </div>
 

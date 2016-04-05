@@ -59,7 +59,7 @@ def application_form(request, orgname, slug, form_slug):
         obj = None
 
     if request.method == "POST":
-        form = form_class(request.POST, user=request.user, application=application)
+        form = form_class(request.POST, request.FILES, user=request.user, application=application)
         if form.is_valid():
             form.save()
             if form_slug not in saved_forms:

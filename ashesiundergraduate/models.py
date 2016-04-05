@@ -38,7 +38,9 @@ class PersonalInformation(models.Model):
     applied_before = models.NullBooleanField(_('applied before'), choices=BOOL_CHOICES)
     year_applied = models.CharField(_('year applied'), max_length=4, null=True)
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, null=True)
-    photo = models.ImageField(upload_to=get_upload_path, height_field='photo_height', width_field='photo_width')
+    photo = models.ImageField(upload_to=get_upload_path,
+        height_field='photo_height', width_field='photo_width',
+        help_text="File name must be in the format firstname_lastname.")
     photo_height = models.CharField(max_length=5)
     photo_width = models.CharField(max_length=5)
 
