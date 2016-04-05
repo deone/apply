@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'payments',
     'ashesiundergraduate',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -142,6 +143,10 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 
 MEDIA_ROOT = '/Users/deone/uploads/apply/'
+
+MEDIA_URL = '/media/'
+
+THUMBNAIL_DEBUG = True
 
 # Registration
 ACCOUNT_ACTIVATION_DAYS = 7

@@ -2,6 +2,8 @@
 
 {% load staticfiles %}
 
+{% load thumbnail %}
+
 {% block page_js %}
 <script src="//cdn.rawgit.com/imsky/holder/master/holder.js"></script>
 <script>
@@ -22,9 +24,17 @@
 {% block application_form %}
 <div class="row">
   <div class="col-xs-6 col-md-3 pull-right photo">
-    <a href="#" class="thumbnail">
-      <img src="holder.js/150x160" alt="">
-    </a>
+    {% if user_application.personalinformation.photo %}
+      <a href="#" class="thumbnail">
+        {% thumbnail user_application.personalinformation.photo "150x160" crop="center" as up %}
+          <img src="{{ up.url }}" width="{{ up.width }}" height="{{ up.height }}" alt="">
+        {% endthumbnail %}
+      </a>
+    {% else %}
+      <a href="#" class="thumbnail">
+        <img src="holder.js/150x160" alt="">
+      </a>
+    {% endif %}
   </div>
 </div>
 
