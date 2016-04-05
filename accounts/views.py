@@ -9,4 +9,4 @@ class ApplyRegistrationView(RegistrationView):
     form_class = ApplyRegistrationForm
 
     def get_success_url(self, user):
-        return 'app:index'
+        return 'home'
