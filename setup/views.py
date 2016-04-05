@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
+from django.contrib import messages
 
 from utils.getters import get_application, get_user_application, compute_completion, get_registry_key
 from utils.registry import REGISTRY
@@ -42,12 +43,14 @@ def application_form(request, orgname, slug, form_slug):
 
     form_slugs = [af.slug for af in application.applicationform_set.all()]
     next_form_slug = form_slugs[form_slugs.index(form_slug) + 1]
+    form_name = unslugify(form_slug)
 
     if request.method == "POST":
         form = form_class(request.POST, user=request.user, application=application)
         if form.is_valid():
             form.save()
             SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
+            messages.success(request, '%s saved.' % form_name)
             return redirect('application_form', orgname=orgname, slug=slug, form_slug=next_form_slug)
     else:
         form = form_class(user=request.user, application=application)
@@ -56,7 +59,7 @@ def application_form(request, orgname, slug, form_slug):
 
     context = get_context_variables(user_app, application)
     context.update({
-      'form_name': unslugify(form_slug),
+      'form_name': form_name,
       'form': form,
       'saved_forms': [sf.form_slug for sf in user_app.savedform_set.all()]
       })
