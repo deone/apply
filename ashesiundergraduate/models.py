@@ -15,7 +15,7 @@ import os
 
 def get_upload_path(instance, filename):
     now = timezone.now()
-    return os.path.join('%s/%s/%s/%s/' % (settings.MEDIA_ROOT, ORG_NAME, APPLICATION_NAME, now.strftime('%Y-%m-%d')), filename)
+    return os.path.join('%s/%s/%s/' % (ORG_NAME, APPLICATION_NAME, now.strftime('%Y-%m-%d')), filename)
 
 class PersonalInformation(models.Model):
 
