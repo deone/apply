@@ -137,6 +137,8 @@ label {
 }
 .help-text {
   font-size: 90%;
+  font-style: italic;
+  color: #000;
 }
 
 /* Progress */
