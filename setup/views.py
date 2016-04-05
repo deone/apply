@@ -21,7 +21,8 @@ def get_context_variables(user_app, application):
 
     return {
         'application_completion': compute_completion(user_app.savedform_set.count(), application.applicationform_set.count()),
-        'application': application
+        'application': application,
+        'user_application': user_app,
         }
 
 class ApplicationList(ListView):

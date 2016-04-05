@@ -36,7 +36,6 @@ Application Sections - Ashesi
 - Make sure applicants are unable to fill an application that is not open.
 - Make sure applicants are unable to fill an application after specified deadline.
 - Update UserApplication.submit_date when user submits application.
-- Always update UserApplication.form_filled_count after user saves a form successfully.
 - Automate the creation of form templates.
 - Paylater.ng is a good model for Apply Central's homepage.
-- Move all general code and assets out of ashesiundergraduate index.html
+- Clean photo field to ensure compliance to firstname_lastname rule.
