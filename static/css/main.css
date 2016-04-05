@@ -40,14 +40,14 @@ html, body {
 }
 .sections {
   padding: 0;
-  background: #bfefff;
+  background: #b8d9f1;
 }
 .sections .nav {
   padding: 0;
 }
 .sections .nav > li > a {
   color: #312c32;
-  border-bottom: solid 1px #c9c9c9;
+  border-bottom: solid 1px #aaa;
 }
 .sections .nav > li.active {
   border-left: solid 4px #daad86;
@@ -161,7 +161,7 @@ label {
   line-height: 3em;
 }
 
-/* Percentag Loader */
+/* Percentage Loader */
 #topLoader {
   width: 256px;
   height: 256px;

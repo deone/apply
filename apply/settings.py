@@ -137,7 +137,7 @@ STATICFILES_DIRS = (
 
 DATE_INPUT_FORMATS = ('%d-%m-%Y',)
 
-LOGIN_URL = 'accounts:login'
+LOGIN_URL = 'login'
 
 LOGIN_REDIRECT_URL = 'home'
 
