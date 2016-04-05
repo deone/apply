@@ -100,12 +100,18 @@ form .btn-primary:hover, .btn-primary:active {
 .tab-pane form {
   width: 90%;
 }
+.main {
+  padding-top: 2.3em;
+}
+.photo {
+  margin-right: 1.7em;
+}
 .main form,
 .sections {
   font-size: 97%;
 }
 .main form {
-  padding-top: 3em;
+  /* padding-top: 3em; */
   color: #777;
 }
 #id_date_of_birth {
@@ -142,7 +148,7 @@ label {
 }
 .sections,
 .progress {
-  min-height: 570px;
+  min-height: 650px;
 }
 .progress a.btn {
   margin-top: 1em;

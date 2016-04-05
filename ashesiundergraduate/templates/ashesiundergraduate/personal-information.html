@@ -1,6 +1,9 @@
 {% extends 'ashesiundergraduate/index.html' %}
 
+{% load staticfiles %}
+
 {% block page_js %}
+<script src="//cdn.rawgit.com/imsky/holder/master/holder.js"></script>
 <script>
   $(function() {
     var yearAppliedDiv = $('#id_year_applied').parents('.form-group');
@@ -17,77 +20,87 @@
 {% endblock %}
 
 {% block application_form %}
-<form action="" method="post" class="form-horizontal mid width-90">
-
-  {% csrf_token %}
-  {{ form.non_field_errors }}
-
-  <div class="form-group">
-    <label for="id_first_name" class="col-sm-3 control-label">First Name</label>
-    <div class="col-sm-9">
-      <input class="form-control" id="id_first_name" name="first_name" value="{{ user.first_name }}" type="text" disabled>
-    </div>
+<div class="row">
+  <div class="col-xs-6 col-md-3 pull-right photo">
+    <a href="#" class="thumbnail">
+      <img src="holder.js/150x160" alt="">
+    </a>
   </div>
+</div>
 
-  <div class="form-group">
-    {{ form.middle_name.errors }}
-    <label for="{{ form.middle_name.id_for_label }}" class="col-sm-3 control-label">{{ form.middle_name.label }}</label>
-    <div class="col-sm-9">
-      {{ form.middle_name }}
-    </div>
-  </div>
+<div class="row">
+  <form action="" method="post" class="form-horizontal mid width-90">
 
-  <div class="form-group">
-    <label for="id_last_name" class="col-sm-3 control-label">Last Name</label>
-    <div class="col-sm-9">
-      <input class="form-control" id="id_last_name" name="last_name" value="{{ user.last_name }}" type="text" disabled>
-    </div>
-  </div>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
 
-  <div class="form-group">
-    {{ form.date_of_birth.errors }}
-    <label for="{{ form.date_of_birth.id_for_label }}" class="col-sm-3 control-label">{{ form.date_of_birth.label }}</label>
-    <div class="col-sm-9">
-      {{ form.date_of_birth }}
+    <div class="form-group">
+      <label for="id_first_name" class="col-sm-3 control-label">First Name</label>
+      <div class="col-sm-9">
+        <input class="form-control" id="id_first_name" name="first_name" value="{{ user.first_name }}" type="text" disabled>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    {{ form.gender.errors }}
-    <label for="{{ form.gender.id_for_label }}" class="col-sm-3 control-label">{{ form.gender.label }}</label>
-    <div class="col-sm-9">
-      {% for radio in form.gender %}
-        <div class="radio">
-          {{ radio }}
-        </div>
-      {% endfor %}
+    <div class="form-group">
+      {{ form.middle_name.errors }}
+      <label for="{{ form.middle_name.id_for_label }}" class="col-sm-3 control-label">{{ form.middle_name.label }}</label>
+      <div class="col-sm-9">
+        {{ form.middle_name }}
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    {{ form.gender.errors }}
-    <label for="{{ form.applied_before.id_for_label }}" class="col-sm-3 control-label">{{ form.applied_before.label }}</label>
-    <div class="col-sm-9">
-      {% for radio in form.applied_before %}
-        <div class="radio">
-          {{ radio }}
-        </div>
-      {% endfor %}
+    <div class="form-group">
+      <label for="id_last_name" class="col-sm-3 control-label">Last Name</label>
+      <div class="col-sm-9">
+        <input class="form-control" id="id_last_name" name="last_name" value="{{ user.last_name }}" type="text" disabled>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    {{ form.year_applied.errors }}
-    <label for="{{ form.year_applied.id_for_label }}" class="col-sm-3 control-label">{{ form.year_applied.label }}</label>
-    <div class="col-sm-9">
-      {{ form.year_applied }}
+    <div class="form-group">
+      {{ form.date_of_birth.errors }}
+      <label for="{{ form.date_of_birth.id_for_label }}" class="col-sm-3 control-label">{{ form.date_of_birth.label }}</label>
+      <div class="col-sm-9">
+        {{ form.date_of_birth }}
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <div class="col-sm-offset-3 col-sm-9">
-      <button type="submit" class="btn btn-primary">Save</button>
+    <div class="form-group">
+      {{ form.gender.errors }}
+      <label for="{{ form.gender.id_for_label }}" class="col-sm-3 control-label">{{ form.gender.label }}</label>
+      <div class="col-sm-9">
+        {% for radio in form.gender %}
+          <div class="radio">
+            {{ radio }}
+          </div>
+        {% endfor %}
+      </div>
     </div>
-  </div>
-</form>
+
+    <div class="form-group">
+      {{ form.gender.errors }}
+      <label for="{{ form.applied_before.id_for_label }}" class="col-sm-3 control-label">{{ form.applied_before.label }}</label>
+      <div class="col-sm-9">
+        {% for radio in form.applied_before %}
+          <div class="radio">
+            {{ radio }}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="form-group">
+      {{ form.year_applied.errors }}
+      <label for="{{ form.year_applied.id_for_label }}" class="col-sm-3 control-label">{{ form.year_applied.label }}</label>
+      <div class="col-sm-9">
+        {{ form.year_applied }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-9">
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </form>
+</div>
 {% endblock %}
