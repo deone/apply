@@ -3,7 +3,7 @@
     <li role="presentation" {% if form_name == section.form.name %}class="active"{% endif %}>
       <a href="{{ section.get_absolute_url }}">
         {{ section.form.name }}
-        {% if section.slug in saved_forms %}<span class="glyphicon glyphicon-ok pull-right" aria-hidden="true"></span>{% endif %}
+        {% if section.slug in saved_forms %}<span class="glyphicon glyphicon-ok pull-right tick" aria-hidden="true"></span>{% endif %}
       </a>
     </li>
   {% endfor %}
