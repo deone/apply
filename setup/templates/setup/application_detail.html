@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block page_title %}{{ application.get_name }} &mdash; {% block application_form_name %}{% endblock %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-theme.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="{% static 'js/jquery.percentageloader-0.2.js' %}"></script>
+<script>
+  $(function() {
+    $('#id_date_of_birth').datepicker({
+      showOn: "both",
+      buttonImage: "{% static 'img/calendar.png' %}",
+      changeMonth: true,
+      changeYear: true,
+      dateFormat: 'dd-mm-yy',
+      yearRange: '-50:-15'
+    });
+
+    var $topLoader = $("#topLoader").percentageLoader();
+
+    var topLoaderRunning = false;
+
+    $topLoader.percentageLoader({onready: function () {
+
+      if (topLoaderRunning) {
+        return;
+      }
+      topLoaderRunning = true;
+
+      var kb = 0;
+      var totalKb = 999;
+
+      var animateFunc = function () {
+        kb += 17;
+        progress = kb / totalKb;
+        value = {{ application_completion }};
+
+        $topLoader.percentageLoader({progress: progress});
+
+        if (kb < totalKb && progress < value) {
+          setTimeout(animateFunc, 25);
+        } else {
+          topLoaderRunning = false;
+        }
+      };
+
+      setTimeout(animateFunc, 25);
+
+    }});
+
+  });
+</script>
+{% endblock %}
+
+{% block org_header %}
+<ul class="nav navbar-nav">
+  <li><a href="{{ application.get_absolute_url }}">{{ application.get_name }}</a></li>
+</ul>
+{% endblock %}
+
+{% block app_body %}
+<div class="application row">
+  <div class="col-sm-2 sections">
+    {% include 'setup/_sections.html' %}
+  </div>
+  <div class="col-sm-7 main">
+    {% block application_form %}
+    {% endblock %}
+  </div>
+  <div class="col-sm-3 progress">
+    {% include '_progress.html' %}
+  </div>
+</div>
+{% endblock %}
