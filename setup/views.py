@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 from django.contrib import messages
 from django.apps import apps
 
-from utils.getters import get_application, get_user_application, compute_completion, get_registry_key
+from utils.getters import *
 from utils.registry import REGISTRY
 
 from .models import Application, SavedForm
@@ -36,14 +37,15 @@ def application(request, orgname, slug):
 
     return render(request, template_name, get_context_variables(userapp, application))
 
+@login_required
 def application_form(request, orgname, slug, form_slug):
     registry_key = orgname + slug.split('-')[0]
     form_class =  REGISTRY[registry_key][form_slug]
+
     application = get_application(slug)
     user_app = get_user_application(request.user, application)
 
-    form_slugs = [af.slug for af in application.applicationform_set.all()]
-    next_form_slug = form_slugs[form_slugs.index(form_slug) + 1]
+    saved_forms = [sf.form_slug for sf in user_app.savedform_set.all()]
     form_name = unslugify(form_slug)
 
     model = apps.get_model(registry_key, ''.join(form_name.split(' ')))
@@ -56,9 +58,11 @@ def application_form(request, orgname, slug, form_slug):
         form = form_class(request.POST, user=request.user, application=application)
         if form.is_valid():
             form.save()
-            SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
+            if form_slug not in saved_forms:
+                SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
             messages.success(request, '%s saved.' % form_name)
-            return redirect('application_form', orgname=orgname, slug=slug, form_slug=next_form_slug)
+            return redirect('application_form', orgname=orgname,
+                slug=slug, form_slug=get_next_form_slug(application, form_slug))
     else:
         if obj is not None:
             data = obj.to_dict()
@@ -72,7 +76,7 @@ def application_form(request, orgname, slug, form_slug):
     context.update({
       'form_name': form_name,
       'form': form,
-      'saved_forms': [sf.form_slug for sf in user_app.savedform_set.all()]
+      'saved_forms': saved_forms,
       })
 
     return render(request, template_name, context)
