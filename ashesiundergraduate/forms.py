@@ -4,6 +4,7 @@ from django.contrib.admin import widgets
 
 from .models import *
 from setup.models import UserApplication
+from utils.getters import get_user_application
 
 class PersonalInformationForm(forms.ModelForm):
 
@@ -24,15 +25,19 @@ class PersonalInformationForm(forms.ModelForm):
         self.fields['year_applied'].widget = forms.TextInput(attrs={'class': 'form-control'})
 
     def save(self):
-        user_application = UserApplication.objects.get(application=self.application, user=self.user)
-        return PersonalInformation.objects.create(
-            user_application=user_application,
-            middle_name=self.cleaned_data['middle_name'],
-            date_of_birth=self.cleaned_data['date_of_birth'],
-            gender=self.cleaned_data['gender'],
-            applied_before=self.cleaned_data['applied_before'],
-            year_applied=self.cleaned_data['year_applied']
-            )
+        user_application = get_user_application(user=self.user, application=self.application)
+        data = self.cleaned_data
+        try:
+            personal_information = PersonalInformation.objects.get(user_application=user_application)
+        except PersonalInformation.DoesNotExist:
+            data.update({'user_application': user_application})
+            personal_information = PersonalInformation(**data)
+            personal_information.save()
+        else:
+            PersonalInformation.objects.filter(user_application=user_application).update(**data)
+
+        return personal_information
+
 
 class ScholarshipsForm(forms.ModelForm):
 
