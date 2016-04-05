@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 from setup.models import UserApplication
 
@@ -26,11 +27,20 @@ class PersonalInformation(models.Model):
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, null=True)
     # photo = 
 
+    def to_dict(self):
+        return {
+            'middle_name': self.middle_name,
+            'date_of_birth': self.date_of_birth.strftime(settings.DATE_INPUT_FORMATS[0]),
+            'gender': self.gender,
+            'applied_before': self.applied_before,
+            'year_applied': self.year_applied,
+            }
+
     def __str__(self):
         return '%s %s %s' % (self.user_application.user.first_name, self.middle_name, self.user_application.user.last_name)
 
 class Scholarships(models.Model):
-    pass
+    user_application = models.OneToOneField(UserApplication)
 
 """ class Citizenship(models.Model):
     user = models.OneToOneField(User)
