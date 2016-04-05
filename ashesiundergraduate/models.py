@@ -9,6 +9,9 @@ from setup.models import UserApplication
 
 class PersonalInformation(models.Model):
 
+    class Meta:
+        verbose_name_plural = 'Personal Information'
+
     GENDER_CHOICES = (
         ('M', 'Male'),
         ('F', 'Female'),

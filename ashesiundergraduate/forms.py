@@ -25,6 +25,15 @@ class PersonalInformationForm(forms.ModelForm):
         self.fields['year_applied'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['year_applied'].required = False
 
+    def clean_year_applied(self):
+        if self.cleaned_data['applied_before'] == True and self.cleaned_data['year_applied'] == '':
+            raise forms.ValidationError("Please specify the year you applied.")
+
+        if self.cleaned_data['applied_before'] == False:
+            self.cleaned_data['year_applied'] = ''
+
+        return self.cleaned_data['year_applied']
+
     def save(self):
         user_application = get_user_application(user=self.user, application=self.application)
         data = self.cleaned_data
