@@ -23,6 +23,7 @@ class PersonalInformationForm(forms.ModelForm):
         self.fields['applied_before'].widget = forms.RadioSelect(choices=PersonalInformation.BOOL_CHOICES)
         self.fields['applied_before'].label = 'Have you applied to Ashesi before?'
         self.fields['year_applied'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['year_applied'].required = False
 
     def save(self):
         user_application = get_user_application(user=self.user, application=self.application)

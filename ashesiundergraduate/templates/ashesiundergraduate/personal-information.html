@@ -1,5 +1,22 @@
 {% extends 'ashesiundergraduate/index.html' %}
 
+{% block page_js %}
+<script>
+  $(function() {
+    var yearAppliedDiv = $('#id_year_applied').parents('.form-group');
+    yearAppliedDiv.hide();
+
+    $('#id_applied_before_0').click(function() {
+      yearAppliedDiv.fadeIn();
+    });
+
+    $('#id_applied_before_1').click(function() {
+      yearAppliedDiv.hide();
+    });
+  });
+</script>
+{% endblock %}
+
 {% block application_form %}
 <form action="" method="post" class="form-horizontal mid width-90">
 

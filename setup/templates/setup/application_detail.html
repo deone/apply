@@ -13,6 +13,7 @@
 <script src="{% static 'js/jquery.percentageloader-0.2.js' %}"></script>
 <script>
   $(function() {
+
     $('#id_date_of_birth').datepicker({
       showOn: "both",
       buttonImage: "{% static 'img/calendar.png' %}",
@@ -56,6 +57,7 @@
 
   });
 </script>
+{% block page_js %}{% endblock %}
 {% endblock %}
 
 {% block org_header %}
