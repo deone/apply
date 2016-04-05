@@ -39,3 +39,4 @@ Application Sections - Ashesi
 - Always update UserApplication.form_filled_count after user saves a form successfully.
 - Automate the creation of form templates.
 - Paylater.ng is a good model for Apply Central's homepage.
+- Move all general code and assets out of ashesiundergraduate index.html
