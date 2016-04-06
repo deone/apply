@@ -27,7 +27,7 @@
     {% if user_application.personalinformation.photo %}
       {% thumbnail user_application.personalinformation.photo "150x160" crop="center" as up %}
         <a href="{{ up.url }}" class="thumbnail">
-          <img src="{{ up.url }}" width="{{ up.width }}" height="{{ up.height }}" alt="">
+          <img src="{{ up.url }}" width="{{ up.width }}" height="{{ up.height }}" title="{{ user_application.user.get_full_name }}">
         </a>
       {% endthumbnail %}
     {% else %}

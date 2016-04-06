@@ -39,3 +39,4 @@ Application Sections - Ashesi
 - Automate the creation of form templates.
 - Paylater.ng is a good model for Apply Central's homepage.
 - Clean photo field to ensure compliance to firstname_lastname rule.
+- Use intercom for messaging.

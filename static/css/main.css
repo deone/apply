@@ -150,7 +150,7 @@ label {
 }
 .sections,
 .progress {
-  min-height: 650px;
+  min-height: 800px;
 }
 .progress a.btn {
   margin-top: 1em;
