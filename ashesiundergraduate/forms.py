@@ -13,8 +13,9 @@ class PersonalInformationForm(forms.ModelForm):
         exclude = ['user_application', 'photo_height', 'photo_width']
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
-        self.application = kwargs.pop('application', None)
+        user = kwargs.pop('user', None)
+        application = kwargs.pop('application', None)
+        self.user_application = get_user_application(user=user, application=application)
         super(PersonalInformationForm, self).__init__(*args, **kwargs)
         self.fields['date_of_birth'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['date_of_birth'].input_formats = settings.DATE_INPUT_FORMATS
@@ -35,17 +36,23 @@ class PersonalInformationForm(forms.ModelForm):
 
         return self.cleaned_data['year_applied']
 
+    def clean_photo(self):
+        if self.cleaned_data['photo'].name.split('.')[0] != '%s_%s' % (self.user_application.user.first_name.title(),
+            self.user_application.user.last_name.title()):
+            raise forms.ValidationError("Please rename your photo to conform with specified format.")
+            
+        return self.cleaned_data['photo']
+
     def save(self):
-        user_application = get_user_application(user=self.user, application=self.application)
         data = self.cleaned_data
         try:
-            personal_information = PersonalInformation.objects.get(user_application=user_application)
+            personal_information = PersonalInformation.objects.get(user_application=self.user_application)
         except PersonalInformation.DoesNotExist:
-            data.update({'user_application': user_application})
+            data.update({'user_application': self.user_application})
             personal_information = PersonalInformation(**data)
             personal_information.save()
         else:
-            PersonalInformation.objects.filter(user_application=user_application).update(**data)
+            PersonalInformation.objects.filter(user_application=self.user_application).update(**data)
 
         return personal_information
 
