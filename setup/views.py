@@ -28,16 +28,18 @@ def application(request, orgname, slug):
 
 @login_required
 def application_form(request, orgname, slug, form_slug):
+    ################## Variables #################
     registry_key = orgname + slug.split('-')[0]
     form_class, form_count = get_form_plus_count(REGISTRY[registry_key][form_slug])
-
-    print form_class, form_count
 
     application = get_application(slug)
     user_app = get_user_application(request.user, application)
 
     saved_forms = [sf.form_slug for sf in user_app.savedform_set.all()]
     form_name = unslugify(form_slug)
+
+    template_name = '%s%s%s%s' % (registry_key, '/', form_slug, '.html')
+    context = get_context_variables(user_app, application)
 
     model = apps.get_model(registry_key, ''.join(form_name.split(' ')))
     try:
@@ -46,7 +48,9 @@ def application_form(request, orgname, slug, form_slug):
         data = None
     else:
         data = obj.to_dict()
+    ##############################################
 
+    ################## Soul ######################
     if request.method == "POST":
         form = form_class(request.POST, request.FILES, user_application=user_app, initial=data)
         if form.is_valid():
@@ -58,10 +62,10 @@ def application_form(request, orgname, slug, form_slug):
                 slug=slug, form_slug=get_next_form_slug(application, form_slug))
     else:
         form = form_class(user_application=user_app, initial=data)
+    ###############################################
 
-    template_name = '%s%s%s%s' % (registry_key, '/', form_slug, '.html')
-
-    context = get_context_variables(user_app, application)
+    ################## Template ###################
+    # Context contains application, user_application and application_completion
     context.update({
       'form_name': form_name,
       'form': form,
