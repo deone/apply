@@ -34,14 +34,14 @@ class PersonalInformationForm(forms.ModelForm):
 
         return self.cleaned_data['year_applied']
 
-    def clean_photo(self):
+    """ def clean_photo(self):
         file_name = self.cleaned_data['photo'].name.split('/')[-1]
         user = self.user_application.user
         user_name = '%s_%s' % (user.first_name.title(), user.last_name.title())
         if not file_name.startswith(user_name):
             raise forms.ValidationError(_("Please rename your photo to conform with specified format."), code='photo-name-error')
             
-        return self.cleaned_data['photo']
+        return self.cleaned_data['photo'] """
 
     def save(self):
         data = self.cleaned_data
@@ -52,7 +52,13 @@ class PersonalInformationForm(forms.ModelForm):
             personal_information = PersonalInformation(**data)
             personal_information.save()
         else:
-            PersonalInformation.objects.filter(user_application=self.user_application).update(**data)
+            personal_information.middle_name = data['middle_name']
+            personal_information.date_of_birth = data['date_of_birth']
+            personal_information.photo = data['photo']
+            personal_information.gender = data['gender']
+            personal_information.applied_before = data['applied_before']
+            personal_information.year_applied = data['year_applied']
+            personal_information.save()
 
         return personal_information
 
