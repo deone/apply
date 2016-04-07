@@ -2,9 +2,9 @@ from ashesiundergraduate.forms import *
 
 REGISTRY = {
       'ashesiundergraduate': {
-          'personal-information': PersonalInformationForm,
-          'citizenship': CitizenshipForm,
-          'passport-details': PassportDetailsForm,
-          'scholarships': ScholarshipsForm,
+        'personal-information': {'form': PersonalInformationForm},
+        'citizenship': {'form': CitizenshipForm},
+        'passport-details': {'form': PassportDetailsForm, 'count': 2},
+        'scholarships': {'form': ScholarshipsForm},
       },
     }

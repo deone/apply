@@ -9,22 +9,6 @@ from utils.registry import REGISTRY
 
 from .models import Application, SavedForm
 
-def unslugify(slug):
-    unslug = ''
-    parts = slug.split('-')
-    for part in parts:
-        unslug += part.title() + ' '
-
-    return unslug[:-1]
-
-def get_context_variables(user_app, application):
-
-    return {
-        'application_completion': compute_completion(user_app.savedform_set.count(), application.applicationform_set.count()),
-        'application': application,
-        'user_application': user_app,
-        }
-
 class ApplicationList(ListView):
     model = Application
     context_object_name = 'applications'
@@ -45,7 +29,9 @@ def application(request, orgname, slug):
 @login_required
 def application_form(request, orgname, slug, form_slug):
     registry_key = orgname + slug.split('-')[0]
-    form_class =  REGISTRY[registry_key][form_slug]
+    form_class, form_count = get_form_plus_count(REGISTRY[registry_key][form_slug])
+
+    print form_class, form_count
 
     application = get_application(slug)
     user_app = get_user_application(request.user, application)
