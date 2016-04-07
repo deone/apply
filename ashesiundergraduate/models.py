@@ -62,7 +62,7 @@ class Citizenship(models.Model):
     country_of_citizenship = models.CharField(_('country of citizenship'), max_length=50)
 
     def __str__(self):
-        pass
+        return '%s %s' % (self.user_application.user.get_full_name(), self.country_of_citizenship)
 
     def to_dict(self):
         return {
@@ -73,6 +73,15 @@ class PassportDetails(models.Model):
     user_application = models.ForeignKey(UserApplication)
     passport_number = models.CharField(_('passport number'), max_length=20)
     expiry_date = models.DateField(_('expiry date'))
+
+    def __str__(self):
+        pass
+
+    def to_dict(self):
+        return {
+            'passport_number': self.passport_number,
+            'expiry_date': self.expiry_date,
+            }
 
 class Residence(models.Model):
     LIVING_WITH_CHOICES = (
