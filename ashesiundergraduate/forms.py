@@ -3,8 +3,9 @@ from django.conf import settings
 from django.contrib.admin import widgets
 from django.utils.translation import ugettext_lazy as _
 
-from .models import *
 from setup.models import UserApplication
+
+from .models import *
 
 class PersonalInformationForm(forms.ModelForm):
 
@@ -50,7 +51,6 @@ class PersonalInformationForm(forms.ModelForm):
         except PersonalInformation.DoesNotExist:
             data.update({'user_application': self.user_application})
             personal_information = PersonalInformation(**data)
-            personal_information.save()
         else:
             personal_information.middle_name = data['middle_name']
             personal_information.date_of_birth = data['date_of_birth']
@@ -58,8 +58,8 @@ class PersonalInformationForm(forms.ModelForm):
             personal_information.gender = data['gender']
             personal_information.applied_before = data['applied_before']
             personal_information.year_applied = data['year_applied']
-            personal_information.save()
 
+        personal_information.save()
         return personal_information
 
 class CitizenshipForm(forms.ModelForm):
@@ -72,6 +72,19 @@ class CitizenshipForm(forms.ModelForm):
         self.user_application = kwargs.pop('user_application', None)
         super(CitizenshipForm, self).__init__(*args, **kwargs)
         self.fields['country_of_citizenship'].widget = forms.TextInput(attrs={'class': 'form-control'})
+
+    def save(self):
+        data = self.cleaned_data
+        try:
+            citizenship = Citizenship.objects.get(user_application=self.user_application)
+        except Citizenship.DoesNotExist:
+            data.update({'user_application': self.user_application})
+            citizenship = Citizenship(**data)
+        else:
+            citizenship.country_of_citizenship = data['country_of_citizenship']
+
+        citizenship.save()
+        return citizenship
 
 class ScholarshipsForm(forms.ModelForm):
 

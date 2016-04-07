@@ -61,6 +61,14 @@ class Citizenship(models.Model):
     user_application = models.OneToOneField(UserApplication)
     country_of_citizenship = models.CharField(_('country of citizenship'), max_length=50)
 
+    def __str__(self):
+        pass
+
+    def to_dict(self):
+        return {
+            'country_of_citizenship': self.country_of_citizenship
+            }
+
 class PassportDetails(models.Model):
     user_application = models.ForeignKey(UserApplication)
     passport_number = models.CharField(_('passport number'), max_length=20)
