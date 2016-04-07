@@ -4,7 +4,6 @@ from django.contrib.admin import widgets
 
 from .models import *
 from setup.models import UserApplication
-from utils.getters import get_user_application
 
 class PersonalInformationForm(forms.ModelForm):
 
@@ -13,9 +12,7 @@ class PersonalInformationForm(forms.ModelForm):
         exclude = ['user_application', 'photo_height', 'photo_width']
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)
-        application = kwargs.pop('application', None)
-        self.user_application = get_user_application(user=user, application=application)
+        self.user_application = kwargs.pop('user_application', None)
         super(PersonalInformationForm, self).__init__(*args, **kwargs)
         self.fields['date_of_birth'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['date_of_birth'].input_formats = settings.DATE_INPUT_FORMATS
@@ -56,14 +53,22 @@ class PersonalInformationForm(forms.ModelForm):
 
         return personal_information
 
+class CitizenshipForm(forms.ModelForm):
+
+    class Meta:
+        model = Citizenship
+        exclude = ['user_application']
+
+    def __init__(self, *args, **kwargs):
+        self.user_application = kwargs.pop('user_application', None)
+        super(CitizenshipForm, self).__init__(*args, **kwargs)
 
 class ScholarshipsForm(forms.ModelForm):
 
     class Meta:
         model = Scholarships
-        exclude = []
+        exclude = ['user_application']
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
-        self.application = kwargs.pop('application', None)
+        self.user_application = kwargs.pop('user_application', None)
         super(ScholarshipsForm, self).__init__(*args, **kwargs)
