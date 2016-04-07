@@ -5,7 +5,21 @@ from utils.getters import get_user_app_from_form
 
 from ..models import PassportDetails
 
-class PassportDetailsForm(forms.ModelForm):
+class BasePassportDetailsFormSet(forms.BaseModelFormSet):
+
+    def __init__(self, *args, **kwargs):
+        self.user_application = get_user_app_from_form(kwargs)
+        super(BasePassportDetailsFormSet, self).__init__(*args, **kwargs)
+
+PassportDetailsFormSet = forms.modelformset_factory(PassportDetails,
+    exclude=('user_application',),
+    widgets={
+      'passport_number': forms.TextInput(attrs={'class': 'form-control'}),
+      'expiry_date': forms.TextInput(attrs={'class': 'form-control date'}),
+      },
+    formset=BasePassportDetailsFormSet)
+
+""" class PassportDetailsForm(forms.ModelForm):
 
     class Meta:
         model = PassportDetails
@@ -25,4 +39,4 @@ class PassportDetailsForm(forms.ModelForm):
             passport_details.passport_number = data['passport_number']
             passport_details.expiry_date = data['expiry_date']
 
-        return passport_details
+        return passport_details """

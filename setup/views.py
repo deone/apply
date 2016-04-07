@@ -30,7 +30,7 @@ def application(request, orgname, slug):
 def application_form(request, orgname, slug, form_slug):
     ################## Variables #################
     registry_key = orgname + slug.split('-')[0]
-    form_class, form_count = get_form_plus_count(REGISTRY[registry_key][form_slug])
+    form_class = REGISTRY[registry_key][form_slug]
 
     application = get_application(slug)
     user_app = get_user_application(request.user, application)
@@ -61,7 +61,9 @@ def application_form(request, orgname, slug, form_slug):
             return redirect('application_form', orgname=orgname,
                 slug=slug, form_slug=get_next_form_slug(application, form_slug))
     else:
-        form = form_class(user_application=user_app, initial=data)
+        # form = form_class(user_application=user_app, initial=data)
+        form = form_class(user_application=user_app)
+        print form
     ###############################################
 
     ################## Template ###################

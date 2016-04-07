@@ -5,23 +5,26 @@
   <form action="" method="post" class="form-horizontal mid width-90">
 
     {% csrf_token %}
-    {{ form.non_field_errors }}
 
-    <div class="form-group">
-      {{ form.passport_number.errors }}
-      <label for="{{ form.passport_number.id_for_label }}" class="col-sm-3 control-label">{{ form.passport_number.label }}</label>
-      <div class="col-sm-9">
-        {{ form.passport_number }}
-      </div>
-    </div>
+    {% for f in form %}
+      {{ f.non_field_errors }}
 
-    <div class="form-group">
-      {{ form.expiry_date.errors }}
-      <label for="{{ form.expiry_date.id_for_label }}" class="col-sm-3 control-label">{{ form.expiry_date.label }}</label>
-      <div class="col-sm-9">
-        {{ form.expiry_date }}
+      <div class="form-group">
+        {{ f.passport_number.errors }}
+        <label for="{{ f.passport_number.id_for_label }}" class="col-sm-3 control-label">{{ f.passport_number.label }}</label>
+        <div class="col-sm-9">
+          {{ f.passport_number }}
+        </div>
       </div>
-    </div>
+
+      <div class="form-group">
+        {{ f.expiry_date.errors }}
+        <label for="{{ f.expiry_date.id_for_label }}" class="col-sm-3 control-label">{{ f.expiry_date.label }}</label>
+        <div class="col-sm-9">
+          {{ f.expiry_date }}
+        </div>
+      </div>
+    {% endfor %}
 
     <div class="form-group">
       <div class="col-sm-offset-3 col-sm-9">
