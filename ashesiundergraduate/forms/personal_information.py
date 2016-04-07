@@ -45,18 +45,15 @@ class PersonalInformationForm(forms.ModelForm):
 
     def save(self):
         data = self.cleaned_data
-        try:
-            personal_information = PersonalInformation.objects.get(user_application=self.user_application)
-        except PersonalInformation.DoesNotExist:
-            data.update({'user_application': self.user_application})
-            personal_information = PersonalInformation(**data)
-        else:
+        personal_information, created = PersonalInformation.objects.get_or_create(user_application=self.user_application,
+            defaults=data)
+        if not created:
             personal_information.middle_name = data['middle_name']
             personal_information.date_of_birth = data['date_of_birth']
             personal_information.photo = data['photo']
             personal_information.gender = data['gender']
             personal_information.applied_before = data['applied_before']
             personal_information.year_applied = data['year_applied']
+            personal_information.save()
 
-        personal_information.save()
         return personal_information

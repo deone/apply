@@ -17,13 +17,9 @@ class CitizenshipForm(forms.ModelForm):
 
     def save(self):
         data = self.cleaned_data
-        try:
-            citizenship = Citizenship.objects.get(user_application=self.user_application)
-        except Citizenship.DoesNotExist:
-            data.update({'user_application': self.user_application})
-            citizenship = Citizenship(**data)
-        else:
+        citizenship, created = Citizenship.objects.get_or_create(user_application=self.user_application, defaults=data)
+        if not created:
             citizenship.country_of_citizenship = data['country_of_citizenship']
-
-        citizenship.save()
+            citizenship.save()
+            
         return citizenship
