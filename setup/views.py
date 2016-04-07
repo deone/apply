@@ -57,10 +57,12 @@ def application_form(request, orgname, slug, form_slug):
     try:
         obj = model.objects.get(user_application=user_app)
     except model.DoesNotExist:
-        obj = None
+        data = None
+    else:
+        data = obj.to_dict()
 
     if request.method == "POST":
-        form = form_class(request.POST, request.FILES, user_application=user_app)
+        form = form_class(request.POST, request.FILES, user_application=user_app, initial=data)
         if form.is_valid():
             form.save()
             if form_slug not in saved_forms:
@@ -69,10 +71,6 @@ def application_form(request, orgname, slug, form_slug):
             return redirect('application_form', orgname=orgname,
                 slug=slug, form_slug=get_next_form_slug(application, form_slug))
     else:
-        if obj is not None:
-            data = obj.to_dict()
-        else:
-            data = None
         form = form_class(user_application=user_app, initial=data)
 
     template_name = '%s%s%s%s' % (registry_key, '/', form_slug, '.html')

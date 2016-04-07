@@ -1,0 +1,26 @@
+{% extends 'ashesiundergraduate/index.html' %}
+
+{% block application_form %}
+<div class="row">
+  <form action="" method="post" class="form-horizontal mid width-90">
+
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <div class="form-group">
+      {{ form.country_of_citizenship.errors }}
+      <label for="{{ form.country_of_citizenship.id_for_label }}" class="col-sm-3 control-label">{{ form.country_of_citizenship.label }}</label>
+      <div class="col-sm-9">
+        {{ form.country_of_citizenship }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-9">
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+{% endblock %}

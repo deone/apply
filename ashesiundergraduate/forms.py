@@ -1,6 +1,7 @@
 from django import forms
 from django.conf import settings
 from django.contrib.admin import widgets
+from django.utils.translation import ugettext_lazy as _
 
 from .models import *
 from setup.models import UserApplication
@@ -26,7 +27,7 @@ class PersonalInformationForm(forms.ModelForm):
 
     def clean_year_applied(self):
         if self.cleaned_data['applied_before'] == True and self.cleaned_data['year_applied'] == '':
-            raise forms.ValidationError("Please specify the year you applied.")
+            raise forms.ValidationError(_("Please specify the year you applied."), code='year-not-specified')
 
         if self.cleaned_data['applied_before'] == False:
             self.cleaned_data['year_applied'] = ''
@@ -34,9 +35,11 @@ class PersonalInformationForm(forms.ModelForm):
         return self.cleaned_data['year_applied']
 
     def clean_photo(self):
-        if self.cleaned_data['photo'].name.split('.')[0] != '%s_%s' % (self.user_application.user.first_name.title(),
-            self.user_application.user.last_name.title()):
-            raise forms.ValidationError("Please rename your photo to conform with specified format.")
+        file_name = self.cleaned_data['photo'].name.split('/')[-1]
+        user = self.user_application.user
+        user_name = '%s_%s' % (user.first_name.title(), user.last_name.title())
+        if not file_name.startswith(user_name):
+            raise forms.ValidationError(_("Please rename your photo to conform with specified format."), code='photo-name-error')
             
         return self.cleaned_data['photo']
 
@@ -62,6 +65,7 @@ class CitizenshipForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user_application = kwargs.pop('user_application', None)
         super(CitizenshipForm, self).__init__(*args, **kwargs)
+        self.fields['country_of_citizenship'].widget = forms.TextInput(attrs={'class': 'form-control'})
 
 class ScholarshipsForm(forms.ModelForm):
 
