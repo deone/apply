@@ -106,6 +106,9 @@ form .btn-primary:hover, .btn-primary:active {
 .photo {
   margin-right: 1.7em;
 }
+.photo-field {
+  font-size: 90%;
+}
 .main form,
 .sections {
   font-size: 97%;
