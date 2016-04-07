@@ -2,6 +2,9 @@ from django.shortcuts import get_object_or_404
 
 from setup.models import Application, UserApplication
 
+def get_user_app_from_form(dct):
+    return dct.pop('user_application', None)
+
 def get_application(slug):
     return get_object_or_404(Application, slug=slug)
 

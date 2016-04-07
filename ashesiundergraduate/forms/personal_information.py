@@ -1,11 +1,10 @@
 from django import forms
 from django.conf import settings
-from django.contrib.admin import widgets
 from django.utils.translation import ugettext_lazy as _
 
-from setup.models import UserApplication
+from utils.getters import get_user_app_from_form
 
-from .models import *
+from ..models import PersonalInformation
 
 class PersonalInformationForm(forms.ModelForm):
 
@@ -14,7 +13,7 @@ class PersonalInformationForm(forms.ModelForm):
         exclude = ['user_application', 'photo_height', 'photo_width']
 
     def __init__(self, *args, **kwargs):
-        self.user_application = kwargs.pop('user_application', None)
+        self.user_application = get_user_app_from_form(kwargs)
         super(PersonalInformationForm, self).__init__(*args, **kwargs)
         self.fields['date_of_birth'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['date_of_birth'].input_formats = settings.DATE_INPUT_FORMATS
@@ -61,37 +60,3 @@ class PersonalInformationForm(forms.ModelForm):
 
         personal_information.save()
         return personal_information
-
-class CitizenshipForm(forms.ModelForm):
-
-    class Meta:
-        model = Citizenship
-        exclude = ['user_application']
-
-    def __init__(self, *args, **kwargs):
-        self.user_application = kwargs.pop('user_application', None)
-        super(CitizenshipForm, self).__init__(*args, **kwargs)
-        self.fields['country_of_citizenship'].widget = forms.TextInput(attrs={'class': 'form-control'})
-
-    def save(self):
-        data = self.cleaned_data
-        try:
-            citizenship = Citizenship.objects.get(user_application=self.user_application)
-        except Citizenship.DoesNotExist:
-            data.update({'user_application': self.user_application})
-            citizenship = Citizenship(**data)
-        else:
-            citizenship.country_of_citizenship = data['country_of_citizenship']
-
-        citizenship.save()
-        return citizenship
-
-class ScholarshipsForm(forms.ModelForm):
-
-    class Meta:
-        model = Scholarships
-        exclude = ['user_application']
-
-    def __init__(self, *args, **kwargs):
-        self.user_application = kwargs.pop('user_application', None)
-        super(ScholarshipsForm, self).__init__(*args, **kwargs)
