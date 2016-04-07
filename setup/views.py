@@ -60,7 +60,7 @@ def application_form(request, orgname, slug, form_slug):
         obj = None
 
     if request.method == "POST":
-        form = form_class(request.POST, request.FILES, user=request.user, application=application)
+        form = form_class(request.POST, request.FILES, user_application=user_app)
         if form.is_valid():
             form.save()
             if form_slug not in saved_forms:
@@ -73,7 +73,7 @@ def application_form(request, orgname, slug, form_slug):
             data = obj.to_dict()
         else:
             data = None
-        form = form_class(user=request.user, application=application, initial=data)
+        form = form_class(user_application=user_app, initial=data)
 
     template_name = '%s%s%s%s' % (registry_key, '/', form_slug, '.html')
 
