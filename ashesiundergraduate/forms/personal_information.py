@@ -15,7 +15,7 @@ class PersonalInformationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user_application = get_user_app_from_form(kwargs)
         super(PersonalInformationForm, self).__init__(*args, **kwargs)
-        self.fields['date_of_birth'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['date_of_birth'].widget = forms.TextInput(attrs={'class': 'form-control date'})
         self.fields['date_of_birth'].input_formats = settings.DATE_INPUT_FORMATS
         self.fields['middle_name'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['gender'].widget = forms.RadioSelect(choices=PersonalInformation.GENDER_CHOICES)

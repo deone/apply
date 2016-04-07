@@ -14,13 +14,13 @@
 <script>
   $(function() {
 
-    $('#id_date_of_birth').datepicker({
+    $('.date').datepicker({
       showOn: "both",
       buttonImage: "{% static 'img/calendar.png' %}",
       changeMonth: true,
       changeYear: true,
       dateFormat: 'dd-mm-yy',
-      yearRange: '-50:-15'
+      yearRange: '-80:+10'
     });
 
     var $topLoader = $("#topLoader").percentageLoader();

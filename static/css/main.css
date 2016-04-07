@@ -117,8 +117,8 @@ form .btn-primary:hover, .btn-primary:active {
   /* padding-top: 3em; */
   color: #777;
 }
-#id_date_of_birth {
-  width: 92%;
+.date {
+  width: 92.95%;
   display: inline-block;
 }
 #id_year_applied {
