@@ -40,7 +40,7 @@ class PersonalInformation(models.Model):
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, null=True)
     photo = models.ImageField(upload_to=get_upload_path,
         height_field='photo_height', width_field='photo_width',
-        help_text="File name must be in the format - Firstname_Lastname.")
+        help_text="File name must be in the format - Firstname_Lastname.jpg")
     photo_height = models.CharField(max_length=5)
     photo_width = models.CharField(max_length=5)
 
@@ -57,12 +57,14 @@ class PersonalInformation(models.Model):
     def __str__(self):
         return '%s %s %s' % (self.user_application.user.first_name, self.middle_name, self.user_application.user.last_name)
 
-class Scholarships(models.Model):
+class Citizenship(models.Model):
     user_application = models.OneToOneField(UserApplication)
-
-""" class Citizenship(models.Model):
-    user = models.OneToOneField(User)
     country_of_citizenship = models.CharField(_('country of citizenship'), max_length=50)
+
+class PassportDetails(models.Model):
+    user_application = models.ForeignKey(UserApplication)
+    passport_number = models.CharField(_('passport number'), max_length=20)
+    expiry_date = models.DateField(_('expiry date'))
 
 class Residence(models.Model):
     LIVING_WITH_CHOICES = (
@@ -79,7 +81,10 @@ class Residence(models.Model):
     country = models.CharField(_('country'), max_length=50)
     # living_with = models.
 
-class Major(models.Model):
+class Scholarships(models.Model):
+    user_application = models.OneToOneField(UserApplication)
+
+""" class Major(models.Model):
     user = models.ForeignKey(User)
     # major = models.C
 
@@ -90,11 +95,6 @@ class Orphanage(models.Model):
     contact_person_name = models.CharField(_('contact person name'), max_length=50)
     contact_person_phone_number = models.CharField(_('contact person phone number'), max_length=15)
     contact_person_email = forms.EmailField(_('contact person email address'))
-
-class Nationality(models.Model):
-    user = models.ForeignKey(User)
-    passport_number = models.CharField(_('passport number'), max_length=20)
-    expiry_date = models.DateField(_('expiry date'))
 
 class Course(models.Model):
     name = models.CharField(_('course name'), max_length=50) """

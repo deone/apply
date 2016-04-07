@@ -17,9 +17,10 @@ Confirm Password
 Application Sections - Ashesi
 =============================
 1. Personal Information
-  - Photo
-  - Name
-  - Email Address
+2. Citizenship
+3. Passport Details
+4. Residence
+
 2. Scholarships
 3. Housing Information
 4. Family Information
