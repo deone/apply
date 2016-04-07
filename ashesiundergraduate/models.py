@@ -36,13 +36,14 @@ class PersonalInformation(models.Model):
     middle_name = models.CharField(_('middle name'), max_length=30)
     date_of_birth = models.DateField(_('date of birth'), null=True)
     applied_before = models.NullBooleanField(_('applied before'), choices=BOOL_CHOICES)
-    year_applied = models.CharField(_('year applied'), max_length=4, null=True)
+    year_applied = models.CharField(_('year applied'), max_length=4, null=True, blank=True)
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, null=True)
-    photo = models.ImageField(upload_to=get_upload_path,
+    # photo = models.ImageField(upload_to=get_upload_path,
+    photo = models.ImageField(upload_to='photos/%Y-%m-%d/',
         height_field='photo_height', width_field='photo_width',
         help_text="File name must be in the format - Firstname_Lastname.jpg")
-    photo_height = models.CharField(max_length=5)
-    photo_width = models.CharField(max_length=5)
+    photo_height = models.CharField(max_length=5, null=True, blank=True)
+    photo_width = models.CharField(max_length=5, null=True, blank=True)
 
     def to_dict(self):
         return {

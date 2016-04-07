@@ -62,7 +62,7 @@ class UserApplication(models.Model):
     user = models.ForeignKey(User)
     application = models.ForeignKey(Application)
     start_date = models.DateTimeField(_('start date'), default=timezone.now)
-    submit_date = models.DateTimeField(_('submit date'), null=True)
+    submit_date = models.DateTimeField(_('submit date'), null=True, blank=True)
 
     def __str__(self):
         return '%s %s' % (self.user.get_full_name(), self.application.get_name())
