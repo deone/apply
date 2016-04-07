@@ -13,3 +13,5 @@ class PassportDetailsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user_application = get_user_app_from_form(kwargs)
         super(PassportDetailsForm, self).__init__(*args, **kwargs)
+        self.fields['passport_number'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['expiry_date'].widget = forms.TextInput(attrs={'class': 'form-control'})
