@@ -80,7 +80,7 @@ class PassportDetails(models.Model):
     def to_dict(self):
         return {
             'passport_number': self.passport_number,
-            'expiry_date': self.expiry_date,
+            'expiry_date': self.expiry_date.strftime(settings.DATE_INPUT_FORMATS[0]),
             }
 
 class Residence(models.Model):
