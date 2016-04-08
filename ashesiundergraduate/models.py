@@ -70,12 +70,15 @@ class Citizenship(models.Model):
             }
 
 class PassportDetails(models.Model):
-    user_application = models.ForeignKey(UserApplication)
+    # user_application = models.ForeignKey(UserApplication)
     passport_number = models.CharField(_('passport number'), max_length=20)
     expiry_date = models.DateField(_('expiry date'))
 
+    class Meta:
+        verbose_name_plural = _('Passport Details')
+
     def __str__(self):
-        pass
+        return self.passport_number
 
     def to_dict(self):
         return {
