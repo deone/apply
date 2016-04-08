@@ -4,10 +4,12 @@
 <div class="row">
   <form action="" method="post" class="form-horizontal mid width-90">
 
+    {{ form.management_form }}
     {% csrf_token %}
 
     {% for f in form %}
-      {{ f.non_field_errors }}
+      {{ f }}
+      <!-- {{ f.non_field_errors }}
 
       <div class="form-group">
         {{ f.passport_number.errors }}
@@ -23,7 +25,7 @@
         <div class="col-sm-9">
           {{ f.expiry_date }}
         </div>
-      </div>
+      </div> -->
     {% endfor %}
 
     <div class="form-group">

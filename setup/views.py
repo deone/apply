@@ -42,17 +42,18 @@ def application_form(request, orgname, slug, form_slug):
     context = get_context_variables(user_app, application)
 
     model = apps.get_model(registry_key, ''.join(form_name.split(' ')))
-    try:
+    """ try:
         obj = model.objects.get(user_application=user_app)
     except model.DoesNotExist:
         data = None
     else:
-        data = obj.to_dict()
+        data = obj.to_dict() """
     ##############################################
 
     ################## Soul ######################
     if request.method == "POST":
-        form = form_class(request.POST, request.FILES, user_application=user_app, initial=data)
+        # form = form_class(request.POST, request.FILES, user_application=user_app, initial=data)
+        form = form_class(request.POST, request.FILES, user_application=user_app)
         if form.is_valid():
             form.save()
             if form_slug not in saved_forms:
@@ -63,7 +64,6 @@ def application_form(request, orgname, slug, form_slug):
     else:
         # form = form_class(user_application=user_app, initial=data)
         form = form_class(user_application=user_app)
-        print form
     ###############################################
 
     ################## Template ###################

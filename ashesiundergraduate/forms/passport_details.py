@@ -1,5 +1,4 @@
 from django import forms
-from django.conf import settings
 
 from utils.getters import get_user_app_from_form
 
@@ -11,13 +10,17 @@ class BasePassportDetailsFormSet(forms.BaseModelFormSet):
         self.user_application = get_user_app_from_form(kwargs)
         super(BasePassportDetailsFormSet, self).__init__(*args, **kwargs)
 
+    def add_fields(self, form, index):
+        super(BasePassportDetailsFormSet, self).add_fields(form, index)
+        form.fields['expiry_date'] = forms.DateField(widget=forms.TextInput(attrs={'class': 'form-control date'}))
+
 PassportDetailsFormSet = forms.modelformset_factory(PassportDetails,
-    exclude=('user_application',),
+    exclude=(),
     widgets={
       'passport_number': forms.TextInput(attrs={'class': 'form-control'}),
       'expiry_date': forms.TextInput(attrs={'class': 'form-control date'}),
       },
-    formset=BasePassportDetailsFormSet)
+    formset=BasePassportDetailsFormSet, extra=2, max_num=2)
 
 """ class PassportDetailsForm(forms.ModelForm):
 
