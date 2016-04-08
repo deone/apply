@@ -40,6 +40,14 @@
     </div>
 
     <div class="form-group">
+      {{ form.living_with.errors }}
+      <label for="{{ form.living_with.id_for_label }}" class="col-sm-3 control-label">{{ form.living_with.label }}</label>
+      <div class="col-sm-9">
+        {{ form.living_with }}
+      </div>
+    </div>
+
+    <div class="form-group">
       <div class="col-sm-offset-3 col-sm-9">
         <button type="submit" class="btn btn-primary">Save</button>
       </div>

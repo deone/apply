@@ -18,6 +18,8 @@ class ResidenceForm(forms.ModelForm):
         self.fields['town'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['state'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['country'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['living_with'] = forms.ChoiceField(label='Who do you live with?', choices=Residence.LIVING_WITH_CHOICES,
+            widget=forms.Select(attrs={'class': 'form-control'}))
 
     def save(self):
         data = self.cleaned_data
