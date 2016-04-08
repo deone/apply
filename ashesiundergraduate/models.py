@@ -89,9 +89,9 @@ class PassportDetails(models.Model):
 class Residence(models.Model):
     LIVING_WITH_CHOICES = (
         ('', 'Select'),
-        ('PG'),
-        ('SELF'),
-        ('ORPH'),
+        ('PG', 'I live with my parent(s)/guardian(s)'),
+        ('SELF', 'I live by myself'),
+        ('ORPH', 'I live in an orphanage'),
     )
 
     user_application = models.OneToOneField(UserApplication)
@@ -99,7 +99,7 @@ class Residence(models.Model):
     town = models.CharField(_('town'), max_length=50)
     state = models.CharField(_('state'), max_length=50)
     country = models.CharField(_('country'), max_length=50)
-    # living_with = models.
+    living_with = models.CharField(_('who do you live with?'), max_length=4, choices=LIVING_WITH_CHOICES)
 
     def to_dict(self):
         return {

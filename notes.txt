@@ -40,5 +40,6 @@ Application Sections - Ashesi
 - Automate the creation of form templates.
 - Paylater.ng is a good model for Apply Central's homepage.
 - Use intercom for messaging.
-- Fix formset date display format.
+- Fix formset date display format. Validates wrongly when user clicks save on the form without changing the date.
 - We might need to ask whether user has passport before showing passport details form.
+- Add phone_numbers field to personal information form
