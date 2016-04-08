@@ -109,6 +109,13 @@ class Residence(models.Model):
             'country': self.country,
             }
 
+class Orphanage(models.Model):
+    residence = models.OneToOneField(Residence)
+    name = models.CharField(_('name of orphanage'), max_length=50)
+    contact_person_title = models.CharField(_('contact person title'), max_length=20)
+    contact_person_name = models.CharField(_('contact person name'), max_length=50)
+    contact_person_phone_number = models.CharField(_('contact person phone number'), max_length=15)
+    contact_person_email = models.EmailField(_('contact person email address'))
 
 class Scholarships(models.Model):
     user_application = models.OneToOneField(UserApplication)
@@ -116,14 +123,6 @@ class Scholarships(models.Model):
 """ class Major(models.Model):
     user = models.ForeignKey(User)
     # major = models.C
-
-class Orphanage(models.Model):
-    user = models.OneToOneField(User)
-    name = models.CharField(_('name of orphanage'), max_length=50)
-    contact_person_title = models.CharField(_('contact person title'), max_length=50)
-    contact_person_name = models.CharField(_('contact person name'), max_length=50)
-    contact_person_phone_number = models.CharField(_('contact person phone number'), max_length=15)
-    contact_person_email = forms.EmailField(_('contact person email address'))
 
 class Course(models.Model):
     name = models.CharField(_('course name'), max_length=50) """
