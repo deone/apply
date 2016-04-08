@@ -5,6 +5,7 @@ REGISTRY = {
         'personal-information': PersonalInformationForm,
         'citizenship': CitizenshipForm,
         'passport-details': PassportDetailsFormSet,
+        'residence': ResidenceForm,
         'scholarships': ScholarshipsForm,
       },
     }

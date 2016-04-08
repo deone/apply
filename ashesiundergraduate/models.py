@@ -94,7 +94,7 @@ class Residence(models.Model):
         ('ORPH'),
     )
 
-    user = models.OneToOneField(User)
+    user_application = models.OneToOneField(UserApplication)
     address = models.CharField(_('address'), max_length=255)
     town = models.CharField(_('town'), max_length=50)
     state = models.CharField(_('state'), max_length=50)
