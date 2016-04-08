@@ -1,15 +1,13 @@
 from django import forms
 from django.conf import settings
 
-from utils.getters import get_user_app_from_form
-
 from ..models import PassportDetails
 
 class BasePassportDetailsFormSet(forms.BaseModelFormSet):
 
     def __init__(self, *args, **kwargs):
-        self.user_application = get_user_app_from_form(kwargs)
         super(BasePassportDetailsFormSet, self).__init__(*args, **kwargs)
+        self.forms[0].empty_permitted = False
 
     def add_fields(self, form, index):
         super(BasePassportDetailsFormSet, self).add_fields(form, index)
