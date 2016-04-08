@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 from django.contrib import messages
+from django import forms
 from django.apps import apps
 
 from utils.getters import *
@@ -42,24 +43,31 @@ def application_form(request, orgname, slug, form_slug):
     context = get_context_variables(user_app, application)
 
     model = apps.get_model(registry_key, ''.join(form_name.split(' ')))
-    """ try:
-        obj = model.objects.get(user_application=user_app)
-    except model.DoesNotExist:
-        data = None
-    else:
-        data = obj.to_dict() """
+
+    if not issubclass(form_class, forms.BaseModelFormSet):
+        try:
+            obj = model.objects.get(user_application=user_app)
+        except model.DoesNotExist:
+            data = None
+        else:
+            data = obj.to_dict()
     ##############################################
 
     ################## Soul ######################
     if request.method == "POST":
-        # form = form_class(request.POST, request.FILES, user_application=user_app, initial=data)
-        form = form_class(request.POST, request.FILES)
+        if issubclass(form_class, forms.BaseModelFormSet):
+            form = form_class(request.POST, request.FILES)
+        else:
+            form = form_class(request.POST, request.FILES, user_application=user_app, initial=data)
+
         if form.is_valid():
-            # form.save()
-            instances = form.save(commit=False)
-            for instance in instances:
-                instance.user_application = user_app
-                instance.save()
+            if issubclass(form_class, forms.BaseModelFormSet):
+                instances = form.save(commit=False)
+                for instance in instances:
+                    instance.user_application = user_app
+                    instance.save()
+            else:
+                form.save()
 
             if form_slug not in saved_forms:
                 SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
@@ -67,8 +75,10 @@ def application_form(request, orgname, slug, form_slug):
             return redirect('application_form', orgname=orgname,
                 slug=slug, form_slug=get_next_form_slug(application, form_slug))
     else:
-        # form = form_class(user_application=user_app, initial=data)
-        form = form_class()
+        if issubclass(form_class, forms.BaseModelFormSet):
+            form = form_class()
+        else:
+            form = form_class(user_application=user_app, initial=data)
     ###############################################
 
     ################## Template ###################
