@@ -53,9 +53,14 @@ def application_form(request, orgname, slug, form_slug):
     ################## Soul ######################
     if request.method == "POST":
         # form = form_class(request.POST, request.FILES, user_application=user_app, initial=data)
-        form = form_class(request.POST, request.FILES, user_application=user_app)
+        form = form_class(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            # form.save()
+            instances = form.save(commit=False)
+            for instance in instances:
+                instance.user_application = user_app
+                instance.save()
+
             if form_slug not in saved_forms:
                 SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
             messages.success(request, '%s saved.' % form_name)
@@ -63,7 +68,7 @@ def application_form(request, orgname, slug, form_slug):
                 slug=slug, form_slug=get_next_form_slug(application, form_slug))
     else:
         # form = form_class(user_application=user_app, initial=data)
-        form = form_class(user_application=user_app)
+        form = form_class()
     ###############################################
 
     ################## Template ###################

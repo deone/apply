@@ -15,7 +15,7 @@ class BasePassportDetailsFormSet(forms.BaseModelFormSet):
         form.fields['expiry_date'] = forms.DateField(widget=forms.TextInput(attrs={'class': 'form-control date'}))
 
 PassportDetailsFormSet = forms.modelformset_factory(PassportDetails,
-    exclude=(),
+    exclude=('user_application',),
     widgets={
       'passport_number': forms.TextInput(attrs={'class': 'form-control'}),
       'expiry_date': forms.TextInput(attrs={'class': 'form-control date'}),
