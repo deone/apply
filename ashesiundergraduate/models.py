@@ -70,7 +70,7 @@ class Citizenship(models.Model):
             }
 
 class PassportDetails(models.Model):
-    # user_application = models.ForeignKey(UserApplication)
+    user_application = models.ForeignKey(UserApplication)
     passport_number = models.CharField(_('passport number'), max_length=20)
     expiry_date = models.DateField(_('expiry date'))
 
