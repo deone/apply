@@ -101,6 +101,15 @@ class Residence(models.Model):
     country = models.CharField(_('country'), max_length=50)
     # living_with = models.
 
+    def to_dict(self):
+        return {
+            'address': self.address,
+            'town': self.town,
+            'state': self.state,
+            'country': self.country,
+            }
+
+
 class Scholarships(models.Model):
     user_application = models.OneToOneField(UserApplication)
 

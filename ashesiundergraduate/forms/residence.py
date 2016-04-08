@@ -18,3 +18,15 @@ class ResidenceForm(forms.ModelForm):
         self.fields['town'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['state'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['country'].widget = forms.TextInput(attrs={'class': 'form-control'})
+
+    def save(self):
+        data = self.cleaned_data
+        residence, created = Residence.objects.get_or_create(user_application=self.user_application, defaults=data)
+        if not created:
+            residence.address = data['address']
+            residence.town = data['town']
+            residence.state = data['state']
+            residence.country = data['country']
+            residence.save()
+
+        return residence
