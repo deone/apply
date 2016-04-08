@@ -13,3 +13,8 @@ class ResidenceForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.user_application = get_user_app_from_form(kwargs)
+        super(ResidenceForm, self).__init__(*args, **kwargs)
+        self.fields['address'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['town'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['state'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['country'].widget = forms.TextInput(attrs={'class': 'form-control'})
