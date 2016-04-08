@@ -10,9 +10,6 @@ def unslugify(slug):
 
     return unslug[:-1]
 
-def get_form_plus_count(dct):
-    return (dct['form'], dct.get('count', 1))
-
 def get_context_variables(user_app, application):
 
     return {

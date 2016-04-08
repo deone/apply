@@ -8,8 +8,9 @@
     {% csrf_token %}
 
     {% for f in form %}
-      {{ f }}
-      <!-- {{ f.non_field_errors }}
+      {{ f.non_field_errors }}
+
+      {{ f.id }}
 
       <div class="form-group">
         {{ f.passport_number.errors }}
@@ -25,7 +26,7 @@
         <div class="col-sm-9">
           {{ f.expiry_date }}
         </div>
-      </div> -->
+      </div>
     {% endfor %}
 
     <div class="form-group">
