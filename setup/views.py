@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 from django.contrib import messages
-from django import forms
 from django.apps import apps
 
 from utils.getters import *
@@ -31,7 +30,9 @@ def application(request, orgname, slug):
 def application_form(request, orgname, slug, form_slug):
     ################## Variables #################
     registry_key = orgname + slug.split('-')[0]
-    form_class = REGISTRY[registry_key][form_slug]
+    form_dict = REGISTRY[registry_key][form_slug]
+    form_class = form_dict['class']
+    form_type = form_dict.get('type', 'form')
 
     application = get_application(slug)
     user_app = get_user_application(request.user, application)
@@ -44,7 +45,7 @@ def application_form(request, orgname, slug, form_slug):
 
     model = apps.get_model(registry_key, ''.join(form_name.split(' ')))
 
-    if not issubclass(form_class, forms.BaseModelFormSet):
+    if form_type != 'formset':
         try:
             obj = model.objects.get(user_application=user_app)
         except model.DoesNotExist:
@@ -55,13 +56,13 @@ def application_form(request, orgname, slug, form_slug):
 
     ################## Soul ######################
     if request.method == "POST":
-        if issubclass(form_class, forms.BaseModelFormSet):
+        if form_type == 'formset':
             form = form_class(request.POST, request.FILES)
         else:
             form = form_class(request.POST, request.FILES, user_application=user_app, initial=data)
 
         if form.is_valid():
-            if issubclass(form_class, forms.BaseModelFormSet):
+            if form_type == 'formset':
                 instances = form.save(commit=False)
                 for instance in instances:
                     instance.user_application = user_app
@@ -75,7 +76,7 @@ def application_form(request, orgname, slug, form_slug):
             return redirect('application_form', orgname=orgname,
                 slug=slug, form_slug=get_next_form_slug(application, form_slug))
     else:
-        if issubclass(form_class, forms.BaseModelFormSet):
+        if form_type == 'formset':
             form = form_class()
         else:
             form = form_class(user_application=user_app, initial=data)
