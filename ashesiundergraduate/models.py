@@ -107,6 +107,7 @@ class Residence(models.Model):
             'town': self.town,
             'state': self.state,
             'country': self.country,
+            'living_with': self.living_with,
             }
 
 class Orphanage(models.Model):

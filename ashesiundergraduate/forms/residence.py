@@ -29,6 +29,7 @@ class ResidenceForm(forms.ModelForm):
             residence.town = data['town']
             residence.state = data['state']
             residence.country = data['country']
+            residence.living_with = data['living_with']
             residence.save()
 
         return residence
