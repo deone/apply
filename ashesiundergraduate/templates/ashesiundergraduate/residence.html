@@ -1,5 +1,22 @@
 {% extends 'ashesiundergraduate/index.html' %}
 
+{% block page_js %}
+<script>
+  $(function() {
+
+    $('.dependence').hide();
+
+    $('#id_living_with').change(function() {
+      var selectedOption = $(this).find(':selected').text();
+      if (selectedOption.indexOf('orphanage') !== -1) {
+        $('.dependence').fadeIn();
+      }
+    });
+
+  });
+</script>
+{% endblock %}
+
 {% block application_form %}
 <div class="row">
   <form action="" method="post" class="form-horizontal mid width-90">
@@ -45,6 +62,52 @@
       <div class="col-sm-9">
         {{ form.living_with }}
       </div>
+    </div>
+
+    <div class="dependence">
+
+      <div class="form-group">
+        {{ dependence.name.errors }}
+        <label for="{{ dependence.name.id_for_label }}" class="col-sm-3 control-label">{{ dependence.name.label }}</label>
+        <div class="col-sm-9">
+          {{ dependence.name }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        {{ dependence.contact_person_name.errors }}
+        <label for="{{ dependence.contact_person_name.id_for_label }}" class="col-sm-3 control-label">{{ dependence.contact_person_name.label }}</label>
+        <div class="col-sm-9">
+          {{ dependence.contact_person_name }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        {{ dependence.contact_person_title.errors }}
+        <label for="{{ dependence.contact_person_title.id_for_label }}" class="col-sm-3 control-label">{{ dependence.contact_person_title.label }}</label>
+        <div class="col-sm-9">
+          {{ dependence.contact_person_title }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        {{ dependence.contact_person_phone_number.errors }}
+        <label for="{{ dependence.contact_person_phone_number.id_for_label }}" class="col-sm-3 control-label">
+          {{ dependence.contact_person_phone_number.label }}
+        </label>
+        <div class="col-sm-9">
+          {{ dependence.contact_person_phone_number }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        {{ dependence.contact_person_email.errors }}
+        <label for="{{ dependence.contact_person_email.id_for_label }}" class="col-sm-3 control-label">{{ dependence.contact_person_email.label }}</label>
+        <div class="col-sm-9">
+          {{ dependence.contact_person_email }}
+        </div>
+      </div>
+
     </div>
 
     <div class="form-group">

@@ -92,6 +92,10 @@ def application_form(request, orgname, slug, form_slug):
             slug=slug, form_slug=get_next_form_slug(application, form_slug))
     else:
         form = show_form(form_class, form_type, user_application=user_app, initial=data)
+        if dependence_class:
+            dependence = show_form(dependence_class, dependence_type, residence=None, initial=data)
+        else:
+            dependence = None
     ###############################################
 
     ################## Template ###################
@@ -99,6 +103,7 @@ def application_form(request, orgname, slug, form_slug):
     context.update({
       'form_name': form_name,
       'form': form,
+      'dependence': dependence,
       'saved_forms': saved_forms,
       })
 

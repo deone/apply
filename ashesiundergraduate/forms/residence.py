@@ -41,4 +41,9 @@ class OrphanageForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.residence = get_obj_from_form('residence', kwargs)
-        super(ResidenceForm, self).__init__(*args, **kwargs)
+        super(OrphanageForm, self).__init__(*args, **kwargs)
+        self.fields['name'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['contact_person_name'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['contact_person_title'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['contact_person_phone_number'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['contact_person_email'].widget = forms.TextInput(attrs={'class': 'form-control'})
