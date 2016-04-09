@@ -10,6 +10,9 @@ def unslugify(slug):
 
     return unslug[:-1]
 
+def get_form_class_and_type(dct):
+    return dct['class'], dct.get('type', 'form')
+
 def get_context_variables(user_app, application):
 
     return {

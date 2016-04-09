@@ -30,9 +30,11 @@ def application(request, orgname, slug):
 def application_form(request, orgname, slug, form_slug):
     ################## Variables #################
     registry_key = orgname + slug.split('-')[0]
+
     form_dict = REGISTRY[registry_key][form_slug]
-    form_class = form_dict['class']
-    form_type = form_dict.get('type', 'form')
+    form_class, form_type = get_form_class_and_type(form_dict)
+    if 'dependence' in form_dict:
+        dependence_class, dependence_type = get_form_class_and_type(form_dict['dependence'])
 
     application = get_application(slug)
     user_app = get_user_application(request.user, application)

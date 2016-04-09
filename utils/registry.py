@@ -5,7 +5,10 @@ REGISTRY = {
         'personal-information': {'class': PersonalInformationForm},
         'citizenship': {'class': CitizenshipForm},
         'passport-details': {'class': PassportDetailsFormSet, 'type': 'formset'},
-        'residence': {'class': ResidenceForm},
+        'residence': {
+          'class': ResidenceForm,
+          'dependence': {'class': OrphanageForm},
+          },
         'scholarships': {'class': ScholarshipsForm},
       },
     }

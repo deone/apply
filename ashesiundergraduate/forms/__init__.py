@@ -2,12 +2,13 @@ from .personal_information import PersonalInformationForm
 from .citizenship import CitizenshipForm
 from .passport_details import PassportDetailsFormSet
 from .scholarships import ScholarshipsForm
-from .residence import ResidenceForm
+from .residence import ResidenceForm, OrphanageForm
 
 __all__ = [
 'PersonalInformationForm',
 'CitizenshipForm',
 'PassportDetailsFormSet',
 'ScholarshipsForm',
-'ResidenceForm'
+'ResidenceForm',
+'OrphanageForm',
 ]
