@@ -1,6 +1,6 @@
 from django import forms
 
-from utils.getters import get_user_app_from_form
+from utils.getters import get_obj_from_form
 
 from ..models import Citizenship
 
@@ -11,7 +11,7 @@ class CitizenshipForm(forms.ModelForm):
         exclude = ['user_application']
 
     def __init__(self, *args, **kwargs):
-        self.user_application = get_user_app_from_form(kwargs)
+        self.user_application = get_obj_from_form('user_application', kwargs)
         super(CitizenshipForm, self).__init__(*args, **kwargs)
         self.fields['country_of_citizenship'].widget = forms.TextInput(attrs={'class': 'form-control'})
 

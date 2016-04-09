@@ -1,6 +1,6 @@
 from django import forms
 
-from utils.getters import get_user_app_from_form
+from utils.getters import get_obj_from_form
 
 from ..models import Scholarships
 
@@ -11,5 +11,5 @@ class ScholarshipsForm(forms.ModelForm):
         exclude = ['user_application']
 
     def __init__(self, *args, **kwargs):
-        self.user_application = get_user_app_from_form(kwargs)
+        self.user_application = get_obj_from_form('user_application', kwargs)
         super(ScholarshipsForm, self).__init__(*args, **kwargs)

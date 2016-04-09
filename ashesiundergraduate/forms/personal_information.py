@@ -2,7 +2,7 @@ from django import forms
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-from utils.getters import get_user_app_from_form
+from utils.getters import get_obj_from_form
 
 from ..models import PersonalInformation
 
@@ -13,7 +13,7 @@ class PersonalInformationForm(forms.ModelForm):
         exclude = ['user_application', 'photo_height', 'photo_width']
 
     def __init__(self, *args, **kwargs):
-        self.user_application = get_user_app_from_form(kwargs)
+        self.user_application = get_obj_from_form('user_application', kwargs)
         super(PersonalInformationForm, self).__init__(*args, **kwargs)
         self.fields['date_of_birth'].widget = forms.TextInput(attrs={'class': 'form-control date'})
         self.fields['date_of_birth'].input_formats = settings.DATE_INPUT_FORMATS
