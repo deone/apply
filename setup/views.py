@@ -9,6 +9,19 @@ from utils.registry import REGISTRY
 
 from .models import Application, SavedForm
 
+def process_form(request, form_class, form_type, **kwargs):
+    if form_type == 'formset':
+        form = form_class(request.POST, request.FILES)
+        if form.is_valid():
+            instances = form.save(commit=False)
+            for instance in instances:
+                instance.user_application = kwargs.pop('user_application', None)
+                instance.save()
+    else:
+        form = form_class(request.POST, request.FILES, **kwargs)
+        if form.is_valid():
+            form.save()
+
 class ApplicationList(ListView):
     model = Application
     context_object_name = 'applications'
@@ -35,6 +48,8 @@ def application_form(request, orgname, slug, form_slug):
     form_class, form_type = get_form_class_and_type(form_dict)
     if 'dependence' in form_dict:
         dependence_class, dependence_type = get_form_class_and_type(form_dict['dependence'])
+    else:
+        dependence_class = dependence_type = None
 
     application = get_application(slug)
     user_app = get_user_application(request.user, application)
@@ -47,36 +62,26 @@ def application_form(request, orgname, slug, form_slug):
 
     model = apps.get_model(registry_key, ''.join(form_name.split(' ')))
 
-    if form_type != 'formset':
+    if form_type == 'form':
         try:
             obj = model.objects.get(user_application=user_app)
         except model.DoesNotExist:
             data = None
         else:
             data = obj.to_dict()
+    else:
+        data = None
     ##############################################
 
     ################## Soul ######################
     if request.method == "POST":
-        if form_type == 'formset':
-            form = form_class(request.POST, request.FILES)
-        else:
-            form = form_class(request.POST, request.FILES, user_application=user_app, initial=data)
-
-        if form.is_valid():
-            if form_type == 'formset':
-                instances = form.save(commit=False)
-                for instance in instances:
-                    instance.user_application = user_app
-                    instance.save()
-            else:
-                form.save()
-
-            if form_slug not in saved_forms:
-                SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
-            messages.success(request, '%s saved.' % form_name)
-            return redirect('application_form', orgname=orgname,
-                slug=slug, form_slug=get_next_form_slug(application, form_slug))
+        process_form(request, form_class, form_type, user_application=user_app, initial=data)
+            
+        if form_slug not in saved_forms:
+            SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
+        messages.success(request, '%s saved.' % form_name)
+        return redirect('application_form', orgname=orgname,
+            slug=slug, form_slug=get_next_form_slug(application, form_slug))
     else:
         if form_type == 'formset':
             form = form_class()
