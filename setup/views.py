@@ -18,23 +18,28 @@ def show_form(form_class, form_type, **kwargs):
     return form
 
 def process_form(request, form_class, form_type, **kwargs):
+    user_app = kwargs.pop('user_application', None)
     if form_type == 'formset':
         form = form_class(request.POST, request.FILES)
         if form.is_valid():
             instances = form.save(commit=False)
             for instance in instances:
-                instance.user_application = kwargs.pop('user_application', None)
+                instance.user_application = user_app
                 instance.save()
+            return form, True
     else:
         form = form_class(request.POST, request.FILES, **kwargs)
         if form.is_valid():
             form.save()
+            return form, True
+
+    return form, False
 
 class ApplicationList(ListView):
     model = Application
     context_object_name = 'applications'
 
-def application(request, orgname, slug):
+def application_index(request, orgname, slug):
     application = get_application(slug)
     user_app = get_user_application(request.user, application)
     saved_forms = [sf.form_slug for sf in user_app.savedform_set.all()]
@@ -57,7 +62,7 @@ def application_form(request, orgname, slug, form_slug):
     if 'dependence' in form_dict:
         dependence_class, dependence_type = get_form_class_and_type(form_dict['dependence'])
     else:
-        dependence_class = dependence_type = None
+        dependence_class = dependence_type = dependence = None
 
     application = get_application(slug)
     user_app = get_user_application(request.user, application)
@@ -83,19 +88,17 @@ def application_form(request, orgname, slug, form_slug):
 
     ################## Soul ######################
     if request.method == "POST":
-        process_form(request, form_class, form_type, object_name=user_app, initial=data)
-            
-        if form_slug not in saved_forms:
-            SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
-        messages.success(request, '%s saved.' % form_name)
-        return redirect('application_form', orgname=orgname,
-            slug=slug, form_slug=get_next_form_slug(application, form_slug))
+        form, saved = process_form(request, form_class, form_type, object_name=user_app, initial=data)
+        if saved:
+            if form_slug not in saved_forms:
+                SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
+            messages.success(request, '%s saved.' % form_name)
+            return redirect('application_form', orgname=orgname,
+                slug=slug, form_slug=get_next_form_slug(application, form_slug))
     else:
         form = show_form(form_class, form_type, object_name=user_app, initial=data)
         if dependence_class:
             dependence = show_form(dependence_class, dependence_type, object_name=None, initial=data)
-        else:
-            dependence = None
     ###############################################
 
     ################## Template ###################

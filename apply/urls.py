@@ -18,5 +18,5 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^payments/', include('payments.urls', namespace='payments')),
     url(r'^(?P<orgname>[-.\w]+)/(?P<slug>[-.\w]+)/(?P<form_slug>[-.\w]+)/$', setup_views.application_form, name='application_form'),
-    url(r'^(?P<orgname>[-.\w]+)/(?P<slug>[-.\w]+)/$', setup_views.application, name='application'),
+    url(r'^(?P<orgname>[-.\w]+)/(?P<slug>[-.\w]+)/$', setup_views.application_index, name='application'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
