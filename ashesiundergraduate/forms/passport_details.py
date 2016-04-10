@@ -1,11 +1,14 @@
 from django import forms
 from django.conf import settings
 
+from utils.getters import get_obj_from_form
+
 from ..models import PassportDetails
 
 class BasePassportDetailsFormSet(forms.BaseModelFormSet):
 
     def __init__(self, *args, **kwargs):
+        self.user_application = get_obj_from_form(kwargs)
         super(BasePassportDetailsFormSet, self).__init__(*args, **kwargs)
         self.forms[0].empty_permitted = False
 
@@ -13,6 +16,13 @@ class BasePassportDetailsFormSet(forms.BaseModelFormSet):
         super(BasePassportDetailsFormSet, self).add_fields(form, index)
         form.fields['expiry_date'] = forms.DateField(widget=forms.TextInput(attrs={'class': 'form-control date'}))
         form.fields['expiry_date'].input_formats = settings.DATE_INPUT_FORMATS
+
+    def save(self):
+        instances = super(BasePassportDetailsFormSet, self).save(commit=False)
+        for instance in instances:
+            instance.user_application = self.user_application
+            instance.save()
+        return instances
 
 PassportDetailsFormSet = forms.modelformset_factory(PassportDetails,
     exclude=('user_application',),

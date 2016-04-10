@@ -18,15 +18,10 @@ def show_form(form_class, form_type, **kwargs):
     return form
 
 def process_form(request, form_class, form_type, **kwargs):
-    user_app = kwargs.pop('user_application', None)
     if form_type == 'formset':
-        form = form_class(request.POST, request.FILES)
+        form = form_class(request.POST, request.FILES, **kwargs)
         if form.is_valid():
-            instances = form.save(commit=False)
-            for instance in instances:
-                instance.user_application = user_app
-                instance.save()
-            return form, True
+            form.save()
     else:
         form = form_class(request.POST, request.FILES, **kwargs)
         if form.is_valid():
