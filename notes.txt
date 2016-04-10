@@ -43,3 +43,6 @@ Application Sections - Ashesi
 - Fix formset date display format. Validates wrongly when user clicks save on the form without changing the date.
 - We might need to ask whether user has passport before showing passport details form.
 - Add phone_numbers field to personal information form
+- We need to show orphanage form only if student specifies he lives in an orphanage. We also need to keep form displayed if the form is filled. We can attach a class 'show' to orphanage form if it contains initial data and use jquery to show the form with the class name as the selector. We can also use jquery to display the form if the select field value is orphanage.
+- Delete orphanage entry if student selects any of the other options.
+- We need to deal with the case where a formset is a dependent form. At the moment, process_form() assumes the the foreign key for all formset instances is user_application. We might need to override formset.save() to do this cleanly so that we do not set the foreign key object in setup/views.

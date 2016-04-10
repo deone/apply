@@ -12,7 +12,7 @@ class ResidenceForm(forms.ModelForm):
         exclude = ['user_application']
 
     def __init__(self, *args, **kwargs):
-        self.user_application = get_obj_from_form('user_application', kwargs)
+        self.user_application = get_obj_from_form(kwargs)
         super(ResidenceForm, self).__init__(*args, **kwargs)
         self.fields['address'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['town'].widget = forms.TextInput(attrs={'class': 'form-control'})
@@ -41,7 +41,7 @@ class OrphanageForm(forms.ModelForm):
         exclude = ['residence']
 
     def __init__(self, *args, **kwargs):
-        self.residence = get_obj_from_form('residence', kwargs)
+        self.residence = get_obj_from_form(kwargs)
         super(OrphanageForm, self).__init__(*args, **kwargs)
         self.fields['name'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['contact_person_name'].widget = forms.TextInput(attrs={'class': 'form-control'})

@@ -21,8 +21,8 @@ def get_context_variables(user_app, application):
         'user_application': user_app,
         }
 
-def get_obj_from_form(obj_name, dct):
-    return dct.pop(obj_name, None)
+def get_obj_from_form(dct):
+    return dct.pop('object_name', None)
 
 def get_application(slug):
     return get_object_or_404(Application, slug=slug)

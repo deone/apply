@@ -6,6 +6,10 @@
 
     $('.dependence').hide();
 
+    if ($('#id_living_with').val() == 'ORPH') {
+      $('.dependence').show();
+    }
+
     $('#id_living_with').change(function() {
       var selectedOption = $(this).find(':selected').text();
       if (selectedOption.indexOf('orphanage') !== -1) {
