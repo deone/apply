@@ -17,16 +17,11 @@ def show_form(form_class, form_type, **kwargs):
 
     return form
 
-def process_form(request, form_class, form_type, **kwargs):
-    if form_type == 'formset':
-        form = form_class(request.POST, request.FILES, **kwargs)
-        if form.is_valid():
-            form.save()
-    else:
-        form = form_class(request.POST, request.FILES, **kwargs)
-        if form.is_valid():
-            form.save()
-            return form, True
+def process_form(request, form_class, **kwargs):
+    form = form_class(request.POST, request.FILES, **kwargs)
+    if form.is_valid():
+        form.save()
+        return form, True
 
     return form, False
 
@@ -83,7 +78,7 @@ def application_form(request, orgname, slug, form_slug):
 
     ################## Soul ######################
     if request.method == "POST":
-        form, saved = process_form(request, form_class, form_type, obj=user_app, initial=data)
+        form, saved = process_form(request, form_class, obj=user_app, initial=data)
         if saved:
             if form_slug not in saved_forms:
                 SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
