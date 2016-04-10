@@ -9,11 +9,11 @@ from utils.registry import REGISTRY
 
 from .models import Application, SavedForm
 
-def process_form(request, form_class, **kwargs):
-    form = form_class(request.POST, request.FILES, **kwargs)
-    if form.is_valid():
-        form.save()
-        return form, True
+def process_forms(request, forms_dict, **kwargs):
+    main_form = forms_dict['main'](request.POST, request.FILES, **kwargs)
+    if main_form.is_valid():
+        obj = main_form.save()
+        return main_form, True
 
     return form, False
 
@@ -66,11 +66,13 @@ def application_form(request, orgname, slug, form_slug):
             data = obj.to_dict()
     else:
         data = None
+
+    forms_dict = {'main': form_class, 'dep': dependence_class}
     ##############################################
 
     ################## Soul ######################
     if request.method == "POST":
-        form, saved = process_form(request, form_class, obj=user_app, initial=data)
+        form, saved = process_forms(request, forms_dict, obj=user_app, initial=data)
         if saved:
             if form_slug not in saved_forms:
                 SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
