@@ -22,7 +22,7 @@ def get_context_variables(user_app, application):
         }
 
 def get_obj_from_form(dct):
-    return dct.pop('object_name', None)
+    return dct.pop('obj', None)
 
 def get_application(slug):
     return get_object_or_404(Application, slug=slug)

@@ -83,7 +83,7 @@ def application_form(request, orgname, slug, form_slug):
 
     ################## Soul ######################
     if request.method == "POST":
-        form, saved = process_form(request, form_class, form_type, object_name=user_app, initial=data)
+        form, saved = process_form(request, form_class, form_type, obj=user_app, initial=data)
         if saved:
             if form_slug not in saved_forms:
                 SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
@@ -91,9 +91,9 @@ def application_form(request, orgname, slug, form_slug):
             return redirect('application_form', orgname=orgname,
                 slug=slug, form_slug=get_next_form_slug(application, form_slug))
     else:
-        form = show_form(form_class, form_type, object_name=user_app, initial=data)
+        form = show_form(form_class, form_type, obj=user_app, initial=data)
         if dependence_class:
-            dependence = show_form(dependence_class, dependence_type, object_name=None, initial=data)
+            dependence = show_form(dependence_class, dependence_type, obj=None, initial=data)
     ###############################################
 
     ################## Template ###################
