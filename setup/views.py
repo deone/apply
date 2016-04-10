@@ -9,14 +9,6 @@ from utils.registry import REGISTRY
 
 from .models import Application, SavedForm
 
-def show_form(form_class, form_type, **kwargs):
-    if form_type == 'formset':
-        form = form_class()
-    else:
-        form = form_class(**kwargs)
-
-    return form
-
 def process_form(request, form_class, **kwargs):
     form = form_class(request.POST, request.FILES, **kwargs)
     if form.is_valid():
@@ -86,9 +78,9 @@ def application_form(request, orgname, slug, form_slug):
             return redirect('application_form', orgname=orgname,
                 slug=slug, form_slug=get_next_form_slug(application, form_slug))
     else:
-        form = show_form(form_class, form_type, obj=user_app, initial=data)
+        form = form_class(obj=user_app, initial=data)
         if dependence_class:
-            dependence = show_form(dependence_class, dependence_type, obj=None, initial=data)
+            dependence = dependence_class(obj=None, initial=data)
     ###############################################
 
     ################## Template ###################
