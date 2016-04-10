@@ -48,3 +48,15 @@ class OrphanageForm(forms.ModelForm):
         self.fields['contact_person_title'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['contact_person_phone_number'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['contact_person_email'].widget = forms.TextInput(attrs={'class': 'form-control'})
+
+    def save(self):
+        data = self.cleaned_data
+        orphanage, created = Orphanage.objects.get_or_create(residence=self.residence, defaults=data)
+        if not created:
+            orphanage.name = data['name']
+            orphanage.contact_person_name = data['contact_person_name']
+            orphanage.contact_person_title = data['contact_person_title']
+            orphanage.contact_person_phone_number = data['contact_person_phone_number']
+            orphanage.contact_person_email = data['contact_person_email']
+
+        return orphanage

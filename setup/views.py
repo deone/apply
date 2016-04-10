@@ -10,12 +10,18 @@ from utils.registry import REGISTRY
 from .models import Application, SavedForm
 
 def process_forms(request, forms_dict, **kwargs):
+    dep_form_class = forms_dict['dep']
     main_form = forms_dict['main'](request.POST, request.FILES, **kwargs)
     if main_form.is_valid():
         obj = main_form.save()
-        return main_form, True
 
-    return form, False
+        if dep_form_class is not None:
+            dep_form = dep_form_class(request.POST, request.FILES, obj=obj)
+            if dep_form.is_valid():
+                obj = dep_form.save()
+                return main_form, dep_form, True
+
+    return main_form, dep_form, False
 
 class ApplicationList(ListView):
     model = Application
@@ -72,7 +78,7 @@ def application_form(request, orgname, slug, form_slug):
 
     ################## Soul ######################
     if request.method == "POST":
-        form, saved = process_forms(request, forms_dict, obj=user_app, initial=data)
+        main_form, dep_form, saved = process_forms(request, forms_dict, obj=user_app, initial=data)
         if saved:
             if form_slug not in saved_forms:
                 SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
@@ -80,7 +86,7 @@ def application_form(request, orgname, slug, form_slug):
             return redirect('application_form', orgname=orgname,
                 slug=slug, form_slug=get_next_form_slug(application, form_slug))
     else:
-        form = form_class(obj=user_app, initial=data)
+        main_form = form_class(obj=user_app, initial=data)
         if dependence_class:
             dep_form = dependence_class(obj=None, initial=data)
     ###############################################
@@ -89,7 +95,7 @@ def application_form(request, orgname, slug, form_slug):
     # Context contains application, user_application and application_completion
     context.update({
       'form_name': form_name,
-      'form': form,
+      'form': main_form,
       'dep_form': dep_form,
       'saved_forms': saved_forms,
       })

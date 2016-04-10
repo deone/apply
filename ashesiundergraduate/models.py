@@ -101,6 +101,9 @@ class Residence(models.Model):
     country = models.CharField(_('country'), max_length=50)
     living_with = models.CharField(_('who do you live with?'), max_length=4, choices=LIVING_WITH_CHOICES)
 
+    def __str__(self):
+        return '%s, %s, %s' % (self.town, self.state, self.country)
+
     def to_dict(self):
         return {
             'address': self.address,
