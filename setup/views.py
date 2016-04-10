@@ -44,7 +44,7 @@ def application_form(request, orgname, slug, form_slug):
     if 'dependence' in form_dict:
         dependence_class, dependence_type = get_form_class_and_type(form_dict['dependence'])
     else:
-        dependence_class = dependence_type = dependence = None
+        dependence_class = dependence_type = dep_form = None
 
     application = get_application(slug)
     user_app = get_user_application(request.user, application)
@@ -80,7 +80,7 @@ def application_form(request, orgname, slug, form_slug):
     else:
         form = form_class(obj=user_app, initial=data)
         if dependence_class:
-            dependence = dependence_class(obj=None, initial=data)
+            dep_form = dependence_class(obj=None, initial=data)
     ###############################################
 
     ################## Template ###################
@@ -88,7 +88,7 @@ def application_form(request, orgname, slug, form_slug):
     context.update({
       'form_name': form_name,
       'form': form,
-      'dependence': dependence,
+      'dep_form': dep_form,
       'saved_forms': saved_forms,
       })
 
