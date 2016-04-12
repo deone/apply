@@ -58,5 +58,6 @@ class OrphanageForm(forms.ModelForm):
             orphanage.contact_person_title = data['contact_person_title']
             orphanage.contact_person_phone_number = data['contact_person_phone_number']
             orphanage.contact_person_email = data['contact_person_email']
+            orphanage.save()
 
         return orphanage
