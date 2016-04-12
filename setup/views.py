@@ -9,7 +9,7 @@ from utils.registry import REGISTRY
 
 from .models import Application, SavedForm
 
-def get_initial_data(registry_key, model_name, form_type, user_app, attr=None):
+def get_initial_data(registry_key, model_name, form_type, user_app, attr):
     model = apps.get_model(registry_key, model_name)
     if form_type == 'form':
         try:
@@ -86,7 +86,7 @@ def application_form(request, orgname, slug, form_slug):
     model_name = ''.join(form_name.split(' '))
     dep = form_dict.get('dependence', None)
     attr = dep.get('attr', None)
-    data = get_initial_data(registry_key, model_name, form_type, user_app, attr=attr)
+    data = get_initial_data(registry_key, model_name, form_type, user_app, attr)
  
     ##############################################
 
