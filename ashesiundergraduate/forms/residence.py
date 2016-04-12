@@ -5,6 +5,15 @@ from utils.getters import get_obj_from_form
 
 from ..models import Residence, Orphanage
 
+def validate_phone_number(number):
+    if not number.startswith('+'):
+        raise forms.ValidationError(_('Prefix phone number with country code'), code='incorrect-number-format')
+
+    try:
+        int(number)
+    except (ValueError, TypeError):
+        raise forms.ValidationError(_('Enter a valid phone number'), code='invalid-phone-number')
+
 class ResidenceForm(forms.ModelForm):
 
     class Meta:
@@ -48,6 +57,12 @@ class OrphanageForm(forms.ModelForm):
         self.fields['contact_person_title'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['contact_person_phone_number'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['contact_person_email'].widget = forms.TextInput(attrs={'class': 'form-control'})
+
+    def clean_contact_person_phone_number(self):
+        number = self.cleaned_data['contact_person_phone_number']
+        validate_phone_number(number)
+
+        return number
 
     def save(self):
         data = self.cleaned_data
