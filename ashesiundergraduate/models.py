@@ -35,10 +35,10 @@ class PersonalInformation(models.Model):
     user_application = models.OneToOneField(UserApplication)
     middle_name = models.CharField(_('middle name'), max_length=30)
     date_of_birth = models.DateField(_('date of birth'))
-    """ primary_phone_number = models.CharField(_('primary phone number'), max_length=15,
-        help_text='Enter phone number in the format +233xxxxxxxxx', null=True)
+    primary_phone_number = models.CharField(_('primary phone number'), max_length=15,
+        help_text='Enter phone number in the format +233xxxxxxxxx')
     alternative_phone_number = models.CharField(_('alternative phone number'), max_length=15,
-        help_text='Enter phone number in the format +233xxxxxxxxx', null=True) """
+        help_text='Enter phone number in the format +233xxxxxxxxx', null=True)
     applied_before = models.NullBooleanField(_('applied before'), choices=BOOL_CHOICES)
     year_applied = models.CharField(_('year applied'), max_length=4)
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES)
