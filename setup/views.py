@@ -9,9 +9,14 @@ from utils.registry import REGISTRY
 
 from .models import Application, SavedForm
 
-def process_forms(request, forms_dict, **kwargs):
-    dep_form_class = forms_dict['dep']
-    main_form = forms_dict['main'](request.POST, request.FILES, **kwargs)
+def process_forms(request, form_dict, **kwargs):
+    dep_form_dict = form_dict.get('dependence', None)
+    if dep_form_dict is not None:
+        dep_form_class = dep_form_dict['class']
+    else:
+        dep_form_class = None
+
+    main_form = form_dict['class'](request.POST, request.FILES, **kwargs)
     if main_form.is_valid():
         obj = main_form.save()
 
@@ -43,8 +48,10 @@ def application_index(request, orgname, slug):
 @login_required
 def application_form(request, orgname, slug, form_slug):
     ################## Variables #################
+    # Get registry key
     registry_key = orgname + slug.split('-')[0]
 
+    # Get form registry entry
     form_dict = REGISTRY[registry_key][form_slug]
     form_class, form_type = get_form_class_and_type(form_dict)
     if 'dependence' in form_dict:
@@ -72,13 +79,11 @@ def application_form(request, orgname, slug, form_slug):
             data = obj.to_dict()
     else:
         data = None
-
-    forms_dict = {'main': form_class, 'dep': dependence_class}
     ##############################################
 
     ################## Soul ######################
     if request.method == "POST":
-        main_form, dep_form, saved = process_forms(request, forms_dict, obj=user_app, initial=data)
+        main_form, dep_form, saved = process_forms(request, form_dict, obj=user_app, initial=data)
         if saved:
             if form_slug not in saved_forms:
                 SavedForm.objects.create(user_application=user_app, form_slug=form_slug)

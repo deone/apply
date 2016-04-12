@@ -7,7 +7,7 @@ REGISTRY = {
         'passport-details': {'class': PassportDetailsFormSet, 'type': 'formset'},
         'residence': {
           'class': ResidenceForm,
-          'dependence': {'class': OrphanageForm},
+          'dependence': {'class': OrphanageForm, 'attr': 'orphanage'},
           },
         'scholarships': {'class': ScholarshipsForm},
       },
