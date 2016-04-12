@@ -118,7 +118,8 @@ class Orphanage(models.Model):
     name = models.CharField(_('name of orphanage'), max_length=50)
     contact_person_title = models.CharField(_('contact person title'), max_length=20)
     contact_person_name = models.CharField(_('contact person name'), max_length=50)
-    contact_person_phone_number = models.CharField(_('contact person phone number'), max_length=15)
+    contact_person_phone_number = models.CharField(_('contact person phone number'), max_length=15,
+        help_text='Enter phone number in the format +233xxxxxxxxx')
     contact_person_email = models.EmailField(_('contact person email address'))
 
     def __str__(self):
