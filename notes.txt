@@ -47,3 +47,4 @@ Application Sections - Ashesi
 - Delete orphanage entry if student selects any of the other options.
 - We need to deal with the case where a formset is a dependent form. At the moment, process_form() assumes the the foreign key for all formset instances is user_application. We might need to override formset.save() to do this cleanly so that we do not set the foreign key object in setup/views.
 - Ask about modifying formset initial data on StackOverflow.
+- Also ask about datepicker misbehaviour - If year is not selected, it uses the current year instead of whatever is set on the widget.

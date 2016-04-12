@@ -15,13 +15,13 @@ def get_initial_data(registry_key, model_name, form_type, user_app, attr):
         try:
             obj = model.objects.get(user_application=user_app)
         except model.DoesNotExist:
-            data = None
+            obj = data = None
         else:
             data = obj.to_dict()
     else:
         data = None
 
-    if attr is not None:
+    if attr is not None and obj is not None:
         dep_data = getattr(obj, attr).to_dict()
     else:
         dep_data = None
