@@ -33,7 +33,7 @@ def process_forms(request, form_dict, data, dep_data, **kwargs):
     if dep_form_dict is not None:
         dep_form_class = dep_form_dict['class']
     else:
-        dep_form_class = None
+        dep_form_class = dep_form = None
 
     main_form = form_dict['class'](request.POST, request.FILES, initial=data, **kwargs)
     if main_form.is_valid():
