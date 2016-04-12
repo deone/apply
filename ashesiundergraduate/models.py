@@ -34,15 +34,19 @@ class PersonalInformation(models.Model):
 
     user_application = models.OneToOneField(UserApplication)
     middle_name = models.CharField(_('middle name'), max_length=30)
-    date_of_birth = models.DateField(_('date of birth'), null=True)
+    date_of_birth = models.DateField(_('date of birth'))
+    """ primary_phone_number = models.CharField(_('primary phone number'), max_length=15,
+        help_text='Enter phone number in the format +233xxxxxxxxx', null=True)
+    alternative_phone_number = models.CharField(_('alternative phone number'), max_length=15,
+        help_text='Enter phone number in the format +233xxxxxxxxx', null=True) """
     applied_before = models.NullBooleanField(_('applied before'), choices=BOOL_CHOICES)
-    year_applied = models.CharField(_('year applied'), max_length=4, null=True, blank=True)
-    gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, null=True)
+    year_applied = models.CharField(_('year applied'), max_length=4)
+    gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES)
     photo = models.ImageField(upload_to=get_upload_path,
         height_field='photo_height', width_field='photo_width',
         help_text="File name must be in the format - Firstname_Lastname.jpg")
-    photo_height = models.CharField(max_length=5, null=True, blank=True)
-    photo_width = models.CharField(max_length=5, null=True, blank=True)
+    photo_height = models.CharField(_('photo height'), max_length=5)
+    photo_width = models.CharField(_('photo width'), max_length=5)
 
     def to_dict(self):
         return {
