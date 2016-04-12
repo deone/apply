@@ -9,6 +9,20 @@ from utils.registry import REGISTRY
 
 from .models import Application, SavedForm
 
+def get_initial_data(registry_key, model_name, form_type, user_app, attr=None):
+    model = apps.get_model(registry_key, model_name)
+    if form_type == 'form':
+        try:
+            obj = model.objects.get(user_application=user_app)
+        except model.DoesNotExist:
+            data = None
+        else:
+            data = obj.to_dict()
+    else:
+        data = None
+
+    return data
+
 def process_forms(request, form_dict, **kwargs):
     dep_form_dict = form_dict.get('dependence', None)
     if dep_form_dict is not None:
@@ -68,17 +82,12 @@ def application_form(request, orgname, slug, form_slug):
     template_name = '%s%s%s%s' % (registry_key, '/', form_slug, '.html')
     context = get_context_variables(user_app, application)
 
-    model = apps.get_model(registry_key, ''.join(form_name.split(' ')))
-
-    if form_type == 'form':
-        try:
-            obj = model.objects.get(user_application=user_app)
-        except model.DoesNotExist:
-            data = None
-        else:
-            data = obj.to_dict()
-    else:
-        data = None
+    # Get initial data
+    model_name = ''.join(form_name.split(' '))
+    dep = form_dict.get('dependence', None)
+    attr = dep.get('attr', None)
+    data = get_initial_data(registry_key, model_name, form_type, user_app, attr=attr)
+ 
     ##############################################
 
     ################## Soul ######################
