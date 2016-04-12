@@ -44,6 +44,8 @@ def process_forms(request, form_dict, data, dep_data, **kwargs):
             if dep_form.is_valid():
                 obj = dep_form.save()
                 return main_form, dep_form, True
+        else:
+            return main_form, None, True
 
     return main_form, dep_form, False
 
