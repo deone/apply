@@ -121,6 +121,18 @@ class Orphanage(models.Model):
     contact_person_phone_number = models.CharField(_('contact person phone number'), max_length=15)
     contact_person_email = models.EmailField(_('contact person email address'))
 
+    def __str__(self):
+        return self.name
+
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'contact_person_title': self.contact_person_title,
+            'contact_person_name': self.contact_person_name,
+            'contact_person_phone_number': self.contact_person_phone_number,
+            'contact_person_email': self.contact_person_email,
+            }
+
 class Scholarships(models.Model):
     user_application = models.OneToOneField(UserApplication)
 

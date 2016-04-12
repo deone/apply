@@ -21,21 +21,26 @@ def get_initial_data(registry_key, model_name, form_type, user_app, attr):
     else:
         data = None
 
-    return data
+    if attr is not None:
+        dep_data = getattr(obj, attr).to_dict()
+    else:
+        dep_data = None
 
-def process_forms(request, form_dict, **kwargs):
+    return data, dep_data
+
+def process_forms(request, form_dict, data, dep_data, **kwargs):
     dep_form_dict = form_dict.get('dependence', None)
     if dep_form_dict is not None:
         dep_form_class = dep_form_dict['class']
     else:
         dep_form_class = None
 
-    main_form = form_dict['class'](request.POST, request.FILES, **kwargs)
+    main_form = form_dict['class'](request.POST, request.FILES, initial=data, **kwargs)
     if main_form.is_valid():
         obj = main_form.save()
 
         if dep_form_class is not None:
-            dep_form = dep_form_class(request.POST, request.FILES, obj=obj)
+            dep_form = dep_form_class(request.POST, request.FILES, initial=dep_data, obj=obj)
             if dep_form.is_valid():
                 obj = dep_form.save()
                 return main_form, dep_form, True
@@ -85,14 +90,17 @@ def application_form(request, orgname, slug, form_slug):
     # Get initial data
     model_name = ''.join(form_name.split(' '))
     dep = form_dict.get('dependence', None)
-    attr = dep.get('attr', None)
-    data = get_initial_data(registry_key, model_name, form_type, user_app, attr)
+    if dep is not None:
+        attr = dep.get('attr', None)
+    else:
+        attr = None
+    data, dep_data = get_initial_data(registry_key, model_name, form_type, user_app, attr)
  
     ##############################################
 
     ################## Soul ######################
     if request.method == "POST":
-        main_form, dep_form, saved = process_forms(request, form_dict, obj=user_app, initial=data)
+        main_form, dep_form, saved = process_forms(request, form_dict, data, dep_data, obj=user_app)
         if saved:
             if form_slug not in saved_forms:
                 SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
@@ -102,7 +110,7 @@ def application_form(request, orgname, slug, form_slug):
     else:
         main_form = form_class(obj=user_app, initial=data)
         if dependence_class:
-            dep_form = dependence_class(obj=None, initial=data)
+            dep_form = dependence_class(obj=None, initial=dep_data)
     ###############################################
 
     ################## Template ###################
