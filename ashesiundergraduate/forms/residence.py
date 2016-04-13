@@ -51,12 +51,21 @@ class OrphanageForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.residence = get_obj_from_form(kwargs)
-        super(OrphanageForm, self).__init__(*args, **kwargs)
-        self.fields['name'].widget = forms.TextInput(attrs={'class': 'form-control'})
-        self.fields['contact_person_name'].widget = forms.TextInput(attrs={'class': 'form-control'})
-        self.fields['contact_person_title'].widget = forms.TextInput(attrs={'class': 'form-control'})
-        self.fields['contact_person_phone_number'].widget = forms.TextInput(attrs={'class': 'form-control'})
-        self.fields['contact_person_email'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        # kwarg obj is set to None if request is GET
+        if self.residence is not None:
+            # this is executed only if request is POST
+            # form is initialized only if the main form determining field is a specific value
+            # this ensures that we only attempt binding and validating the dependent form if that value is set
+            # if the value is not set, return prematurely. This will throw an AttributeError upon validation since is_bound is not set on the form
+            if self.residence.living_with != 'ORPH':
+                return
+            else:
+                super(OrphanageForm, self).__init__(*args, **kwargs)
+                self.fields['name'].widget = forms.TextInput(attrs={'class': 'form-control'})
+                self.fields['contact_person_name'].widget = forms.TextInput(attrs={'class': 'form-control'})
+                self.fields['contact_person_title'].widget = forms.TextInput(attrs={'class': 'form-control'})
+                self.fields['contact_person_phone_number'].widget = forms.TextInput(attrs={'class': 'form-control'})
+                self.fields['contact_person_email'].widget = forms.TextInput(attrs={'class': 'form-control'})
 
     def clean_contact_person_phone_number(self):
         number = self.cleaned_data['contact_person_phone_number']

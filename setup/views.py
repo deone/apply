@@ -45,9 +45,17 @@ def process_forms(request, form_dict, data, dep_data, **kwargs):
 
         if dep_form_class is not None:
             dep_form = dep_form_class(request.POST, request.FILES, initial=dep_data, obj=obj)
-            if dep_form.is_valid():
-                obj = dep_form.save()
+            try:
+                boolean = dep_form.is_valid()
+            except AttributeError:
+                # this is thrown if form is not bound because the main form determining field is not set to the required value.
                 return main_form, dep_form, True
+            else:
+                # we can continue validating here since AttributeError is not raised.
+                # main form determining field is set to the required value.
+                if boolean is True:
+                    obj = dep_form.save()
+                    return main_form, dep_form, True
         else:
             return main_form, None, True
 
