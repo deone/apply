@@ -102,7 +102,7 @@ def application_form(request, orgname, slug, form_slug):
     context = get_context_variables(user_app, application)
 
     # Get initial data
-    model_name = ''.join(form_name.split(' '))
+    model_name = form_class.__name__[:-4]
     dep = form_dict.get('dependence', None)
     if dep is not None:
         attr = dep.get('attr', None)
