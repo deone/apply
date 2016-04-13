@@ -8,10 +8,15 @@ from django.utils import timezone
 
 from setup.models import UserApplication
 
+import os
+
 ORG_NAME = 'ashesi'
 APPLICATION_NAME = 'undergraduate-application-2016'
 
-import os
+BOOL_CHOICES = (
+        (True, 'Yes'),
+        (False, 'No'),
+    )
 
 def get_upload_path(instance, filename):
     now = timezone.now()
@@ -25,12 +30,7 @@ class PersonalInformation(models.Model):
     GENDER_CHOICES = (
         ('M', 'Male'),
         ('F', 'Female'),
-    )
-
-    BOOL_CHOICES = (
-        (True, 'Yes'),
-        (False, 'No'),
-    )
+    ) 
 
     user_application = models.OneToOneField(UserApplication)
     middle_name = models.CharField(_('middle name'), max_length=30)
@@ -73,10 +73,17 @@ class Citizenship(models.Model):
     def to_dict(self):
         return {
             'country_of_citizenship': self.country_of_citizenship
-            }
+        }
+
+class PassportCheck(models.Model):
+    user_application = models.ForeignKey(UserApplication)
+    have_passport = models.NullBooleanField(_('have passport'), choices=BOOL_CHOICES)
+
+    def __str__(self):
+        return '%s %s', (self.user_application.user.get_full_name(), self.have_passport)
 
 class PassportDetails(models.Model):
-    user_application = models.ForeignKey(UserApplication)
+    passport_check = models.ForeignKey(PassportCheck)
     passport_number = models.CharField(_('passport number'), max_length=20)
     expiry_date = models.DateField(_('expiry date'))
 
