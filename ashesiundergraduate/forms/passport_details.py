@@ -18,14 +18,17 @@ class PassportCheckForm(forms.ModelForm):
         self.fields['have_passport'].label = _('Do you have a passport?')
         self.fields['have_passport'].widget = forms.RadioSelect(choices=BOOL_CHOICES)
 
-    def save(self):
-        data = self.cleaned_data
-        passport_check, created = PassportCheck.objects.get_or_create(user_application=self.user_application, defaults=data)
-        if not created:
-            passport_check.have_passport = data['have_passport']
-            passport_check.save()
+    def save(self, commit=True):
+        if commit is False:
+            return super(PassportCheckForm, self).save(commit=False)
+        else:
+            data = self.cleaned_data
+            passport_check, created = PassportCheck.objects.get_or_create(user_application=self.user_application, defaults=data)
+            if not created:
+                passport_check.have_passport = data['have_passport']
+                passport_check.save()
 
-        return passport_check
+            return passport_check
 
 class BasePassportDetailsFormSet(forms.BaseModelFormSet):
 

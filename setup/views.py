@@ -41,7 +41,7 @@ def process_forms(request, form_dict, data, dep_data, **kwargs):
 
     main_form = form_dict['class'](request.POST, request.FILES, initial=data, **kwargs)
     if main_form.is_valid():
-        obj = main_form.save()
+        obj = main_form.save(commit=False)
 
         if dep_form_class is not None:
             dep_form = dep_form_class(request.POST, request.FILES, initial=dep_data, obj=obj)
@@ -49,6 +49,7 @@ def process_forms(request, form_dict, data, dep_data, **kwargs):
                 boolean = dep_form.is_valid()
             except AttributeError:
                 # this is thrown if form is not bound because the main form determining field is not set to the required value.
+                main_form.save()
                 return main_form, dep_form, True
             else:
                 # we can continue validating here since AttributeError is not raised.

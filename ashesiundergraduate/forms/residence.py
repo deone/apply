@@ -22,18 +22,21 @@ class ResidenceForm(forms.ModelForm):
         self.fields['living_with'] = forms.ChoiceField(label='Who do you live with?', choices=Residence.LIVING_WITH_CHOICES,
             widget=forms.Select(attrs={'class': 'form-control'}))
 
-    def save(self):
-        data = self.cleaned_data
-        residence, created = Residence.objects.get_or_create(user_application=self.user_application, defaults=data)
-        if not created:
-            residence.address = data['address']
-            residence.town = data['town']
-            residence.state = data['state']
-            residence.country = data['country']
-            residence.living_with = data['living_with']
-            residence.save()
+    def save(self, commit=True):
+        if commit is False:
+            return super(ResidenceForm, self).save(commit=False)
+        else:
+            data = self.cleaned_data
+            residence, created = Residence.objects.get_or_create(user_application=self.user_application, defaults=data)
+            if not created:
+                residence.address = data['address']
+                residence.town = data['town']
+                residence.state = data['state']
+                residence.country = data['country']
+                residence.living_with = data['living_with']
+                residence.save()
 
-        return residence
+            return residence
 
 class OrphanageForm(forms.ModelForm):
 
