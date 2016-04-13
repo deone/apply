@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from utils.getters import get_obj_from_form
 
 from ..models import PersonalInformation
+from utils import validate_phone_number
 
 class PersonalInformationForm(forms.ModelForm):
 
@@ -20,6 +21,7 @@ class PersonalInformationForm(forms.ModelForm):
         self.fields['middle_name'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['primary_phone_number'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['alternative_phone_number'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['alternative_phone_number'].required = False
         self.fields['gender'].widget = forms.RadioSelect(choices=PersonalInformation.GENDER_CHOICES)
         self.fields['applied_before'].widget = forms.RadioSelect(choices=PersonalInformation.BOOL_CHOICES)
         self.fields['applied_before'].label = 'Have you applied to Ashesi before?'
@@ -35,6 +37,19 @@ class PersonalInformationForm(forms.ModelForm):
             self.cleaned_data['year_applied'] = ''
 
         return self.cleaned_data['year_applied']
+
+    def clean_primary_phone_number(self):
+        primary_phone_no = self.cleaned_data['primary_phone_number']
+        validate_phone_number(primary_phone_no)
+
+        return primary_phone_no
+
+    def clean_alternative_phone_number(self):
+        if self.cleaned_data['alternative_phone_number']:
+            alt_phone_no = self.cleaned_data['alternative_phone_number']
+            validate_phone_number(alt_phone_no)
+
+            return alt_phone_no
 
     def clean_photo(self):
         file_name = self.cleaned_data['photo'].name.split('/')[-1]
