@@ -14,6 +14,8 @@
       var selectedOption = $(this).find(':selected').text();
       if (selectedOption.indexOf('orphanage') !== -1) {
         $('.dependence').fadeIn();
+      } else {
+        $('.dependence').hide();
       }
     });
 

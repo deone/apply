@@ -51,13 +51,12 @@ class OrphanageForm(forms.ModelForm):
             # if the value is not set, return prematurely. This will throw an AttributeError upon validation since is_bound is not set on the form
             if self.residence.living_with != 'ORPH':
                 return
-            else:
-                super(OrphanageForm, self).__init__(*args, **kwargs)
-                self.fields['name'].widget = forms.TextInput(attrs={'class': 'form-control'})
-                self.fields['contact_person_name'].widget = forms.TextInput(attrs={'class': 'form-control'})
-                self.fields['contact_person_title'].widget = forms.TextInput(attrs={'class': 'form-control'})
-                self.fields['contact_person_phone_number'].widget = forms.TextInput(attrs={'class': 'form-control'})
-                self.fields['contact_person_email'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        super(OrphanageForm, self).__init__(*args, **kwargs)
+        self.fields['name'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['contact_person_name'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['contact_person_title'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['contact_person_phone_number'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['contact_person_email'].widget = forms.TextInput(attrs={'class': 'form-control'})
 
     def clean_contact_person_phone_number(self):
         number = self.cleaned_data['contact_person_phone_number']
