@@ -77,6 +77,22 @@
     </div>
 
     <div class="form-group">
+      {{ form.primary_phone_number.errors }}
+      <label for="{{ form.primary_phone_number.id_for_label }}" class="col-sm-3 control-label">{{ form.primary_phone_number.label }}</label>
+      <div class="col-sm-9">
+        {{ form.primary_phone_number }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      {{ form.alternative_phone_number.errors }}
+      <label for="{{ form.alternative_phone_number.id_for_label }}" class="col-sm-3 control-label">{{ form.alternative_phone_number.label }}</label>
+      <div class="col-sm-9">
+        {{ form.alternative_phone_number }}
+      </div>
+    </div>
+
+    <div class="form-group">
       {{ form.photo.errors }}
       <label for="{{ form.photo.id_for_label }}" class="col-sm-3 control-label">{{ form.photo.label }}</label>
       <div class="col-sm-9 photo-field">

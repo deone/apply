@@ -52,6 +52,8 @@ class PersonalInformation(models.Model):
         return {
             'middle_name': self.middle_name,
             'date_of_birth': self.date_of_birth.strftime(settings.DATE_INPUT_FORMATS[0]),
+            'primary_phone_number': self.primary_phone_number,
+            'alternative_phone_number': self.alternative_phone_number,
             'gender': self.gender,
             'applied_before': self.applied_before,
             'year_applied': self.year_applied,
