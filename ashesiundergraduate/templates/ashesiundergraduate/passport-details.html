@@ -6,6 +6,18 @@
 
     {% csrf_token %}
 
+    <div class="form-group">
+      {{ form.have_passport.errors }}
+      <label for="{{ form.have_passport.id_for_label }}" class="col-sm-3 control-label">{{ form.have_passport.label }}</label>
+      <div class="col-sm-9">
+        {% for radio in form.have_passport %}
+          <div class="radio">
+            {{ radio }}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
     <div class="dependence">
       {{ dep_form.management_form }}
 

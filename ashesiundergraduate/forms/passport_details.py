@@ -1,9 +1,10 @@
 from django import forms
 from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 
 from utils.getters import get_obj_from_form
 
-from ..models import PassportCheck, PassportDetails
+from ..models import PassportCheck, PassportDetails, BOOL_CHOICES
 
 class PassportCheckForm(forms.ModelForm):
 
@@ -14,6 +15,8 @@ class PassportCheckForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user_application = get_obj_from_form(kwargs)
         super(PassportCheckForm, self).__init__(*args, **kwargs)
+        self.fields['have_passport'].label = _('Do you have a passport?')
+        self.fields['have_passport'].widget = forms.RadioSelect(choices=BOOL_CHOICES)
 
     def save(self):
         data = self.cleaned_data
