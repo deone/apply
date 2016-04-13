@@ -1,5 +1,27 @@
 {% extends 'ashesiundergraduate/index.html' %}
 
+{% block page_js %}
+<script>
+  $(function() {
+    var dep = $('.dependence');
+
+    dep.hide();
+
+    if ($('#id_have_passport_0').is(':checked')) {
+      dep.show();
+    }
+
+    $('#id_have_passport_0').click(function() {
+      dep.fadeIn();
+    });
+
+    $('#id_have_passport_1').click(function() {
+      dep.hide();
+    });
+  });
+</script>
+{% endblock %}
+
 {% block application_form %}
 <div class="row">
   <form action="" method="post" class="form-horizontal mid width-90">
