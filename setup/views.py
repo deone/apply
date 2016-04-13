@@ -22,7 +22,11 @@ def get_initial_data(registry_key, model_name, form_type, user_app, attr):
         data = None
 
     if attr is not None and obj is not None:
-        dep_data = getattr(obj, attr).to_dict()
+        try:
+            dep_data = getattr(obj, attr).to_dict()
+        except:
+            # we need to catch RelatedObjectDoesNotExist here
+            dep_data = None
     else:
         dep_data = None
 
