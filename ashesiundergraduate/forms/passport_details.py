@@ -20,7 +20,7 @@ class PassportCheckForm(forms.ModelForm):
 
     def save(self):
         data = self.cleaned_data
-        passport_check, created = PassportCheck.get_or_create(user_application=self.user_application, defaults=data)
+        passport_check, created = PassportCheck.objects.get_or_create(user_application=self.user_application, defaults=data)
         if not created:
             passport_check.have_passport = data['have_passport']
             passport_check.save()
@@ -31,6 +31,9 @@ class BasePassportDetailsFormSet(forms.BaseModelFormSet):
 
     def __init__(self, *args, **kwargs):
         self.passport_check = get_obj_from_form(kwargs)
+        if self.passport_check is not None:
+            if not self.passport_check.have_passport:
+                return
         super(BasePassportDetailsFormSet, self).__init__(*args, **kwargs)
         self.forms[0].empty_permitted = False
 

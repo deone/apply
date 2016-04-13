@@ -82,6 +82,11 @@ class PassportCheck(models.Model):
     def __str__(self):
         return '%s %s', (self.user_application.user.get_full_name(), self.have_passport)
 
+    def to_dict(self):
+        return {
+            'have_passport': self.have_passport,
+            }
+
 class PassportDetails(models.Model):
     passport_check = models.ForeignKey(PassportCheck)
     passport_number = models.CharField(_('passport number'), max_length=20)
