@@ -4,34 +4,36 @@
 <div class="row">
   <form action="" method="post" class="form-horizontal mid width-90">
 
-    {{ form.management_form }}
     {% csrf_token %}
 
-    {% for f in form %}
-      {{ f.non_field_errors }}
+    <div class="dependence">
+      {{ dep_form.management_form }}
 
-      {{ f.id }}
+      {% for f in dep_form %}
+        {{ f.non_field_errors }}
+        {{ f.id }}
+
+        <div class="form-group">
+          {{ f.passport_number.errors }}
+          <label for="{{ f.passport_number.id_for_label }}" class="col-sm-3 control-label">{{ f.passport_number.label }}</label>
+          <div class="col-sm-9">
+            {{ f.passport_number }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          {{ f.expiry_date.errors }}
+          <label for="{{ f.expiry_date.id_for_label }}" class="col-sm-3 control-label">{{ f.expiry_date.label }}</label>
+          <div class="col-sm-9">
+            {{ f.expiry_date }}
+          </div>
+        </div>
+      {% endfor %}
 
       <div class="form-group">
-        {{ f.passport_number.errors }}
-        <label for="{{ f.passport_number.id_for_label }}" class="col-sm-3 control-label">{{ f.passport_number.label }}</label>
-        <div class="col-sm-9">
-          {{ f.passport_number }}
+        <div class="col-sm-offset-3 col-sm-9">
+          <button type="submit" class="btn btn-primary">Save</button>
         </div>
-      </div>
-
-      <div class="form-group">
-        {{ f.expiry_date.errors }}
-        <label for="{{ f.expiry_date.id_for_label }}" class="col-sm-3 control-label">{{ f.expiry_date.label }}</label>
-        <div class="col-sm-9">
-          {{ f.expiry_date }}
-        </div>
-      </div>
-    {% endfor %}
-
-    <div class="form-group">
-      <div class="col-sm-offset-3 col-sm-9">
-        <button type="submit" class="btn btn-primary">Save</button>
       </div>
     </div>
     
