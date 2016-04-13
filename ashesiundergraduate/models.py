@@ -80,7 +80,7 @@ class PassportCheck(models.Model):
     have_passport = models.NullBooleanField(_('have passport'), choices=BOOL_CHOICES)
 
     def __str__(self):
-        return '%s %s', (self.user_application.user.get_full_name(), self.have_passport)
+        return '%s %s' % (self.user_application.user.get_full_name(), self.have_passport)
 
     def to_dict(self):
         return {

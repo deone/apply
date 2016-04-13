@@ -45,10 +45,10 @@ class BasePassportDetailsFormSet(forms.BaseModelFormSet):
         form.fields['expiry_date'] = forms.DateField(widget=forms.TextInput(attrs={'class': 'form-control date'}))
         form.fields['expiry_date'].input_formats = settings.DATE_INPUT_FORMATS
 
-    def save(self):
+    def save(self, passport_check):
         instances = super(BasePassportDetailsFormSet, self).save(commit=False)
         for instance in instances:
-            instance.passport_check = self.passport_check
+            instance.passport_check = passport_check
             instance.save()
         return instances
 

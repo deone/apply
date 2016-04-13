@@ -55,7 +55,9 @@ def process_forms(request, form_dict, data, dep_data, **kwargs):
                 # we can continue validating here since AttributeError is not raised.
                 # main form determining field is set to the required value.
                 if boolean is True:
-                    obj = dep_form.save()
+                    obj = main_form.save()
+                    print obj
+                    dep_form.save(obj)
                     return main_form, dep_form, True
         else:
             return main_form, None, True

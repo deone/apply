@@ -67,9 +67,9 @@ class OrphanageForm(forms.ModelForm):
 
         return number
 
-    def save(self):
+    def save(self, residence):
         data = self.cleaned_data
-        orphanage, created = Orphanage.objects.get_or_create(residence=self.residence, defaults=data)
+        orphanage, created = Orphanage.objects.get_or_create(residence=residence, defaults=data)
         if not created:
             orphanage.name = data['name']
             orphanage.contact_person_name = data['contact_person_name']
