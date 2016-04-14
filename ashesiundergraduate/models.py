@@ -152,12 +152,9 @@ class Orphanage(models.Model):
             'contact_person_email': self.contact_person_email,
             }
 
-class Scholarships(models.Model):
-    user_application = models.OneToOneField(UserApplication)
-
-""" class Major(models.Model):
-    user = models.ForeignKey(User)
-    # major = models.C
-
 class Course(models.Model):
-    name = models.CharField(_('course name'), max_length=50) """
+    name = models.CharField(_('course name'), max_length=50)
+
+class DesiredMajor(models.Model):
+    user_application = models.OneToOneField(UserApplication)
+    major = models.ForeignKey(Course)
