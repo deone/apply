@@ -12,6 +12,6 @@ REGISTRY = {
           'class': ResidenceForm,
           'dependence': {'class': OrphanageForm, 'attr': 'orphanage'},
           },
-        'scholarships': {'class': ScholarshipsForm},
+        'desired-major': {'class': DesiredMajorForm},
       },
     }
