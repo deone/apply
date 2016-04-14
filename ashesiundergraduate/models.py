@@ -164,7 +164,7 @@ class DesiredMajor(models.Model):
 
     def to_dict(self):
         return {
-            'major': self.desired_major
+            'desired_major': self.desired_major
             }
 
     def __str__(self):
