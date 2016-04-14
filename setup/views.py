@@ -56,10 +56,10 @@ def process_forms(request, form_dict, data, dep_data, **kwargs):
                 # main form determining field is set to the required value.
                 if boolean is True:
                     obj = main_form.save()
-                    print obj
                     dep_form.save(obj)
                     return main_form, dep_form, True
         else:
+            main_form.save()
             return main_form, None, True
 
     return main_form, dep_form, False

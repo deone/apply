@@ -60,7 +60,7 @@ class PersonalInformationForm(forms.ModelForm):
             
         return self.cleaned_data['photo']
 
-    def save(self):
+    def save(self, commit=True):
         data = self.cleaned_data
         personal_information, created = PersonalInformation.objects.get_or_create(user_application=self.user_application,
             defaults=data)
