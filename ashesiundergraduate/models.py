@@ -155,6 +155,17 @@ class Orphanage(models.Model):
 class Course(models.Model):
     name = models.CharField(_('course name'), max_length=50)
 
+    def __str__(self):
+        return self.name
+
 class DesiredMajor(models.Model):
     user_application = models.OneToOneField(UserApplication)
-    major = models.ForeignKey(Course)
+    desired_major = models.ForeignKey(Course)
+
+    def to_dict(self):
+        return {
+            'major': self.desired_major
+            }
+
+    def __str__(self):
+        return self.desired_major.name
