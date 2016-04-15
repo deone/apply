@@ -10,17 +10,16 @@ from setup.models import UserApplication
 
 import os
 
-ORG_NAME = 'ashesi'
-APPLICATION_NAME = 'undergraduate-application-2016'
-
 BOOL_CHOICES = (
         (True, 'Yes'),
         (False, 'No'),
     )
 
 def get_upload_path(instance, filename):
+    org_short_name = instance.user_application.application.organization.short_name
+    application_slug = instance.user_application.application.slug
     now = timezone.now()
-    return os.path.join('%s/%s/%s/' % (ORG_NAME, APPLICATION_NAME, now.strftime('%Y-%m-%d')), filename)
+    return os.path.join('%s/%s/%s/' % (org_short_name, application_slug, now.strftime('%Y-%m-%d')), filename)
 
 class PersonalInformation(models.Model):
 
