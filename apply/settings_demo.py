@@ -1,10 +1,12 @@
 from apply.settings import *
 
-DEBUG = TEMPLATE_DEBUG = True
+DEBUG = True
 
 ALLOWED_HOSTS = ['demo.applycentral.net']
 
 STATIC_URL = "http://demo.applycentral.net/static/"
+
+STATIC_ROOT = '/home/deone/webapps/applycentral_demo_static'
 
 MEDIA_ROOT = "/home/deone/webapps/applycentral_media"
 
