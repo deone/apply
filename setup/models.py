@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+from django.utils.text import slugify
 
 from utils import AutoSlugField
 
@@ -16,11 +17,22 @@ class Organization(models.Model):
 
 class Application(models.Model):
     organization = models.ForeignKey(Organization)
+    # It is important that the name field is set properly.
+    # We use it to build application names and slugs and locate application form app.
+    # Application form apps are named in this convention - `organization short name` + first word of application name
+    # A portion of application URLs contain `organization short name` and `application slug`
     name = models.CharField(_('application name'), max_length=50)
-    slug = AutoSlugField(populate_from='name', db_index=False)
-    is_open = models.BooleanField(_('application open?'), default=False)
+    slug = models.SlugField(blank=True)
     year = models.PositiveSmallIntegerField(_('year'), null=True, blank=True)
+    is_open = models.BooleanField(_('application open?'), default=False)
     deadline = models.DateTimeField()
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            year = str(self.year)
+            self.slug = slugify(self.name + ' ' + year)
+            self.name += ' ' + year
+        super(Application, self).save(*args, **kwargs)
 
     def __str__(self):
         return '%s %s' % (self.organization.name, self.name)
