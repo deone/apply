@@ -1,3 +1,6 @@
+- We can get one of Challenges Worldwide voluteers to help with sales.
+
+
 Steps
 =====
 - Account Creation
@@ -48,3 +51,4 @@ Application Sections - Ashesi
 - Ask about modifying formset initial data on StackOverflow.
 - Also ask about datepicker misbehaviour - If year is not selected, it uses the current year instead of whatever is set on the widget.
 - Don't forget to add a beautiful footer.
+- Try to add queryset to forms just like formsets.

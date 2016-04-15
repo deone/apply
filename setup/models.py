@@ -4,21 +4,35 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+from django.utils.text import slugify
 
 from utils import AutoSlugField
 
 class Organization(models.Model):
     name = models.CharField(_('organization name'), max_length=50)
+    short_name = models.CharField(_('organization short name'), max_length=20)
 
     def __str__(self):
         return self.name
 
 class Application(models.Model):
     organization = models.ForeignKey(Organization)
+    # It is important that the name field is set properly.
+    # We use it to build application names and slugs and locate application form app.
+    # Application form apps are named in this convention - `organization short name` + first word of application name
+    # A portion of application URLs contain `organization short name` and `application slug`
     name = models.CharField(_('application name'), max_length=50)
-    slug = AutoSlugField(populate_from='name', db_index=False, editable=False)
+    slug = models.SlugField(blank=True)
+    year = models.PositiveSmallIntegerField(_('year'), null=True, blank=True)
     is_open = models.BooleanField(_('application open?'), default=False)
     deadline = models.DateTimeField()
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            year = str(self.year)
+            self.slug = slugify(self.name + ' ' + year)
+            self.name += ' ' + year
+        super(Application, self).save(*args, **kwargs)
 
     def __str__(self):
         return '%s %s' % (self.organization.name, self.name)
@@ -28,7 +42,7 @@ class Application(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'application', (self.organization.name.lower().split(' ')[0], self.slug,)
+        return 'application', (self.organization.short_name.lower(), self.slug,)
 
 class Staff(models.Model):
     user = models.OneToOneField(User)
@@ -56,7 +70,7 @@ class ApplicationForm(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'application_form', (self.application.organization.name.lower().split(' ')[0], self.application.slug, self.slug)
+        return 'application_form', (self.application.organization.short_name.lower(), self.application.slug, self.slug)
 
 class UserApplication(models.Model):
     user = models.ForeignKey(User)
