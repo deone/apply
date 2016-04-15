@@ -30,7 +30,7 @@ class Application(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'application', (self.organization.name.lower().split(' ')[0], self.slug,)
+        return 'application', (self.organization.short_name.lower(), self.slug,)
 
 class Staff(models.Model):
     user = models.OneToOneField(User)
@@ -58,7 +58,7 @@ class ApplicationForm(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'application_form', (self.application.organization.name.lower().split(' ')[0], self.application.slug, self.slug)
+        return 'application_form', (self.application.organization.short_name.lower(), self.application.slug, self.slug)
 
 class UserApplication(models.Model):
     user = models.ForeignKey(User)
