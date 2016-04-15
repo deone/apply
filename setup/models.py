@@ -9,7 +9,7 @@ from utils import AutoSlugField
 
 class Organization(models.Model):
     name = models.CharField(_('organization name'), max_length=50)
-    # short_name = model.CharField(_('organization short name'), max_length=20)
+    short_name = models.CharField(_('organization short name'), max_length=20)
 
     def __str__(self):
         return self.name
@@ -19,6 +19,7 @@ class Application(models.Model):
     name = models.CharField(_('application name'), max_length=50)
     slug = AutoSlugField(populate_from='name', db_index=False)
     is_open = models.BooleanField(_('application open?'), default=False)
+    year = models.PositiveSmallIntegerField(_('year'), null=True, blank=True)
     deadline = models.DateTimeField()
 
     def __str__(self):
