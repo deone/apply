@@ -52,3 +52,4 @@ Application Sections - Ashesi
 - Also ask about datepicker misbehaviour - If year is not selected, it uses the current year instead of whatever is set on the widget.
 - Don't forget to add a beautiful footer.
 - Try to add queryset to forms just like formsets.
+- When creating applications, staff can make mistakes. Provide a view application form link with helpful messages instead of errors. e.g ZeroDivisionError means that the staff has not created the application forms.
