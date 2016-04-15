@@ -9,6 +9,7 @@ from utils import AutoSlugField
 
 class Organization(models.Model):
     name = models.CharField(_('organization name'), max_length=50)
+    # short_name = model.CharField(_('organization short name'), max_length=20)
 
     def __str__(self):
         return self.name
@@ -16,7 +17,7 @@ class Organization(models.Model):
 class Application(models.Model):
     organization = models.ForeignKey(Organization)
     name = models.CharField(_('application name'), max_length=50)
-    slug = AutoSlugField(populate_from='name', db_index=False, editable=False)
+    slug = AutoSlugField(populate_from='name', db_index=False)
     is_open = models.BooleanField(_('application open?'), default=False)
     deadline = models.DateTimeField()
 
