@@ -67,6 +67,8 @@ class PersonalInformationForm(forms.ModelForm):
         if not created:
             personal_information.middle_name = data['middle_name']
             personal_information.date_of_birth = data['date_of_birth']
+            personal_information.primary_phone_number = data['primary_phone_number']
+            personal_information.alternative_phone_number = data['alternative_phone_number']
             personal_information.photo = data['photo']
             personal_information.gender = data['gender']
             personal_information.applied_before = data['applied_before']
