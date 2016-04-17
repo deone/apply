@@ -21,3 +21,5 @@ def bind_save_form(form_class, data, **kwargs):
     form = form_class(data, **kwargs)
     if form.is_valid():
         return form.save()
+    else:
+        print form.errors
