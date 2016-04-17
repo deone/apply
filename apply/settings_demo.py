@@ -8,7 +8,7 @@ STATIC_URL = "http://demo.applycentral.net/static/"
 
 STATIC_ROOT = '/home/deone/webapps/applycentral_demo_static'
 
-MEDIA_ROOT = "/home/deone/webapps/applycentral_media"
+MEDIA_ROOT = "/home/deone/webapps/applycentral_demo_media"
 
 MEDIA_URL = "/media/"
 
