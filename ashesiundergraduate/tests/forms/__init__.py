@@ -7,7 +7,6 @@ from setup.models import Organization, Application, UserApplication
 class FormsTest(TestCase):
 
     def setUp(self, *args, **kwargs):
-        self.data = {'country_of_citizenship': 'Nigeria'}
         user = User.objects.create_user('a@a.com', 'a@a.com', '12345')
         organization = Organization.objects.create(name='Ecobank Ghana', short_name='Ecobank')
         application = Application.objects.create(
@@ -17,3 +16,8 @@ class FormsTest(TestCase):
             deadline=timezone.now()
             )
         self.user_app = UserApplication.objects.create(user=user, application=application)
+
+def bind_save_form(form_class, data, **kwargs):
+    form = form_class(data, **kwargs)
+    if form.is_valid():
+        return form.save()
