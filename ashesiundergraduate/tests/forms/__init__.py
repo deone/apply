@@ -18,9 +18,13 @@ class FormsTest(TestCase):
         self.user_app = UserApplication.objects.create(user=user, application=application)
 
     def form_test(self, form_class, data, **kwargs):
+        parent_obj = kwargs.pop('parent', None)
         form = form_class(data, **kwargs)
         if form.is_valid():
-            obj = form.save()
+            if parent_obj is not None:
+                obj = form.save(parent_obj)
+            else:
+                obj = form.save()
         else:
             print form.errors
 
