@@ -29,9 +29,12 @@ class Application(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
-            year = str(self.year)
-            self.slug = slugify(self.name + ' ' + year)
-            self.name += ' ' + year
+            if self.year:
+                year = str(self.year)
+                self.slug = slugify(self.name + ' ' + year)
+                self.name += ' ' + year
+            else:
+                self.slug = slugify(self.name)
         super(Application, self).save(*args, **kwargs)
 
     def __str__(self):
