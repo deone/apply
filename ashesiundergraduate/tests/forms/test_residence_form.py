@@ -58,3 +58,12 @@ class OrphanageFormTest(FormsTest):
         orph.save()
 
         super(OrphanageFormTest, self).form_test(OrphanageForm, self.data, parent=self.residence)
+
+    def test_save_living_with(self):
+        residence_data = self.residence_data.copy()
+        residence_data.update({'living_with': 'PG'})
+        residence_form = ResidenceForm(residence_data, obj=self.user_app)
+        if residence_form.is_valid():
+            residence_obj = residence_form.save(commit=False)
+            form = OrphanageForm(self.data, obj=residence_obj)
+            self.assertRaises(AttributeError, getattr, form, 'is_bound')
