@@ -1,7 +1,7 @@
 from ...models import Citizenship
 from ...forms import CitizenshipForm
 
-from . import FormsTest, bind_save_form
+from . import FormsTest
 
 class CitizenshipFormTest(FormsTest):
 
@@ -9,14 +9,9 @@ class CitizenshipFormTest(FormsTest):
         super(CitizenshipFormTest, self).setUp(*args, **kwargs)
         self.data = {'country_of_citizenship': 'Nigeria'}
 
-    def _assert(self, value):
-        self.assertEqual(value, self.data['country_of_citizenship'])
-
     def test_save_new(self):
-        citizenship = bind_save_form(CitizenshipForm, self.data, obj=self.user_app)
-        self._assert(citizenship.country_of_citizenship)
+        super(CitizenshipFormTest, self).form_test(CitizenshipForm, self.data, obj=self.user_app)
 
     def test_save_existing(self):
         Citizenship.objects.create(user_application=self.user_app, country_of_citizenship='Angola')
-        citizenship = bind_save_form(CitizenshipForm, self.data, obj=self.user_app)
-        self._assert(citizenship.country_of_citizenship)
+        super(CitizenshipFormTest, self).form_test(CitizenshipForm, self.data, obj=self.user_app)

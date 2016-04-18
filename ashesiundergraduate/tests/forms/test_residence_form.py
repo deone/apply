@@ -1,7 +1,7 @@
 from ...models import Residence, Orphanage
 from ...forms import ResidenceForm
 
-from . import FormsTest, bind_save_form
+from . import FormsTest
 
 class ResidenceFormTest(FormsTest):
     
@@ -16,8 +16,7 @@ class ResidenceFormTest(FormsTest):
             }
 
     def test_save_new(self):
-        residence = bind_save_form(ResidenceForm, self.data, obj=self.user_app)
-        self.assertEqual(residence.to_dict(), self.data)
+        super(ResidenceFormTest, self).form_test(ResidenceForm, self.data, obj=self.user_app)
 
     def test_save_existing(self):
         data = self.data.copy()
@@ -25,5 +24,4 @@ class ResidenceFormTest(FormsTest):
         r = Residence(**data)
         r.save()
 
-        residence = bind_save_form(ResidenceForm, self.data, obj=self.user_app)
-        self.assertEqual(residence.to_dict(), self.data)
+        super(ResidenceFormTest, self).form_test(ResidenceForm, self.data, obj=self.user_app)

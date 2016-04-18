@@ -17,9 +17,12 @@ class FormsTest(TestCase):
             )
         self.user_app = UserApplication.objects.create(user=user, application=application)
 
-def bind_save_form(form_class, data, **kwargs):
-    form = form_class(data, **kwargs)
-    if form.is_valid():
-        return form.save()
-    else:
-        print form.errors
+    def form_test(self, form_class, data, **kwargs):
+        form = form_class(data, **kwargs)
+        if form.is_valid():
+            obj = form.save()
+        else:
+            print form.errors
+
+        if obj:
+            self.assertEqual(obj.to_dict(), data)

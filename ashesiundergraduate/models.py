@@ -163,7 +163,7 @@ class DesiredMajor(models.Model):
 
     def to_dict(self):
         return {
-            'desired_major': self.desired_major
+            'desired_major': self.desired_major.pk
             }
 
     def __str__(self):
