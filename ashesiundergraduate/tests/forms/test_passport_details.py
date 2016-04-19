@@ -49,8 +49,6 @@ class PassportDetailsFormSetTest(FormsTest):
     def test_passport_check_have_passport_false(self):
         passport_check_data = self.passport_check_data.copy()
         passport_check_data.update({'have_passport': False})
-        passport_check_form = PassportCheckForm(passport_check_data, obj=self.user_app)
-        if passport_check_form.is_valid():
-            passport_check_obj = passport_check_form.save(commit=False)
-            form = PassportDetailsFormSet(self.data, obj=passport_check_obj)
-            self.assertRaises(AttributeError, getattr, form, 'is_bound')
+
+        super(PassportDetailsFormSetTest, self).form_test_without_bound_parent_form(PassportCheckForm,
+            PassportDetailsFormSet, passport_check_data, self.data, obj=self.user_app)

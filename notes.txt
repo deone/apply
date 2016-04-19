@@ -56,3 +56,4 @@ Application Sections - Ashesi
 - Make deadline nullable.
 - Try using expresspay payment API.
 - Make course name unique.
+- Change all occurrences of 'dependence' and anything like it to 'child' for simplicity.

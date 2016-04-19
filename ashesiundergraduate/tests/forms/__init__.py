@@ -30,3 +30,10 @@ class FormsTest(TestCase):
 
         if obj:
             self.assertEqual(obj.to_dict(), data)
+
+    def form_test_without_bound_parent_form(self, parent_form_class, child_form_class, parent_data, child_data, **kwargs):
+        parent_form = parent_form_class(parent_data, **kwargs)
+        if parent_form.is_valid():
+            parent_obj = parent_form.save(commit=False)
+            form = child_form_class(child_data, obj=parent_obj)
+            self.assertRaises(AttributeError, getattr, form, 'is_bound')

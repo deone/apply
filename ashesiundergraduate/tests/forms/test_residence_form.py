@@ -62,8 +62,6 @@ class OrphanageFormTest(FormsTest):
     def test_residence_living_with_not_orphanage(self):
         residence_data = self.residence_data.copy()
         residence_data.update({'living_with': 'PG'})
-        residence_form = ResidenceForm(residence_data, obj=self.user_app)
-        if residence_form.is_valid():
-            residence_obj = residence_form.save(commit=False)
-            form = OrphanageForm(self.data, obj=residence_obj)
-            self.assertRaises(AttributeError, getattr, form, 'is_bound')
+
+        super(OrphanageFormTest, self).form_test_without_bound_parent_form(ResidenceForm,
+            OrphanageForm, residence_data, self.data, obj=self.user_app)
