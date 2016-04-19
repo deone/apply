@@ -59,7 +59,7 @@ class OrphanageFormTest(FormsTest):
 
         super(OrphanageFormTest, self).form_test(OrphanageForm, self.data, parent=self.residence)
 
-    def test_save_living_with(self):
+    def test_residence_living_with_not_orphanage(self):
         residence_data = self.residence_data.copy()
         residence_data.update({'living_with': 'PG'})
         residence_form = ResidenceForm(residence_data, obj=self.user_app)
