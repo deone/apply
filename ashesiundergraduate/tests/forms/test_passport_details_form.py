@@ -1,5 +1,3 @@
-from django.utils import timezone
-
 from ...models import PassportCheck, PassportDetails
 from ...forms import PassportCheckForm, PassportDetailsFormSet
 

@@ -57,3 +57,4 @@ Application Sections - Ashesi
 - Try using expresspay payment API.
 - Make course name unique.
 - Change all occurrences of 'dependence' and anything like it to 'child' for simplicity.
+- Add placeholders to form fields.
