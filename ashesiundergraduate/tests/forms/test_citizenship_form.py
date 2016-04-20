@@ -10,8 +10,10 @@ class CitizenshipFormTest(FormsTest):
         self.data = {'country_of_citizenship': 'Nigeria'}
 
     def test_save_new(self):
-        super(CitizenshipFormTest, self).form_test(CitizenshipForm, self.data, obj=self.user_app)
+        obj = super(CitizenshipFormTest, self).save_form(CitizenshipForm, self.data, obj=self.user_app)
+        self.assertEqual(obj, self.data)
 
     def test_save_existing(self):
         Citizenship.objects.create(user_application=self.user_app, country_of_citizenship='Angola')
-        super(CitizenshipFormTest, self).form_test(CitizenshipForm, self.data, obj=self.user_app)
+        obj = super(CitizenshipFormTest, self).save_form(CitizenshipForm, self.data, obj=self.user_app)
+        self.assertEqual(obj, self.data)

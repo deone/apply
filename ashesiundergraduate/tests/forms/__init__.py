@@ -20,7 +20,7 @@ class FormsTest(TestCase):
             )
         self.user_app = UserApplication.objects.create(user=user, application=application)
 
-    def form_test(self, form_class, data, files=None, **kwargs):
+    def save_form(self, form_class, data, files=None, **kwargs):
         parent_obj = kwargs.pop('parent', None)
         form = form_class(data, files, **kwargs)
         if form.is_valid():
@@ -29,13 +29,8 @@ class FormsTest(TestCase):
             else:
                 obj = form.save()
         else:
-            print form.errors
-
-        if obj:
-            obj_dict = obj.to_dict()
-            if obj_dict.has_key('photo'):
-                del obj_dict['photo']
-            self.assertEqual(obj_dict, data)
+            return form.errors
+        return obj.to_dict()
 
     def form_test_without_bound_parent_form(self, parent_form_class, child_form_class, parent_data, child_data, **kwargs):
         parent_form = parent_form_class(parent_data, **kwargs)
