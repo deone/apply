@@ -68,6 +68,7 @@ class ApplicationList(ListView):
     model = Application
     context_object_name = 'applications'
 
+@login_required
 def application_index(request, orgname, slug):
     application = get_application(slug)
     user_app = get_user_application(request.user, application)

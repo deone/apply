@@ -19,7 +19,7 @@ def get_upload_path(instance, filename):
     org_short_name = instance.user_application.application.organization.short_name
     application_slug = instance.user_application.application.slug
     now = timezone.now()
-    return os.path.join('%s/%s/%s/' % (org_short_name, application_slug, now.strftime('%Y-%m-%d')), filename)
+    return os.path.join('%s/%s/%s/' % (org_short_name.lower(), application_slug, now.strftime('%Y-%m-%d')), filename)
 
 class PersonalInformation(models.Model):
 
@@ -163,7 +163,7 @@ class DesiredMajor(models.Model):
 
     def to_dict(self):
         return {
-            'desired_major': self.desired_major
+            'desired_major': self.desired_major.pk
             }
 
     def __str__(self):
