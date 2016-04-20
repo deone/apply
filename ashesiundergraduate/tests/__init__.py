@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import User
 
@@ -19,3 +20,4 @@ class AppTest(TestCase):
             deadline=timezone.now()
             )
         self.user_app = UserApplication.objects.create(user=user, application=application)
+        settings.MEDIA_ROOT = '/Users/deone/src/apply/apply/ashesiundergraduate/tests/test_files/'
