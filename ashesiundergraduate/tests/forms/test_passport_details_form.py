@@ -10,11 +10,13 @@ class PassportCheckFormTest(FormsTest):
         self.data = {'have_passport': True}
 
     def test_save_new(self):
-        super(PassportCheckFormTest, self).form_test(PassportCheckForm, self.data, obj=self.user_app)
+        obj = super(PassportCheckFormTest, self).save_form(PassportCheckForm, self.data, obj=self.user_app)
+        self.assertEqual(obj, self.data)
 
     def test_save_existing(self):
         PassportCheck.objects.create(user_application=self.user_app, have_passport=False)
-        super(PassportCheckFormTest, self).form_test(PassportCheckForm, self.data, obj=self.user_app)
+        obj = super(PassportCheckFormTest, self).save_form(PassportCheckForm, self.data, obj=self.user_app)
+        self.assertEqual(obj, self.data)
 
 
 class PassportDetailsFormSetTest(FormsTest):

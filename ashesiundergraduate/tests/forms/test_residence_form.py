@@ -16,7 +16,7 @@ class ResidenceFormTest(FormsTest):
             }
 
     def test_save_new(self):
-        super(ResidenceFormTest, self).form_test(ResidenceForm, self.data, obj=self.user_app)
+        super(ResidenceFormTest, self).save_form(ResidenceForm, self.data, obj=self.user_app)
 
     def test_save_existing(self):
         data = self.data.copy()
@@ -24,7 +24,8 @@ class ResidenceFormTest(FormsTest):
         r = Residence(**data)
         r.save()
 
-        super(ResidenceFormTest, self).form_test(ResidenceForm, self.data, obj=self.user_app)
+        obj = super(ResidenceFormTest, self).save_form(ResidenceForm, self.data, obj=self.user_app)
+        self.assertEqual(obj, self.data)
 
 class OrphanageFormTest(FormsTest):
 
@@ -49,7 +50,8 @@ class OrphanageFormTest(FormsTest):
             }
 
     def test_save_new(self):
-        super(OrphanageFormTest, self).form_test(OrphanageForm, self.data, parent=self.residence)
+        obj = super(OrphanageFormTest, self).save_form(OrphanageForm, self.data, parent=self.residence)
+        self.assertEqual(obj, self.data)
 
     def test_save_existing(self):
         data = self.data.copy()
@@ -57,7 +59,8 @@ class OrphanageFormTest(FormsTest):
         orph = Orphanage(**data)
         orph.save()
 
-        super(OrphanageFormTest, self).form_test(OrphanageForm, self.data, parent=self.residence)
+        obj = super(OrphanageFormTest, self).save_form(OrphanageForm, self.data, parent=self.residence)
+        self.assertEqual(obj, self.data)
 
     def test_residence_living_with_not_orphanage(self):
         residence_data = self.residence_data.copy()

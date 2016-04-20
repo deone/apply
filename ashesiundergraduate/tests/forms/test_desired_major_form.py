@@ -11,9 +11,12 @@ class DesiredMajorFormTest(FormsTest):
         self.data = {'desired_major': course_one.pk}
 
     def test_save_new(self):
-        super(DesiredMajorFormTest, self).form_test(DesiredMajorForm, self.data, obj=self.user_app)
+        obj = super(DesiredMajorFormTest, self).save_form(DesiredMajorForm, self.data, obj=self.user_app)
+        self.assertEqual(obj, self.data)
 
     def test_save_existing(self):
         course_two = Course.objects.create(name='Management Information Systems')
         major = DesiredMajor.objects.create(user_application=self.user_app, desired_major=course_two)
-        super(DesiredMajorFormTest, self).form_test(DesiredMajorForm, self.data, obj=self.user_app)
+
+        obj = super(DesiredMajorFormTest, self).save_form(DesiredMajorForm, self.data, obj=self.user_app)
+        self.assertEqual(obj, self.data)
