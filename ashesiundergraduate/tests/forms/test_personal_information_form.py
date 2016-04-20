@@ -31,7 +31,9 @@ class PersonalInformationFormTest(FormsTest):
                 }
 
     def test_save_new(self):
-        super(PersonalInformationFormTest, self).form_test(PersonalInformationForm, self.data, files=self.photo, obj=self.user_app)
+        obj = super(PersonalInformationFormTest, self).save_form(PersonalInformationForm, self.data, files=self.photo, obj=self.user_app)
+        del obj['photo']
+        self.assertEqual(obj, self.data)
 
     def test_save_existing(self):
         data = self.data.copy()
@@ -47,4 +49,31 @@ class PersonalInformationFormTest(FormsTest):
           })
         pi = PersonalInformation(**data)
         pi.save()
-        super(PersonalInformationFormTest, self).form_test(PersonalInformationForm, self.data, files=self.photo, obj=self.user_app)
+        obj = super(PersonalInformationFormTest, self).save_form(PersonalInformationForm, self.data, files=self.photo, obj=self.user_app)
+        del obj['photo']
+        self.assertEqual(obj, self.data)
+
+    def test_applied_before_true_year_applied_empty(self):
+        data = self.data.copy()
+        data.update({'year_applied': ''})
+        errors = super(PersonalInformationFormTest, self).save_form(PersonalInformationForm, data, files=self.photo, obj=self.user_app)
+        self.assertTrue(errors['year_applied'].__contains__('Please specify the year you applied.'))
+
+    def test_applied_before_false(self):
+        data = self.data.copy()
+        data.update({
+          'year_applied': '2000',
+          'applied_before': False,
+          })
+        obj = super(PersonalInformationFormTest, self).save_form(PersonalInformationForm, data, files=self.photo, obj=self.user_app)
+        self.assertEqual(obj['year_applied'], '')
+
+    def test_clean_photo(self):
+        image = os.path.join(settings.BASE_DIR, 'ashesiundergraduate/tests/test_files/IMG_0972.jpg')
+        with open(image) as image:
+            image_name = image.name.split('/')[-1:][0]
+            photo = {
+                'photo': SimpleUploadedFile(image_name, image.read(), 'image/jpeg')
+                }
+        errors = super(PersonalInformationFormTest, self).save_form(PersonalInformationForm, self.data, files=photo, obj=self.user_app)
+        self.assertTrue(errors['photo'].__contains__('Please rename your photo to conform with specified format.'))
