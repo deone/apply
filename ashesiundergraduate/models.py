@@ -97,11 +97,11 @@ class PassportDetails(models.Model):
     def __str__(self):
         return self.passport_number
 
-    def to_dict(self):
+    """ def to_dict(self):
         return {
             'passport_number': self.passport_number,
             'expiry_date': self.expiry_date.strftime(settings.DATE_INPUT_FORMATS[0]),
-            }
+            } """
 
 class Residence(models.Model):
     LIVING_WITH_CHOICES = (

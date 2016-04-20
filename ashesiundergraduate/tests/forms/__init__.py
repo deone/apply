@@ -1,4 +1,4 @@
-from ashesiundergraduate.tests import AppTest
+from .. import AppTest
 
 class FormsTest(AppTest):
 
