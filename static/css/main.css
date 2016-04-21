@@ -146,9 +146,9 @@ label {
   font-weight: normal;
 }
 .help-text {
-  font-size: 90%;
+  font-size: 82%;
   font-style: italic;
-  color: #000;
+  color: #777;
 }
 
 /* Progress */
