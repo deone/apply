@@ -150,6 +150,9 @@ label {
   font-style: italic;
   color: #777;
 }
+.photo-field .help-text {
+  font-size: 90%;
+}
 
 /* Progress */
 .progress {
