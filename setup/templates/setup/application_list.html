@@ -8,9 +8,11 @@
     <h2>My Applications</h2>
     <p>None.</p>
     <h2>Available Applications</h2>
+    <ul>
     {% for application in applications %}
-      <a href="{{ application.get_absolute_url }}">{{ application }}</a>
+      <li><a href="{{ application.get_absolute_url }}">{{ application }}</a></li>
     {% endfor %}
+    </ul>
   </div>
 </div>
 {% endblock %}
