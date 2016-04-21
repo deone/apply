@@ -7,7 +7,7 @@ from django.apps import apps
 from utils.getters import *
 from utils.registry import REGISTRY
 
-from .models import Application, SavedForm
+from .models import Application, SavedForm, Organization
 
 def get_initial_data(registry_key, model_name, form_type, user_app, attr):
     model = apps.get_model(registry_key, model_name)
@@ -67,6 +67,10 @@ def process_forms(request, form_dict, data, dep_data, **kwargs):
 class ApplicationList(ListView):
     model = Application
     context_object_name = 'applications'
+
+class OrganizationDetail(DetailView):
+    model = Organization
+    context_object_name = 'organization'
 
 @login_required
 def application_index(request, orgname, slug):

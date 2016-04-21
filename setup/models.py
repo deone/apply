@@ -10,7 +10,7 @@ from utils import AutoSlugField
 
 class Organization(models.Model):
     name = models.CharField(_('organization name'), max_length=50)
-    short_name = models.CharField(_('organization short name'), max_length=20)
+    slug = models.SlugField(_('slug'))
 
     def __str__(self):
         return self.name

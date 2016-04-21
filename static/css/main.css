@@ -131,6 +131,13 @@ form .btn-primary:hover, .btn-primary:active {
   padding-right: 1.3em;
   text-align: right;
 }
+.form-link {
+  display: block;
+  text-align: right;
+  line-height: 2.3em;
+  background: #eee;
+  padding-right: 16%;
+}
 .radio {
   display: inline-block;
   width: 80px;
@@ -139,9 +146,12 @@ label {
   font-weight: normal;
 }
 .help-text {
-  font-size: 90%;
+  font-size: 82%;
   font-style: italic;
-  color: #000;
+  color: #777;
+}
+.photo-field .help-text {
+  font-size: 90%;
 }
 
 /* Progress */

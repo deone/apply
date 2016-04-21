@@ -10,14 +10,22 @@
   $(function() {
 
     var yearAppliedDiv = $('#id_year_applied').parents('.form-group');
+    yearAppliedDiv.hide();
 
-    $('#id_applied_before_0').click(function() {
+    var yes = $('#id_applied_before_0');
+    var no = $('#id_applied_before_1');
+
+    yes.click(function() {
       yearAppliedDiv.fadeIn();
     });
 
-    $('#id_applied_before_1').click(function() {
+    no.click(function() {
       yearAppliedDiv.hide();
     });
+
+    if (yes.is(':checked')) {
+      yearAppliedDiv.fadeIn();
+    }
 
   });
 </script>
@@ -81,6 +89,7 @@
       <label for="{{ form.primary_phone_number.id_for_label }}" class="col-sm-3 control-label">{{ form.primary_phone_number.label }}</label>
       <div class="col-sm-9">
         {{ form.primary_phone_number }}
+        <span class="help-text">{{ form.primary_phone_number.help_text }}</span>
       </div>
     </div>
 
@@ -89,6 +98,7 @@
       <label for="{{ form.alternative_phone_number.id_for_label }}" class="col-sm-3 control-label">{{ form.alternative_phone_number.label }}</label>
       <div class="col-sm-9">
         {{ form.alternative_phone_number }}
+        <span class="help-text">{{ form.primary_phone_number.help_text }}</span>
       </div>
     </div>
 

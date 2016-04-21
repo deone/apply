@@ -60,3 +60,4 @@ Application Sections - Ashesi
 - Add help-text and  placeholders to form fields wherever neccessary.
 - Add 'Create Account' to login page. Do same for Create Account page.
 - We can add an app_name field to Application model to explicitly specify app name instead of inferring it from Organization short name and application name.
+- Think about having applicants sign in with social accounts - Google, Facebook, Twitter.
