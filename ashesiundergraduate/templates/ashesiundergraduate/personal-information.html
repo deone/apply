@@ -10,14 +10,22 @@
   $(function() {
 
     var yearAppliedDiv = $('#id_year_applied').parents('.form-group');
+    yearAppliedDiv.hide();
 
-    $('#id_applied_before_0').click(function() {
+    var yes = $('#id_applied_before_0');
+    var no = $('#id_applied_before_1');
+
+    yes.click(function() {
       yearAppliedDiv.fadeIn();
     });
 
-    $('#id_applied_before_1').click(function() {
+    no.click(function() {
       yearAppliedDiv.hide();
     });
+
+    if (yes.is(':checked')) {
+      yearAppliedDiv.fadeIn();
+    }
 
   });
 </script>
