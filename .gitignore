@@ -2,3 +2,4 @@
 .*.swp
 .coverage
 htmlcov
+ashesiundergraduate/tests/test_files/
