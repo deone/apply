@@ -91,11 +91,11 @@ def application_index(request, orgname, slug):
             current_site.name = 'Apply Central Dev'
             current_site.domain = 'localhost:8000'
         elif pk == 2:
-            current_site.name == 'Apply Central Demo'
+            current_site.name = 'Apply Central Demo'
             current_site.domain = 'demo.applycentral.net'
         elif pk == 3:
-            current_site.name == 'Apply Central'
-            current_site.domain == 'applycentral.net'
+            current_site.name = 'Apply Central'
+            current_site.domain = 'applycentral.net'
         current_site.save()
 
     application = get_application(slug)
