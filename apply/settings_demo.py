@@ -12,6 +12,8 @@ MEDIA_ROOT = "/home/deone/webapps/applycentral_demo_media"
 
 MEDIA_URL = "/media/"
 
+SITE_ID = 2
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
