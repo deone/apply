@@ -105,8 +105,9 @@ def application_index(request, orgname, slug):
     saved_forms = [sf.form_slug for sf in user_app.savedform_set.all()]
 
     # Insert payment and update user application
+    paid = getattr(user_app, 'payment', None)
     payment_token = request.GET.get('token', None)
-    if not user_app.payment and payment_token is not None:
+    if paid is None and payment_token is not None:
         Payment.objects.create(user_application=user_app, token=payment_token)
         user_app.is_complete = True
         user_app.submit_date = timezone.now()

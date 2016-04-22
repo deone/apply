@@ -13,9 +13,18 @@
 
 {% if application_completion == 1 %}
   <p class="bg-success width-90 mid">Application Complete!</p>
-  <a href="{% if user_application.application.receive_fee %}{% url 'payments:pay' user_application.pk %}{% else %}#{% endif %}" class="btn btn-success btn-lg width-90" role="button">
-    Submit
-  </a>
+
+  {% if not user_application.is_complete %}
+    {% if user_application.application.receive_fee %}
+      <a href="{% url 'payments:pay' user_application.pk %}" class="btn btn-success btn-lg width-90" role="button">
+        Pay Fee
+      </a>
+    {% else %}
+      <a href="#" class="btn btn-success btn-lg width-90" role="button">
+        Submit
+      </a>
+    {% endif %}
+  {% endif %}
 {% else %}
   <a class="btn btn-primary btn-lg width-90 disabled" role="button">Application Incomplete</a>
 {% endif %}
