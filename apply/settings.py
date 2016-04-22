@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'setup',
     'accounts',
     'payments',
@@ -145,6 +146,8 @@ LOGIN_REDIRECT_URL = 'home'
 MEDIA_ROOT = '/Users/deone/uploads/apply/'
 
 MEDIA_URL = '/media/'
+
+SITE_ID = 1
 
 THUMBNAIL_DEBUG = True
 
