@@ -107,7 +107,7 @@ def application_index(request, orgname, slug):
     registry_key = get_registry_key(orgname, slug)
     template_name = '%s%s%s' % (registry_key, '/', 'index.html')
 
-    context = get_context_variables(user_app, application)
+    context = get_context_variables(user_app)
     context.update({'saved_forms': saved_forms})
 
     return render(request, template_name, context)
@@ -133,7 +133,7 @@ def application_form(request, orgname, slug, form_slug):
     form_name = unslugify(form_slug)
 
     template_name = '%s%s%s%s' % (registry_key, '/', form_slug, '.html')
-    context = get_context_variables(user_app, application)
+    context = get_context_variables(user_app)
 
     # Get initial data
     model_name = form_class.__name__[:-4]

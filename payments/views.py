@@ -26,7 +26,7 @@ def pay(request, pk):
     return_url = 'http://%s%s' % (current_site.domain,
         reverse('application',
           kwargs={'orgname': org_name, 'slug': application_slug}))
-    data = '{"invoice": {"total_amount": "' + settings.APPLICATION_FEE + '", "description": "' + settings.PAYMENT_DESCRIPTION + '"}, "store": {"name": "' + settings.STORE_NAME + '"}, "actions": {"return_url": "' + return_url + '"}}'
+    data = '{"invoice": {"total_amount": "' + user_application.application.fee + '", "description": "' + settings.PAYMENT_DESCRIPTION + '"}, "store": {"name": "' + settings.STORE_NAME + '"}, "actions": {"return_url": "' + return_url + '"}}'
 
     response = requests.post(settings.PAYMENT_TEST_URL, headers=headers, data=data)
     obj = json.loads(response.content)

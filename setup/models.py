@@ -25,6 +25,8 @@ class Application(models.Model):
     slug = models.SlugField(blank=True)
     year = models.PositiveSmallIntegerField(_('year'), null=True, blank=True)
     is_open = models.BooleanField(_('application open?'), default=False)
+    receive_fee = models.BooleanField(_('receive fee?'), default=False)
+    fee = models.PositiveSmallIntegerField(_('amount'), null=True, blank=True)
     deadline = models.DateTimeField()
 
     def save(self, *args, **kwargs):

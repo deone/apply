@@ -64,8 +64,6 @@ Application Sections - Ashesi
 
 Payments
 ========
-- Create Payment model to capture payment. Must have OneToOne relationship to user application.
 - Ensure that user is not able to submit application more than once by disabling or removing 'Submit' button if payment has been made with an 'Application Submitted' message.
-- Add application fee boolean field and amount field to Application.
 - Add status field to user application and update this after successful payment and redirection from MPower.
 - Store payment token in Payment model.

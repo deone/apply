@@ -13,11 +13,10 @@ def unslugify(slug):
 def get_form_class_and_type(dct):
     return dct['class'], dct.get('type', 'form')
 
-def get_context_variables(user_app, application):
+def get_context_variables(user_app):
 
     return {
-        'application_completion': compute_completion(user_app.savedform_set.count(), application.applicationform_set.count()),
-        'application': application,
+        'application_completion': compute_completion(user_app.savedform_set.count(), user_app.application.applicationform_set.count()),
         'user_application': user_app,
         }
 
