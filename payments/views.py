@@ -15,7 +15,7 @@ def pay(request):
         'MP-Token': '84ca940ca8ad14a592d4',
     }
 
-    data = '{"invoice": {"total_amount": "' + settings.APPLICATION_FEE + '", "description": "' + settings.PAYMENT_DESCRIPTION + '"}, "store": {"name": "' + settings.STORE_NAME + '"}}'
+    data = '{"invoice": {"total_amount": "' + settings.APPLICATION_FEE + '", "description": "' + settings.PAYMENT_DESCRIPTION + '"}, "store": {"name": "' + settings.STORE_NAME + '"}, "actions": {"return_url": "http://localhost:8000/ashesi/undergraduate-application-2016/"}}'
 
     response = requests.post(settings.PAYMENT_TEST_URL, headers=headers, data=data)
     obj = json.loads(response.content)
