@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 from django.contrib import messages
 from django.apps import apps
+from django.contrib.sites.models import Site
 
 from utils.getters import *
 from utils.registry import REGISTRY
@@ -84,17 +85,18 @@ def application_index(request, orgname, slug):
     perform the data migration.
     """
     current_site = Site.objects.get_current()
-    pk = current_site.pk
-    if pk == 1:
-        current_site.name = 'Apply Central Dev'
-        current_site.domain = 'localhost:8000'
-    elif pk == 2:
-        current_site.name == 'Apply Central Demo'
-        current_site.domain = 'demo.applycentral.net'
-    elif pk == 3:
-        current_site.name == 'Apply Central'
-        current_site.domain == 'applycentral.net'
-    current_site.save()
+    if current_site.name == 'example.com':
+        pk = current_site.pk
+        if pk == 1:
+            current_site.name = 'Apply Central Dev'
+            current_site.domain = 'localhost:8000'
+        elif pk == 2:
+            current_site.name == 'Apply Central Demo'
+            current_site.domain = 'demo.applycentral.net'
+        elif pk == 3:
+            current_site.name == 'Apply Central'
+            current_site.domain == 'applycentral.net'
+        current_site.save()
 
     application = get_application(slug)
     user_app = get_user_application(request.user, application)
