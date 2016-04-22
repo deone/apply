@@ -61,3 +61,11 @@ Application Sections - Ashesi
 - Add 'Create Account' to login page. Do same for Create Account page.
 - We can add an app_name field to Application model to explicitly specify app name instead of inferring it from Organization short name and application name.
 - Think about having applicants sign in with social accounts - Google, Facebook, Twitter.
+
+Payments
+========
+- Create Payment model to capture payment. Must have OneToOne relationship to user application.
+- Ensure that user is not able to submit application more than once by disabling or removing 'Submit' button if payment has been made with an 'Application Submitted' message.
+- Add application fee boolean field and amount field to Application.
+- Add status field to user application and update this after successful payment and redirection from MPower.
+- Store payment token in Payment model.

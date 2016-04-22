@@ -98,6 +98,8 @@ def application_index(request, orgname, slug):
             current_site.domain = 'applycentral.net'
         current_site.save()
 
+    payment_token = request.GET.get('token', None)
+
     application = get_application(slug)
     user_app = get_user_application(request.user, application)
     saved_forms = [sf.form_slug for sf in user_app.savedform_set.all()]
