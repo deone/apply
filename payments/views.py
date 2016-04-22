@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.conf import settings
 from django.contrib.sites.models import Site
+from django.core.urlresolvers import reverse
+from django.conf import settings
 
 import json
 import requests
@@ -17,7 +18,9 @@ def pay(request):
         'MP-Token': '84ca940ca8ad14a592d4',
     }
 
-    return_url = 'http://%s%s' % (current_site.domain, reverse('application', kwargs={'orgname': 'ashesi', 'slug': 'undergraduate-application-2016'}))
+    return_url = 'http://%s%s' % (current_site.domain,
+        reverse('application',
+          kwargs={'orgname': 'ashesi', 'slug': 'undergraduate-application-2016'}))
     data = '{"invoice": {"total_amount": "' + settings.APPLICATION_FEE + '", "description": "' + settings.PAYMENT_DESCRIPTION + '"}, "store": {"name": "' + settings.STORE_NAME + '"}, "actions": {"return_url": "' + return_url + '"}}'
 
     response = requests.post(settings.PAYMENT_TEST_URL, headers=headers, data=data)
