@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView
 from django.contrib import messages
 from django.apps import apps
 from django.contrib.sites.models import Site
+from django.utils import timezone
 
 from utils.getters import *
 from utils.registry import REGISTRY
@@ -103,10 +104,13 @@ def application_index(request, orgname, slug):
     user_app = get_user_application(request.user, application)
     saved_forms = [sf.form_slug for sf in user_app.savedform_set.all()]
 
-    # Update Payments model
+    # Insert payment and update user application
     payment_token = request.GET.get('token', None)
     if not user_app.payment and payment_token is not None:
         Payment.objects.create(user_application=user_app, token=payment_token)
+        user_app.is_complete = True
+        user_app.submit_date = timezone.now()
+        user_app.save()
 
     registry_key = get_registry_key(orgname, slug)
     template_name = '%s%s%s' % (registry_key, '/', 'index.html')

@@ -68,4 +68,3 @@ Payments
 ========
 - Ensure that user is not able to submit application more than once by disabling or removing 'Submit' button if payment has been made with an 'Application Submitted' message.
 - Add status field to user application and update this after successful payment and redirection from MPower.
-- Store payment token in Payment model.

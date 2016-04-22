@@ -82,6 +82,7 @@ class UserApplication(models.Model):
     application = models.ForeignKey(Application)
     start_date = models.DateTimeField(_('start date'), default=timezone.now)
     submit_date = models.DateTimeField(_('submit date'), null=True, blank=True)
+    is_complete = models.BooleanField(_('is complete'), default=False)
 
     def __str__(self):
         return '%s %s' % (self.user.get_full_name(), self.application.get_name())
