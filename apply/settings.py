@@ -162,8 +162,7 @@ EMAIL_HOST_PASSWORD = '@dune369'
 
 
 # Payments
-APPLICATION_FEE = '50'
-STORE_NAME = 'The Apply App'
+STORE_NAME = 'Apply Central'
 
 PAYMENT_DESCRIPTION = 'Application Fee'
 PAYMENT_MASTER_KEY = 'cef70167-7dec-458e-b5bf-1befb4196565'
