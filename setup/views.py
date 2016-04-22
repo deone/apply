@@ -9,6 +9,7 @@ from utils.getters import *
 from utils.registry import REGISTRY
 
 from .models import Application, SavedForm, Organization
+from payments.models import Payment
 
 def get_initial_data(registry_key, model_name, form_type, user_app, attr):
     model = apps.get_model(registry_key, model_name)
@@ -98,11 +99,14 @@ def application_index(request, orgname, slug):
             current_site.domain = 'applycentral.net'
         current_site.save()
 
-    payment_token = request.GET.get('token', None)
-
     application = get_application(slug)
     user_app = get_user_application(request.user, application)
     saved_forms = [sf.form_slug for sf in user_app.savedform_set.all()]
+
+    # Update Payments model
+    payment_token = request.GET.get('token', None)
+    if not user_app.payment and payment_token is not None:
+        Payment.objects.create(user_application=user_app, token=payment_token)
 
     registry_key = get_registry_key(orgname, slug)
     template_name = '%s%s%s' % (registry_key, '/', 'index.html')
