@@ -74,6 +74,28 @@ class OrganizationDetail(DetailView):
 
 @login_required
 def application_index(request, orgname, slug):
+    """
+    We tried to use a data migration to set the site name and domain
+    for different sites e.g. dev site should have 'Apply Central Dev'
+    as name and 'localhost:8000' as domain.
+
+    We would have to load the data here because we would need it to
+    set the return_url for payments. At least till we figure out how
+    perform the data migration.
+    """
+    current_site = Site.objects.get_current()
+    pk = current_site.pk
+    if pk == 1:
+        current_site.name = 'Apply Central Dev'
+        current_site.domain = 'localhost:8000'
+    elif pk == 2:
+        current_site.name == 'Apply Central Demo'
+        current_site.domain = 'demo.applycentral.net'
+    elif pk == 3:
+        current_site.name == 'Apply Central'
+        current_site.domain == 'applycentral.net'
+    current_site.save()
+
     application = get_application(slug)
     user_app = get_user_application(request.user, application)
     saved_forms = [sf.form_slug for sf in user_app.savedform_set.all()]
