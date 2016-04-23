@@ -109,12 +109,7 @@ def application_index(request, orgname, slug):
         payment_token = request.GET.get('token', None)
         if paid is None and payment_token is not None:
             Payment.objects.create(user_application=user_app, token=payment_token)
-            # redirect to /success/ here
-            user_app.is_complete = True
-            user_app.submit_date = timezone.now()
-            user_app.save()
-            user_app_success_template = '%s%s%s' % (registry_key, '/', 'success.html')
-            return render(request, user_app_success_template, context)
+            return redirect('success', orgname=orgname, slug=slug)
     ######################################################################
 
     template_name = '%s%s%s' % (registry_key, '/', 'index.html')
@@ -177,6 +172,10 @@ def application_form(request, orgname, slug, form_slug):
 @login_required
 def success(request, orgname, slug):
     registry_key, application, user_app, context = get_form_variables(request.user, orgname, slug)
+
+    user_app.is_complete = True
+    user_app.submit_date = timezone.now()
+    user_app.save()
 
     template = '%s%s%s' % (registry_key, '/', 'success.html')
     return render(request, template, context)
