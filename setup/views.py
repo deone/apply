@@ -69,6 +69,14 @@ def process_forms(request, form_dict, data, dep_data, **kwargs):
 
 @login_required
 def applicant_home(request):
+    # Redirect staff if they ever land here after logging in.
+    try:
+        staff = request.user.staff
+    except:
+        staff = None
+    else:
+        return redirect('staffadmin:home', orgname=staff.organization.slug)
+
     return render(request, 'setup/application_list.html', {
       'applications': Application.objects.all(),
       })
