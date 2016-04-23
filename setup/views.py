@@ -103,6 +103,10 @@ def application_index(request, orgname, slug):
     application = get_application(slug)
     user_app = get_user_application(request.user, application)
     saved_forms = [sf.form_slug for sf in user_app.savedform_set.all()]
+    registry_key = get_registry_key(orgname, slug)
+
+    context = get_context_variables(user_app)
+    context.update({'saved_forms': saved_forms})
 
     # Insert payment and update user application
     paid = getattr(user_app, 'payment', None)
@@ -112,12 +116,10 @@ def application_index(request, orgname, slug):
         user_app.is_complete = True
         user_app.submit_date = timezone.now()
         user_app.save()
+        user_app_success_template = '%s%s%s' % (registry_key, '/', 'success.html')
+        return render(request, user_app_success_template, context)
 
-    registry_key = get_registry_key(orgname, slug)
     template_name = '%s%s%s' % (registry_key, '/', 'index.html')
-
-    context = get_context_variables(user_app)
-    context.update({'saved_forms': saved_forms})
 
     return render(request, template_name, context)
 
