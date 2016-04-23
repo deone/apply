@@ -17,8 +17,9 @@ Product
 - Try to add queryset to forms just like formsets.
 - When creating applications, staff can make mistakes. Provide a view application form link with helpful messages instead of errors. e.g ZeroDivisionError means that the staff has not created the application forms.
 - Change all occurrences of 'dependence' and anything like it to 'child' for simplicity.
-- Add help-text and  placeholders to form fields wherever neccessary.
+- Add help-text and placeholders to form fields wherever neccessary.
 - Add 'Create Account' to login page. Do same for Create Account page.
 - We can add an app_name field to Application model to explicitly specify app name instead of inferring it from Organization short name and application name.
 - Think about having applicants sign in with social accounts - Google, Facebook, Twitter.
 - Email applicants after account creation and after completing application form.
+- Investigate projects like django-forms-builder and wagtail cms.
