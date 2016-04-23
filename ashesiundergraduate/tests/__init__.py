@@ -12,7 +12,7 @@ class AppTest(TestCase):
         user.first_name = 'Dayo'
         user.last_name = 'Osikoya'
         user.save()
-        organization = Organization.objects.create(name='Ecobank Ghana', short_name='Ecobank')
+        organization = Organization.objects.create(name='Ecobank Ghana', slug='ecobank')
         application = Application.objects.create(
             organization=organization,
             name='Account Opening Form',

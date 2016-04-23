@@ -26,7 +26,7 @@ class Application(models.Model):
     year = models.PositiveSmallIntegerField(_('year'), null=True, blank=True)
     is_open = models.BooleanField(_('application open?'), default=False)
     receive_fee = models.BooleanField(_('receive fee?'), default=False)
-    fee = models.PositiveSmallIntegerField(_('amount'), null=True, blank=True)
+    fee = models.PositiveSmallIntegerField(_('fee'), null=True, blank=True)
     deadline = models.DateTimeField()
 
     def save(self, *args, **kwargs):
@@ -82,6 +82,7 @@ class UserApplication(models.Model):
     application = models.ForeignKey(Application)
     start_date = models.DateTimeField(_('start date'), default=timezone.now)
     submit_date = models.DateTimeField(_('submit date'), null=True, blank=True)
+    is_complete = models.BooleanField(_('is complete'), default=False)
 
     def __str__(self):
         return '%s %s' % (self.user.get_full_name(), self.application.get_name())

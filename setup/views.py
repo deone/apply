@@ -4,11 +4,13 @@ from django.views.generic import ListView, DetailView
 from django.contrib import messages
 from django.apps import apps
 from django.contrib.sites.models import Site
+from django.utils import timezone
 
 from utils.getters import *
 from utils.registry import REGISTRY
 
 from .models import Application, SavedForm, Organization
+from payments.models import Payment
 
 def get_initial_data(registry_key, model_name, form_type, user_app, attr):
     model = apps.get_model(registry_key, model_name)
@@ -98,25 +100,26 @@ def application_index(request, orgname, slug):
             current_site.domain = 'applycentral.net'
         current_site.save()
 
-    payment_token = request.GET.get('token', None)
+    registry_key, application, user_app, context = get_form_variables(request.user, orgname, slug)
 
-    application = get_application(slug)
-    user_app = get_user_application(request.user, application)
-    saved_forms = [sf.form_slug for sf in user_app.savedform_set.all()]
+    ##################### Submit Application ############################
+    # Insert payment and update user application
+    if user_app.application.receive_fee:
+        paid = getattr(user_app, 'payment', None)
+        payment_token = request.GET.get('token', None)
+        if paid is None and payment_token is not None:
+            Payment.objects.create(user_application=user_app, token=payment_token)
+            return redirect('success', orgname=orgname, slug=slug)
+    ######################################################################
 
-    registry_key = get_registry_key(orgname, slug)
     template_name = '%s%s%s' % (registry_key, '/', 'index.html')
-
-    context = get_context_variables(user_app)
-    context.update({'saved_forms': saved_forms})
 
     return render(request, template_name, context)
 
 @login_required
 def application_form(request, orgname, slug, form_slug):
     ################## Variables #################
-    # Get registry key
-    registry_key = orgname + slug.split('-')[0]
+    registry_key, application, user_app, context = get_form_variables(request.user, orgname, slug)
 
     # Get form registry entry
     form_dict = REGISTRY[registry_key][form_slug]
@@ -126,14 +129,9 @@ def application_form(request, orgname, slug, form_slug):
     else:
         dependence_class = dependence_type = dep_form = None
 
-    application = get_application(slug)
-    user_app = get_user_application(request.user, application)
-
-    saved_forms = [sf.form_slug for sf in user_app.savedform_set.all()]
     form_name = unslugify(form_slug)
 
     template_name = '%s%s%s%s' % (registry_key, '/', form_slug, '.html')
-    context = get_context_variables(user_app)
 
     # Get initial data
     model_name = form_class.__name__[:-4]
@@ -167,7 +165,17 @@ def application_form(request, orgname, slug, form_slug):
       'form_name': form_name,
       'form': main_form,
       'dep_form': dep_form,
-      'saved_forms': saved_forms,
       })
 
     return render(request, template_name, context)
+
+@login_required
+def success(request, orgname, slug):
+    registry_key, application, user_app, context = get_form_variables(request.user, orgname, slug)
+
+    user_app.is_complete = True
+    user_app.submit_date = timezone.now()
+    user_app.save()
+
+    template = '%s%s%s' % (registry_key, '/', 'success.html')
+    return render(request, template, context)
