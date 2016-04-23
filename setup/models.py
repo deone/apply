@@ -27,7 +27,7 @@ class Application(models.Model):
     is_open = models.BooleanField(_('application open?'), default=False)
     receive_fee = models.BooleanField(_('receive fee?'), default=False)
     fee = models.PositiveSmallIntegerField(_('fee'), null=True, blank=True)
-    deadline = models.DateTimeField()
+    deadline = models.DateTimeField(null=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.id:
