@@ -64,3 +64,4 @@ Application Sections - Ashesi
 - We can add an app_name field to Application model to explicitly specify app name instead of inferring it from Organization short name and application name.
 - Think about having applicants sign in with social accounts - Google, Facebook, Twitter.
 - Ensure applicants are unable to fill out a form whose deadline has elapsed.
+- Email applicants after account creation and after completing application form.

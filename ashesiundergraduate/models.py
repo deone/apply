@@ -16,10 +16,10 @@ BOOL_CHOICES = (
     )
 
 def get_upload_path(instance, filename):
-    org_short_name = instance.user_application.application.organization.short_name
+    org_slug = instance.user_application.application.organization.slug
     application_slug = instance.user_application.application.slug
     now = timezone.now()
-    return os.path.join('%s/%s/%s/' % (org_short_name.lower(), application_slug, now.strftime('%Y-%m-%d')), filename)
+    return os.path.join('%s/%s/%s/' % (org_slug.lower(), application_slug, now.strftime('%Y-%m-%d')), filename)
 
 class PersonalInformation(models.Model):
 
