@@ -152,7 +152,7 @@ class Orphanage(models.Model):
             }
 
 class Course(models.Model):
-    name = models.CharField(_('course name'), max_length=50)
+    name = models.CharField(_('course name'), unique=True, max_length=50)
 
     def __str__(self):
         return self.name
