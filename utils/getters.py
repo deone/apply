@@ -2,6 +2,15 @@ from django.shortcuts import get_object_or_404
 
 from setup.models import Application, UserApplication
 
+def get_form_variables(user, orgname, slug):
+    registry_key = get_registry_key(orgname, slug)
+    application = get_application(slug)
+    user_app = get_user_application(user, application)
+    context = get_context_variables(user_app)
+    context.update({'saved_forms': [sf.form_slug for sf in user_app.savedform_set.all()]})
+
+    return registry_key, application, user_app, context
+
 def unslugify(slug):
     unslug = ''
     parts = slug.split('-')
