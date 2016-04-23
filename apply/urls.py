@@ -9,7 +9,7 @@ from accounts.forms import LoginForm
 from setup import views as setup_views
 
 urlpatterns = [
-    url(r'^$', setup_views.ApplicationList.as_view(), name='home'),
+    url(r'^$', setup_views.applicant_home, name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^logout/$', auth_views.logout, {'next_page': '/accounts/login/'}, name='logout'),
     url(r'^accounts/create/$', ApplyRegistrationView.as_view(), name='create_account'),

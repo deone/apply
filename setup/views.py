@@ -67,9 +67,11 @@ def process_forms(request, form_dict, data, dep_data, **kwargs):
 
     return main_form, dep_form, False
 
-class ApplicationList(ListView):
-    model = Application
-    context_object_name = 'applications'
+@login_required
+def applicant_home(request):
+    return render(request, 'setup/application_list.html', {
+      'applications': Application.objects.all(),
+      })
 
 class OrganizationDetail(DetailView):
     model = Organization

@@ -23,3 +23,4 @@ Product
 - Think about having applicants sign in with social accounts - Google, Facebook, Twitter.
 - Email applicants after account creation and after completing application form.
 - Investigate projects like django-forms-builder and wagtail cms.
+- Staff should always access the app through /orgname/admin/ for proper login and redirection. If they log in at /accounts/login/ (without the next parameter), they would be redirected to LOGIN_REDIRECT_URL (/). Do not allow this to happen.
