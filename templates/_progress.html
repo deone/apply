@@ -20,7 +20,7 @@
         Pay Fee
       </a>
     {% else %}
-      <a href="#" class="btn btn-success btn-lg width-90" role="button">
+      <a href="{% url 'success' user_application.application.organization.slug user_application.application.slug %}" class="btn btn-success btn-lg width-90" role="button">
         Submit
       </a>
     {% endif %}
