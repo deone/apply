@@ -114,7 +114,7 @@ def application_index(request, orgname, slug):
 
     ##################### Submit Application ############################
     # Insert payment and update user application
-    if user_app.application.receive_fee:
+    if user_app.application.has_fee:
         paid = getattr(user_app, 'payment', None)
         payment_token = request.GET.get('token', None)
         if paid is None and payment_token is not None:
@@ -158,7 +158,7 @@ def application_form(request, orgname, slug, form_slug):
     if request.method == "POST":
         main_form, dep_form, saved = process_forms(request, form_dict, data, dep_data, obj=user_app)
         if saved:
-            if form_slug not in saved_forms:
+            if form_slug not in context['saved_forms']:
                 SavedForm.objects.create(user_application=user_app, form_slug=form_slug)
             messages.success(request, '%s saved.' % form_name)
             return redirect('application_form', orgname=orgname,
@@ -183,9 +183,10 @@ def application_form(request, orgname, slug, form_slug):
 def success(request, orgname, slug):
     registry_key, application, user_app, context = get_form_variables(request.user, orgname, slug)
 
-    user_app.is_complete = True
-    user_app.submit_date = timezone.now()
-    user_app.save()
+    if not user_app.is_complete:
+        user_app.is_complete = True
+        user_app.submit_date = timezone.now()
+        user_app.save()
 
     template = '%s%s%s' % (registry_key, '/', 'success.html')
     return render(request, template, context)

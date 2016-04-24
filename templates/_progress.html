@@ -15,14 +15,16 @@
   <p class="bg-success width-90 mid">Application Complete!</p>
 
   {% if not user_application.is_complete %}
-    {% if user_application.application.receive_fee %}
+    {% if user_application.application.has_fee %}
       <a href="{% url 'payments:pay' user_application.pk %}" class="btn btn-success btn-lg width-90" role="button">
         Pay Fee
       </a>
     {% else %}
-      <a href="{% url 'success' user_application.application.organization.slug user_application.application.slug %}" class="btn btn-success btn-lg width-90" role="button">
-        Submit
-      </a>
+      {% with user_application.application.organization.slug as org_slug %}
+        <a href="{% url 'success' org_slug user_application.application.slug %}" class="btn btn-success btn-lg width-90" role="button">
+          Submit
+        </a>
+      {% endwith %}
     {% endif %}
   {% endif %}
 {% else %}
