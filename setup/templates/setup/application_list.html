@@ -5,9 +5,20 @@
 {% block app_body %}
 <div class="mid width-90">
   <div class="row">
-    <h2>My Applications</h2>
-    <p>None.</p>
-    <h2>Available Applications</h2>
+    <div class="page-header">
+      <h2>My Applications</h2>
+    </div>
+    <ul>
+    {% for user_app in user.userapplication_set.all %}
+      <li><a href="{{ user_app.application.get_absolute_url }}">{{ user_app.application }}</a></li>
+    {% empty %}
+      <p>You have no applications.</p>
+    {% endfor %}
+    </ul>
+
+    <div class="page-header">
+      <h2>Available Applications</h2>
+    </div>
     <ul>
     {% for application in applications %}
       <li><a href="{{ application.get_absolute_url }}">{{ application }}</a></li>
