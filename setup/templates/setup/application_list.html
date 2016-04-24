@@ -9,8 +9,8 @@
       <h2>My Applications</h2>
     </div>
     <ul>
-    {% for application in user.userapplication_set.all %}
-      <li><a href="{{ application.get_absolute_url }}">{{ application }}</a></li>
+    {% for user_app in user.userapplication_set.all %}
+      <li><a href="{{ user_app.application.get_absolute_url }}">{{ user_app.application }}</a></li>
     {% empty %}
       <p>You have no applications.</p>
     {% endfor %}
