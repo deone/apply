@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block page_title %}
-{{ user.staff.organization.name }} &mdash; Staff Admin
+{{ user.staff.organization.name }} &mdash; Staff Admin {% block admin_page_title %}{% endblock %}
 {% endblock %}
 
 {% block app_body %}
@@ -11,13 +11,13 @@
     <div class="page-header">
       <h2>{{ org.name }} Applications</h2>
     </div>
-    <ul>
+    <div class="list-group">
       {% for application in org.application_set.all %}
-      <li><a href="{% url 'staffadmin:user_application_list' org.slug application.pk %}">{{ application }}</a></li>
+      <a class="list-group-item" href="{% url 'staffadmin:user_application_list' org.slug application.pk %}">{{ application }}</a>
       {% empty %}
       <p>{{ org.name }} has no applications.</p>
       {% endfor %}
-    </ul>
+    </div>
     {% endwith %}
   </div>
 </div>
