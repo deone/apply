@@ -7,13 +7,15 @@
 {% block app_body %}
 <div class="mid width-90">
   <div class="row">
-    <div class="page-header">
-      <h2>{{ user.staff.organization.name }} Applications</h2>
-    </div>
     {% with user.staff.organization as org %}
+    <div class="page-header">
+      <h2>{{ org.name }} Applications</h2>
+    </div>
     <ul>
       {% for application in org.application_set.all %}
-        <li>{{ application }}</li>
+      <li><a href="{% url 'staffadmin:user_application_list' org.slug application.pk %}">{{ application }}</a></li>
+      {% empty %}
+      <p>{{ org.name }} has no applications.</p>
       {% endfor %}
     </ul>
     {% endwith %}
