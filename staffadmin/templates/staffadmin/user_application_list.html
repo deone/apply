@@ -13,7 +13,7 @@
     </div>
     <ul>
       {% for ua in application.userapplication_set.all %}
-      <li><a href="">{{ ua }}</a></li>
+      <li><a href="{% url 'staffadmin:user_application' ua.application.organization.slug ua.pk %}">{{ ua }}</a></li>
       {% empty %}
       <p>There are no submissions for this application.</p>
       {% endfor %}

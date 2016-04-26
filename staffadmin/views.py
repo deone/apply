@@ -8,6 +8,10 @@ def index(request, orgname):
     return render(request, 'staffadmin/index.html', {})
 
 @login_required
+def user_application(request, orgname, pk):
+    return render(request, 'staffadmin/user_application.html', {})
+
+@login_required
 def user_application_list(request, orgname, pk):
     application = get_object_or_404(Application, pk=pk)
     return render(request, 'staffadmin/user_application_list.html', {'application': application})
