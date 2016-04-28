@@ -75,7 +75,7 @@ class Citizenship(models.Model):
         }
 
 class PassportCheck(models.Model):
-    user_application = models.ForeignKey(UserApplication)
+    user_application = models.OneToOneField(UserApplication)
     have_passport = models.NullBooleanField(_('have passport'), choices=BOOL_CHOICES)
 
     def __str__(self):
