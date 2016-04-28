@@ -183,10 +183,14 @@
     {% endifequal %}
   </div>
   <div class="row">
-  </div>
-  <div class="row">
     <div class="page-header">
       <h5>{{ ua.application.applicationform_set.all.4.form.name }}</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 left data-cell">
+      <p class="label">Desired Major</p>
+      <p class="data">{{ ua.desiredmajor.desired_major.name }}</p>
     </div>
   </div>
   {% endwith %}
