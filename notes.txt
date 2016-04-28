@@ -26,3 +26,5 @@ Product
 - Staff should always access the app through /orgname/admin/ for proper login and redirection. If they log in at /accounts/login/ (without the next parameter), they would be redirected to LOGIN_REDIRECT_URL (/). Do not allow this to happen.
 - Style applicant and staff home. We can make list display like table rows complete with action columns. e.g. 'View Applications' and 'Download Files' for staff and completed status for applicants. We can also display whether application is open, the deadline if it is set and fee if application has a fee.
 - Staff can only see completed applications.
+- Add 'Forgot Password' feature.
+- Make photo dimensions a setting.

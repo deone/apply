@@ -14,7 +14,7 @@ def user_application(request, orgname, pk):
     user_application = get_object_or_404(UserApplication, pk=pk)
     registry_key = get_registry_key(orgname, user_application.application.slug)
     template_name = '%s%s%s' % (registry_key, '/', 'user_application.html')
-    return render(request, template_name, {})
+    return render(request, template_name, {'user_application': user_application})
 
 @login_required
 def user_application_list(request, orgname, pk):
