@@ -19,7 +19,7 @@
     <div class="pull-right photo" style="margin-right: 0;">
       {% thumbnail ua.personalinformation.photo "150x160" crop="center" as up %}
         <a href="{{ up.url }}" class="thumbnail">
-          <img src="{{ up.url }}" width="{{ up.width }}" height="{{ up.height }}" title="{{ user_application.user.get_full_name }}">
+          <img src="{{ up.url }}" width="{{ up.width }}" height="{{ up.height }}" title="{{ ua.user.get_full_name }}">
         </a>
       {% endthumbnail %}
     </div>
@@ -85,7 +85,7 @@
   </div>
   <div class="row">
     <div class="page-header">
-      <h5>{{ user_application.application.applicationform_set.all.1.form.name }}</h5>
+      <h5>{{ ua.application.applicationform_set.all.1.form.name }}</h5>
     </div>
   </div>
   <div class="row">
@@ -96,7 +96,7 @@
   </div>
   <div class="row">
     <div class="page-header">
-      <h5>{{ user_application.application.applicationform_set.all.2.form.name }}</h5>
+      <h5>{{ ua.application.applicationform_set.all.2.form.name }}</h5>
     </div>
   </div>
   <div class="row">
@@ -123,12 +123,70 @@
   </div>
   <div class="row">
     <div class="page-header">
-      <h5>{{ user_application.application.applicationform_set.all.3.form.name }}</h5>
+      <h5>{{ ua.application.applicationform_set.all.3.form.name }}</h5>
     </div>
   </div>
   <div class="row">
+    <div class="col-md-4 left data-cell">
+      <p class="label">Address</p>
+      <p class="data">{{ ua.residence.address }}</p>
+    </div>
+    <div class="col-md-2 data-cell">
+      <p class="label">Town</p>
+      <p class="data">{{ ua.residence.town }}</p>
+    </div>
+    <div class="col-md-2 data-cell">
+      <p class="label">State</p>
+      <p class="data">{{ ua.residence.state }}</p>
+    </div>
+    <div class="col-md-2 data-cell">
+      <p class="label">Country</p>
+      <p class="data">{{ ua.residence.country }}</p>
+    </div>
+    <div class="col-md-2 data-cell">
+    {% with ua.residence.living_with as lw %}
+      {% ifequal lw 'SELF' %}
+        <p class="label">Living</p>
+        <p class="data">By Myself</p>
+      {% endifequal %}
+      {% ifequal lw 'PG' %}
+        <p class="label">Living With</p>
+        <p class="row">Parent(s)/Guardian(s)</p>
+      {% endifequal %}
+      {% ifequal lw 'ORPH' %}
+        <p class="label">Living In An</p>
+        <p class="data">Orphanage</p>
+      {% endifequal %}
+    {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    {% ifequal ua.residence.living_with 'ORPH' %}
+      {% with ua.residence.orphanage as orph %}
+        <div class="col-md-4 left data-cell">
+          <p class="label">Name Of Orphanage</p>
+          <p class="data">{{ orph.name }}</p>
+        </div>
+        <div class="col-md-4 data-cell">
+          <p class="label">Contact Person &amp; Title</p>
+          <p class="data">{{ orph.contact_person_name }}, {{ orph.contact_person_title }}</p>
+        </div>
+        <div class="col-md-2 data-cell">
+          <p class="label">Phone Number</p>
+          <p class="data">{{ orph.contact_person_phone_number }}</p>
+        </div>
+        <div class="col-md-2 data-cell">
+          <p class="label">Email Address</p>
+          <p class="data">{{ orph.email }}</p>
+        </div>
+      {% endwith %}
+    {% endifequal %}
+  </div>
+  <div class="row">
+  </div>
+  <div class="row">
     <div class="page-header">
-      <h5>{{ user_application.application.applicationform_set.all.4.form.name }}</h5>
+      <h5>{{ ua.application.applicationform_set.all.4.form.name }}</h5>
     </div>
   </div>
   {% endwith %}
