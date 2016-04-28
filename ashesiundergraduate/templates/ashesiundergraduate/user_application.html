@@ -100,16 +100,26 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-2 left data-cell">
-      <p class="label">Passport Details</span>
-      <p class="data">
-      {% ifequal ua.passport_check.have_passport True %}
-        Yes
-      {% else %}
-        No passport
-      {% endifequal %}
-      </p>
-    </div>
+    {% ifequal ua.passportcheck.have_passport True %}
+      {% for pd in ua.passportcheck.passportdetails_set.all %}
+        <div class="col-md-2 {% if forloop.first %}left{% endif %} data-cell">
+          <p class="label">Passport Number</span>
+          <p class="data">
+            {{ pd.passport_number }}
+          </p>
+        </div>
+        <div class="col-md-2 data-cell">
+          <p class="label">Expiry Date</span>
+          <p class="data">
+            {{ pd.expiry_date }}
+          </p>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="col-md-2 left data-cell">
+        <p class="data">No passport</p>
+      </div>
+    {% endifequal %}
   </div>
   <div class="row">
     <div class="page-header">
