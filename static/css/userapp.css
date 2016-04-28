@@ -1,0 +1,26 @@
+.left {
+  margin-left: -15px;
+}
+.data-cell {
+  margin-bottom: 10px;
+}
+.data-cell p {
+  margin: 0;
+  padding: 0;
+}
+.data-cell .label {
+  font-size: 90%;
+  color: #aaa;
+  font-weight: normal;
+}
+.data-cell .data {
+  font-size: 115%;
+}
+.page-header {
+  margin-top: 0;
+  padding: 0;
+}
+h5 {
+  font-size: 110%;
+  color: #337ab7;
+}

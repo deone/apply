@@ -1,0 +1,24 @@
+{% extends 'staffadmin/index.html' %}
+
+{% block admin_page_title %}
+&mdash; Submissions
+{% endblock %}
+
+{% block app_body %}
+<div class="mid width-90">
+  <div class="row">
+    {% with user.staff.organization as org %}
+    <div class="page-header">
+      <h3>Submissions for {{ application }}</h3>
+    </div>
+    <ul>
+      {% for ua in application.userapplication_set.all %}
+      <li><a href="{% url 'staffadmin:user_application' ua.application.organization.slug ua.pk %}">{{ ua }}</a></li>
+      {% empty %}
+      <p>There are no submissions for this application.</p>
+      {% endfor %}
+    </ul>
+    {% endwith %}
+  </div>
+</div>
+{% endblock %}
