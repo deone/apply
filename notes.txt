@@ -30,5 +30,5 @@ Product
 - Make photo dimensions a setting.
 - Ensure fee is provided if has_fee is checked. This would be important when staff are able to create applications.
 - Change passport details formset queryset.
-- Rename uploads in the correct format instead of having applicant's name them.
-- Use positive words for the completion feedback e.g. 'Almost Done' instead of 'Application Incomplete'.
+- Rename uploads in the correct format instead of having applicant's name them. Do this for all file uploads.
+- Use positive words for the completion feedback e.g. 'Almost Done' instead of 'Application Incomplete'. We can take this further by having different phrases based on the completion value.
