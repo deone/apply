@@ -6,7 +6,7 @@ Business
 
 Product
 =======
-- Make sure applicants are unable to fill an application that is not open.
+- Make sure applicants are unable to fill an application that is not open. Check the is_open flag in both templates and views.
 - Make sure applicants are unable to fill an application after specified deadline.
 - Automate the creation of form templates.
 - Paylater.ng is a good model for Apply Central's homepage.
