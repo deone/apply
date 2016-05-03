@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 from setup.models import *
+from payments.models import Payment
 
 class ViewsTests(TestCase):
 
@@ -48,3 +49,18 @@ class ApplicationTests(ViewsTests):
         response = self.c.get(reverse('application', kwargs={'orgname': self.org.slug, 'slug': self.application.slug}))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'ashesiundergraduate/index.html')
+
+    def test_application_index_insert_payment_record(self):
+        self.application.has_fee = True
+        self.application.fee = 10
+        self.application.save()
+
+        self.c.post(reverse('login'), {'username': 'a@a.com', 'password': '12345'})
+        url = '%s?token=kdfhdfldf' % reverse('application', kwargs={'orgname': self.org.slug, 'slug': self.application.slug})
+        response = self.c.get(url)
+
+        user_application = self.application.userapplication_set.all()[0]
+        payment = Payment.objects.get(user_application=user_application)
+
+        self.assertEqual(payment.token, 'kdfhdfldf')
+        self.assertEqual(response.status_code, 302)
