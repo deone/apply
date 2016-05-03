@@ -32,3 +32,4 @@ Product
 - Change passport details formset queryset.
 - Rename uploads in the correct format instead of having applicant's name them. Do this for all file uploads.
 - Use positive words for the completion feedback e.g. 'Almost Done' instead of 'Application Incomplete'. We can take this further by having different phrases based on the completion value.
+- There's a decorator function in django.test called modify_settings. We can use this in the test case that modifies the MEDIA_ROOT setting. There's also override_settings, this may be more appropriate.
