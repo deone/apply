@@ -115,21 +115,71 @@ class ApplicationFormTests(ApplicationTests):
         self.factory = RequestFactory()
         self.session = SessionMiddleware()
 
+    def test_application_form_with_main_form_only_invalid(self):
+        self.login()
+        form = Form.objects.create(name='Citizenship')
+        app_form = ApplicationForm.objects.create(application=self.application, slug='citizenship', form=form)
+        data = {
+            'country_of_citizenship': ''
+            }
+        response, lst = self.application_form_test(app_form, data)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(lst, [])
+
     def test_application_form_with_main_form_only(self):
-        pass
+        self.login()
+        form = Form.objects.create(name='Citizenship')
+        app_form = ApplicationForm.objects.create(application=self.application, slug='citizenship', form=form)
+        data = {
+            'country_of_citizenship': 'Angola'
+            }
+        response, lst = self.application_form_test(app_form, data)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual('Citizenship saved.', lst[0].__str__())
 
     def test_application_form_with_main_form_null_dep_form(self):
-        pass
-
-    def test_application_form_post_with_main_form_dep_form(self):
         self.login()
+        data = {
+              'address': 'Hse 2',
+              'town': 'Lagos',
+              'state': 'Lagos',
+              'country': 'Nigeria',
+              'living_with': 'SELF',
+              }
+        response, lst = self.application_form_test(self.app_form, data)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual('Residence saved.', lst[0].__str__())
+
+    def application_form_test(self, app_form, data):
         request = self.factory.post(reverse('application_form',
           kwargs={
               'orgname': self.org.slug,
               'slug': self.application.slug,
-              'form_slug': self.app_form.slug
-              }),
-            data={
+              'form_slug': app_form.slug
+              }), data=data)
+
+        request.user = self.user
+        self.session.process_request(request)
+        request.session.save()
+
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+
+        response = application_form(request, self.org.slug, self.application.slug, app_form.slug)
+        storage = get_messages(request)
+
+        lst = []
+        for message in storage:
+            lst.append(message)
+
+        return response, lst
+
+    def test_application_form_post_with_main_form_dep_form(self):
+        self.login()
+        data = {
               'address': 'Hse 2',
               'town': 'Lagos',
               'state': 'Lagos',
@@ -140,21 +190,8 @@ class ApplicationFormTests(ApplicationTests):
               'contact_person_name': 'Ade',
               'contact_person_phone_number': '+233542751610',
               'contact_person_title': 'Manager',
-              })
-
-        request.user = self.user
-        self.session.process_request(request)
-        request.session.save()
-
-        messages = FallbackStorage(request)
-        setattr(request, '_messages', messages)
-
-        response = application_form(request, self.org.slug, self.application.slug, self.app_form.slug)
-        storage = get_messages(request)
-
-        lst = []
-        for message in storage:
-            lst.append(message)
+              }
+        response, lst = self.application_form_test(self.app_form, data)
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual('Residence saved.', lst[0].__str__())
