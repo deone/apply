@@ -10,7 +10,7 @@ from django.contrib.messages import get_messages
 from setup.models import *
 from setup.views import application_form
 from payments.models import Payment
-from utils.getters import get_user_application
+from utils.getters import get_user_application, get_next_form_slug
 
 class ViewsTests(TestCase):
 
@@ -195,3 +195,10 @@ class ApplicationFormTests(ApplicationTests):
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual('Residence saved.', lst[0].__str__())
+
+    def test_get_next_form_slug(self):
+        form_two = Form.objects.create(name='Passport Details')
+        app_form_two = ApplicationForm.objects.create(application=self.application, slug='passport-details', form=form_two)
+        next_slug = get_next_form_slug(self.application, 'residence')
+
+        self.assertEqual(next_slug, 'passport-details')
