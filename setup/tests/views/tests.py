@@ -10,7 +10,8 @@ from django.contrib.messages import get_messages
 from setup.models import *
 from setup.views import application_form
 from payments.models import Payment
-from utils.getters import get_user_application, get_next_form_slug
+from utils.getters import get_user_application, get_next_form_slug, get_initial_data
+from ashesiundergraduate.models import Citizenship
 
 class ViewsTests(TestCase):
 
@@ -114,6 +115,20 @@ class ApplicationFormTests(ApplicationTests):
         super(ApplicationFormTests, self).setUp(*args, **kwargs)
         self.factory = RequestFactory()
         self.session = SessionMiddleware()
+        self.residence_data = {
+              'address': 'Hse 2',
+              'town': 'Lagos',
+              'state': 'Lagos',
+              'country': 'Nigeria',
+              'living_with': 'SELF',
+              }
+        self.orphanage_data = {
+              'name': 'Bless God',
+              'email': 'b@b.com',
+              'contact_person_name': 'Ade',
+              'contact_person_phone_number': '+233542751610',
+              'contact_person_title': 'Manager',
+              }
 
     def test_application_form_with_main_form_only_invalid(self):
         self.login()
@@ -141,14 +156,7 @@ class ApplicationFormTests(ApplicationTests):
 
     def test_application_form_with_main_form_null_dep_form(self):
         self.login()
-        data = {
-              'address': 'Hse 2',
-              'town': 'Lagos',
-              'state': 'Lagos',
-              'country': 'Nigeria',
-              'living_with': 'SELF',
-              }
-        response, lst = self.application_form_test(self.app_form, data)
+        response, lst = self.application_form_test(self.app_form, self.residence_data)
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual('Residence saved.', lst[0].__str__())
@@ -179,18 +187,8 @@ class ApplicationFormTests(ApplicationTests):
 
     def test_application_form_post_with_main_form_dep_form(self):
         self.login()
-        data = {
-              'address': 'Hse 2',
-              'town': 'Lagos',
-              'state': 'Lagos',
-              'country': 'Nigeria',
-              'living_with': 'ORPH',
-              'name': 'Bless God',
-              'email': 'b@b.com',
-              'contact_person_name': 'Ade',
-              'contact_person_phone_number': '+233542751610',
-              'contact_person_title': 'Manager',
-              }
+        data = self.residence_data
+        data.update(self.orphanage_data)
         response, lst = self.application_form_test(self.app_form, data)
 
         self.assertEqual(response.status_code, 302)
@@ -202,3 +200,28 @@ class ApplicationFormTests(ApplicationTests):
         next_slug = get_next_form_slug(self.application, 'residence')
 
         self.assertEqual(next_slug, 'passport-details')
+
+    def create_object(self):
+        user_app = get_user_application(self.user, self.application)
+        data = {'country_of_citizenship': 'Angola', 'user_application': user_app}
+        c = Citizenship(**data)
+        c.save()
+
+        return data, user_app
+
+    def test_get_initial_data_form_type_form(self):
+        data, user_app = self.create_object()
+        initial_data, dep_data = get_initial_data('ashesiundergraduate', 'Citizenship', 'form', user_app, None)
+
+        del data['user_application']
+
+        self.assertEqual(initial_data, data)
+
+    def test_get_initial_data_form_type_formset(self):
+        data, user_app = self.create_object()
+        initial_data, dep_data = get_initial_data('ashesiundergraduate', 'Citizenship', 'formset', user_app, None)
+
+        self.assertEqual(initial_data, None)
+
+    """ def test_get_initial_data_attr_obj_not_none(self):
+        initial_data, dep_data = get_initial_data('ashesiundergraduate', 'Residence', 'form', user_app, 'orphanage') """
