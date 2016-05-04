@@ -202,8 +202,10 @@ class ApplicationFormTests(ViewsTests):
         self.assertEqual(next_slug, 'passport-details')
 
     def create_object(self, model, data):
-        c = model(**data)
-        c.save()
+        obj = model(**data)
+        obj.save()
+
+        return obj
 
     def test_get_initial_data_form_type_form(self):
         self.create_object(Citizenship, self.citizenship_data)
@@ -215,13 +217,15 @@ class ApplicationFormTests(ViewsTests):
         self.assertEqual(initial_data, data)
 
     def test_get_initial_data_form_type_formset(self):
-        user_app = get_user_application(self.user, self.application)
-        data = {'country_of_citizenship': 'Angola', 'user_application': self.user_app}
-        self.create_object(Citizenship, data)
+        self.create_object(Citizenship, self.citizenship_data)
         initial_data, dep_data = get_initial_data('ashesiundergraduate', 'Citizenship', 'formset', self.user_app, None)
 
         self.assertEqual(initial_data, None)
 
-    """ def test_get_initial_data_attr_obj_not_none(self):
-        data, user_app = self.create_object(Residence)
-        initial_data, dep_data = get_initial_data('ashesiundergraduate', 'Residence', 'form', self.user_app, 'orphanage') """
+    def test_get_initial_data_dep_data_none(self):
+        data = {'user_application': self.user_app}
+        data.update(self.residence_form_data)
+        self.create_object(Residence, data)
+
+        initial_data, dep_data = get_initial_data('ashesiundergraduate', 'Residence', 'form', self.user_app, 'orphanage')
+        self.assertEqual(initial_data, self.residence_form_data)

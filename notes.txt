@@ -35,3 +35,4 @@ Product
 - There's a decorator function in django.test called modify_settings. We can use this in the test case that modifies the MEDIA_ROOT setting. There's also override_settings, this may be more appropriate.
 - Fix page titles.
 - Make exhaustive list of all possible use cases of Apply Central, much the same way Victor thought about it.
+- When you create sub-domains like ashesi.applycentral.net, also create www.ashesi.applycentral.net because people might type in 'www.'.
