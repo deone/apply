@@ -11,7 +11,7 @@ from setup.models import *
 from setup.views import application_form
 from payments.models import Payment
 from utils.getters import get_user_application, get_next_form_slug, get_initial_data
-from ashesiundergraduate.models import Citizenship
+from ashesiundergraduate.models import Citizenship, Residence
 
 class ViewsTests(TestCase):
 
@@ -21,6 +21,16 @@ class ViewsTests(TestCase):
         self.user.first_name = 'Ade'
         self.user.last_name = 'Olu'
         self.user.save()
+        self.org = Organization.objects.create(name='Ashesi College', slug='ashesi')
+        self.application = Application.objects.create(
+            organization=self.org,
+            name='Undergraduate Application',
+            year='2016',
+            is_open=True
+            )
+        self.user_app = get_user_application(self.user, self.application)
+        form = Form.objects.create(name='Residence')
+        self.app_form = ApplicationForm.objects.create(application=self.application, slug='residence', form=form)
 
     def login(self):
         self.c.post(reverse('login'), {'username': 'a@a.com', 'password': '12345'})
@@ -38,18 +48,9 @@ class ApplicationTests(ViewsTests):
 
     def setUp(self, *args, **kwargs):
         super(ApplicationTests, self).setUp(*args, **kwargs)
-        self.org = Organization.objects.create(name='Ashesi College', slug='ashesi')
-        self.staff = Staff.objects.create(user=self.user, organization=self.org)
-        self.application = Application.objects.create(
-            organization=self.org,
-            name='Undergraduate Application',
-            year='2016',
-            is_open=True
-            )
-        form = Form.objects.create(name='Residence')
-        self.app_form = ApplicationForm.objects.create(application=self.application, slug='residence', form=form)
 
     def test_applicant_home_staff(self):
+        staff = Staff.objects.create(user=self.user, organization=self.org)
         self.login()
         response = self.c.get(reverse('home'))
         self.assertEqual(response['location'], '/ashesi/admin/')
@@ -81,8 +82,7 @@ class ApplicationTests(ViewsTests):
         url = '%s?token=kdfhdfldf' % reverse('application', kwargs={'orgname': self.org.slug, 'slug': self.application.slug})
         response = self.c.get(url)
 
-        user_application = self.application.userapplication_set.all()[0]
-        payment = Payment.objects.get(user_application=user_application)
+        payment = Payment.objects.get(user_application=self.user_app)
 
         self.assertEqual(payment.token, 'kdfhdfldf')
         self.assertEqual(response.status_code, 302)
@@ -90,10 +90,9 @@ class ApplicationTests(ViewsTests):
     def test_success(self):
         self.login()
         response = self.c.get(reverse('success', kwargs={'orgname': self.org.slug, 'slug': self.application.slug}))
+        user_app = self.application.userapplication_set.all()[0]
 
-        user_application = self.application.userapplication_set.all()[0]
-
-        self.assertTrue(user_application.is_complete)
+        self.assertTrue(user_app.is_complete)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'ashesiundergraduate/success.html')
 
@@ -109,20 +108,21 @@ class ApplicationTests(ViewsTests):
         self.assertTrue('form_name' in response.context)
         self.assertTrue('dep_form' in response.context)
 
-class ApplicationFormTests(ApplicationTests):
+class ApplicationFormTests(ViewsTests):
 
     def setUp(self, *args, **kwargs):
         super(ApplicationFormTests, self).setUp(*args, **kwargs)
         self.factory = RequestFactory()
         self.session = SessionMiddleware()
-        self.residence_data = {
+        self.citizenship_data = {'country_of_citizenship': 'Angola', 'user_application': self.user_app}
+        self.residence_form_data = {
               'address': 'Hse 2',
               'town': 'Lagos',
               'state': 'Lagos',
               'country': 'Nigeria',
               'living_with': 'SELF',
               }
-        self.orphanage_data = {
+        self.orphanage_form_data = {
               'name': 'Bless God',
               'email': 'b@b.com',
               'contact_person_name': 'Ade',
@@ -156,7 +156,7 @@ class ApplicationFormTests(ApplicationTests):
 
     def test_application_form_with_main_form_null_dep_form(self):
         self.login()
-        response, lst = self.application_form_test(self.app_form, self.residence_data)
+        response, lst = self.application_form_test(self.app_form, self.residence_form_data)
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual('Residence saved.', lst[0].__str__())
@@ -187,8 +187,8 @@ class ApplicationFormTests(ApplicationTests):
 
     def test_application_form_post_with_main_form_dep_form(self):
         self.login()
-        data = self.residence_data
-        data.update(self.orphanage_data)
+        data = self.residence_form_data
+        data.update(self.orphanage_form_data)
         response, lst = self.application_form_test(self.app_form, data)
 
         self.assertEqual(response.status_code, 302)
@@ -201,27 +201,27 @@ class ApplicationFormTests(ApplicationTests):
 
         self.assertEqual(next_slug, 'passport-details')
 
-    def create_object(self):
-        user_app = get_user_application(self.user, self.application)
-        data = {'country_of_citizenship': 'Angola', 'user_application': user_app}
-        c = Citizenship(**data)
+    def create_object(self, model, data):
+        c = model(**data)
         c.save()
 
-        return data, user_app
-
     def test_get_initial_data_form_type_form(self):
-        data, user_app = self.create_object()
-        initial_data, dep_data = get_initial_data('ashesiundergraduate', 'Citizenship', 'form', user_app, None)
+        self.create_object(Citizenship, self.citizenship_data)
+        initial_data, dep_data = get_initial_data('ashesiundergraduate', 'Citizenship', 'form', self.user_app, None)
 
+        data = self.citizenship_data
         del data['user_application']
 
         self.assertEqual(initial_data, data)
 
     def test_get_initial_data_form_type_formset(self):
-        data, user_app = self.create_object()
-        initial_data, dep_data = get_initial_data('ashesiundergraduate', 'Citizenship', 'formset', user_app, None)
+        user_app = get_user_application(self.user, self.application)
+        data = {'country_of_citizenship': 'Angola', 'user_application': self.user_app}
+        self.create_object(Citizenship, data)
+        initial_data, dep_data = get_initial_data('ashesiundergraduate', 'Citizenship', 'formset', self.user_app, None)
 
         self.assertEqual(initial_data, None)
 
     """ def test_get_initial_data_attr_obj_not_none(self):
-        initial_data, dep_data = get_initial_data('ashesiundergraduate', 'Residence', 'form', user_app, 'orphanage') """
+        data, user_app = self.create_object(Residence)
+        initial_data, dep_data = get_initial_data('ashesiundergraduate', 'Residence', 'form', self.user_app, 'orphanage') """
