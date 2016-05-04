@@ -55,9 +55,8 @@ class PersonalInformationForm(forms.ModelForm):
         file_name = self.cleaned_data['photo'].name.split('/')[-1]
         user = self.user_application.user
         user_name = '%s_%s' % (user.first_name.title(), user.last_name.title())
-        if not file_name.startswith(user_name):
-            raise forms.ValidationError(_("Please rename your photo to conform with specified format."), code='photo-name-error')
-            
+        self.cleaned_data['photo'].name = user_name
+
         return self.cleaned_data['photo']
 
     def save(self, commit=True):

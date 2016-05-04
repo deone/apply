@@ -1,6 +1,30 @@
 from django.shortcuts import get_object_or_404
+from django.apps import apps
 
 from setup.models import Application, UserApplication
+
+def get_initial_data(registry_key, model_name, form_type, user_app, attr):
+    model = apps.get_model(registry_key, model_name)
+    if form_type == 'form':
+        try:
+            obj = model.objects.get(user_application=user_app)
+        except model.DoesNotExist:
+            obj = data = None
+        else:
+            data = obj.to_dict()
+    else:
+        data = None
+
+    if attr is not None and obj is not None:
+        try:
+            dep_data = getattr(obj, attr).to_dict()
+        except:
+            # we need to catch RelatedObjectDoesNotExist here
+            dep_data = None
+    else:
+        dep_data = None
+
+    return data, dep_data
 
 def get_form_variables(user, orgname, slug):
     registry_key = get_registry_key(orgname, slug)

@@ -66,13 +66,3 @@ class PersonalInformationFormTest(FormsTest):
           })
         obj = super(PersonalInformationFormTest, self).save_form(PersonalInformationForm, data, files=self.photo, obj=self.user_app)
         self.assertEqual(obj['year_applied'], '')
-
-    def test_clean_photo(self):
-        image = os.path.join(settings.BASE_DIR, 'ashesiundergraduate/tests/test_files/IMG_0972.jpg')
-        with open(image) as image:
-            image_name = image.name.split('/')[-1:][0]
-            photo = {
-                'photo': SimpleUploadedFile(image_name, image.read(), 'image/jpeg')
-                }
-        errors = super(PersonalInformationFormTest, self).save_form(PersonalInformationForm, self.data, files=photo, obj=self.user_app)
-        self.assertTrue(errors['photo'].__contains__('Please rename your photo to conform with specified format.'))

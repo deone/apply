@@ -45,7 +45,7 @@ class ModelsTest(AppTest):
             address='House 2', town='Labone', state='Accra', country='Ghana', living_with='ORPH')
         orphanage = Orphanage.objects.create(residence=residence, name='Bless God',
             contact_person_title='Manager', contact_person_name='Ade Olu', contact_person_phone_number='+233546723450',
-            contact_person_email='ade@gmail.com')
+            email='ade@gmail.com')
         self.assertEqual(residence.__str__(), 'Labone, Accra, Ghana')
         self.assertEqual(orphanage.__str__(), 'Bless God')
 

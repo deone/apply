@@ -6,7 +6,7 @@ Business
 
 Product
 =======
-- Make sure applicants are unable to fill an application that is not open.
+- Make sure applicants are unable to fill an application that is not open. Check the is_open flag in both templates and views.
 - Make sure applicants are unable to fill an application after specified deadline.
 - Automate the creation of form templates.
 - Paylater.ng is a good model for Apply Central's homepage.
@@ -28,3 +28,11 @@ Product
 - Staff can only see completed applications.
 - Add 'Forgot Password' feature.
 - Make photo dimensions a setting.
+- Ensure fee is provided if has_fee is checked. This would be important when staff are able to create applications.
+- Change passport details formset queryset.
+- Rename uploads in the correct format instead of having applicant's name them. Do this for all file uploads.
+- Use positive words for the completion feedback e.g. 'Almost Done' instead of 'Application Incomplete'. We can take this further by having different phrases based on the completion value.
+- There's a decorator function in django.test called modify_settings. We can use this in the test case that modifies the MEDIA_ROOT setting. There's also override_settings, this may be more appropriate.
+- Fix page titles.
+- Make exhaustive list of all possible use cases of Apply Central, much the same way Victor thought about it.
+- When you create sub-domains like ashesi.applycentral.net, also create www.ashesi.applycentral.net because people might type in 'www.'.

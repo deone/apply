@@ -46,7 +46,7 @@ class OrphanageFormTest(FormsTest):
             'contact_person_name': 'Ade',
             'contact_person_title': 'Manager',
             'contact_person_phone_number': '+233542751610',
-            'contact_person_email': 'ade@blessgod.com'
+            'email': 'ade@blessgod.com'
             }
 
     def test_save_new(self):
