@@ -1,10 +1,14 @@
-from django.test import TestCase, Client, override_settings
+from django.test import TestCase, Client, RequestFactory, override_settings
+from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.contrib.sites.models import Site
+from django.contrib.messages.storage.fallback import FallbackStorage
+from django.contrib.messages import get_messages
 
 from setup.models import *
+from setup.views import application_form
 from payments.models import Payment
 from utils.getters import get_user_application
 
@@ -17,10 +21,13 @@ class ViewsTests(TestCase):
         self.user.last_name = 'Olu'
         self.user.save()
 
+    def login(self):
+        self.c.post(reverse('login'), {'username': 'a@a.com', 'password': '12345'})
+
 class HomePageTests(ViewsTests):
 
     def test_applicant_home(self):
-        self.c.post(reverse('login'), {'username': 'a@a.com', 'password': '12345'})
+        self.login()
         response = self.c.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
         self.assertTrue('applications' in response.context)
@@ -38,11 +45,11 @@ class ApplicationTests(ViewsTests):
             year='2016',
             is_open=True
             )
-        form = Form.objects.create(name='Personal Information')
-        application_form = ApplicationForm.objects.create(application=self.application, slug='personal-information', form=form)
+        form = Form.objects.create(name='Residence')
+        self.app_form = ApplicationForm.objects.create(application=self.application, slug='residence', form=form)
 
     def test_applicant_home_staff(self):
-        self.c.post(reverse('login'), {'username': 'a@a.com', 'password': '12345'})
+        self.login()
         response = self.c.get(reverse('home'))
         self.assertEqual(response['location'], '/ashesi/admin/')
         self.assertEqual(response.status_code, 302)
@@ -59,7 +66,7 @@ class ApplicationTests(ViewsTests):
         # print current_site.name
         # self.assertEqual(current_site.name, 'Apply Central Demo')
 
-        self.c.post(reverse('login'), {'username': 'a@a.com', 'password': '12345'})
+        self.login()
         response = self.c.get(reverse('application', kwargs={'orgname': self.org.slug, 'slug': self.application.slug}))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'ashesiundergraduate/index.html')
@@ -69,7 +76,7 @@ class ApplicationTests(ViewsTests):
         self.application.fee = 10
         self.application.save()
 
-        self.c.post(reverse('login'), {'username': 'a@a.com', 'password': '12345'})
+        self.login()
         url = '%s?token=kdfhdfldf' % reverse('application', kwargs={'orgname': self.org.slug, 'slug': self.application.slug})
         response = self.c.get(url)
 
@@ -80,7 +87,7 @@ class ApplicationTests(ViewsTests):
         self.assertEqual(response.status_code, 302)
 
     def test_success(self):
-        self.c.post(reverse('login'), {'username': 'a@a.com', 'password': '12345'})
+        self.login()
         response = self.c.get(reverse('success', kwargs={'orgname': self.org.slug, 'slug': self.application.slug}))
 
         user_application = self.application.userapplication_set.all()[0]
@@ -88,3 +95,66 @@ class ApplicationTests(ViewsTests):
         self.assertTrue(user_application.is_complete)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'ashesiundergraduate/success.html')
+
+    def test_application_form_get(self):
+        self.login()
+        response = self.c.get(reverse('application_form', kwargs={
+          'orgname': self.org.slug,
+          'slug': self.application.slug,
+          'form_slug': self.app_form.slug}))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('form' in response.context)
+        self.assertTrue('form_name' in response.context)
+        self.assertTrue('dep_form' in response.context)
+
+class ApplicationFormTests(ApplicationTests):
+
+    def setUp(self, *args, **kwargs):
+        super(ApplicationFormTests, self).setUp(*args, **kwargs)
+        self.factory = RequestFactory()
+        self.session = SessionMiddleware()
+
+    def test_application_form_with_main_form_only(self):
+        pass
+
+    def test_application_form_with_main_form_null_dep_form(self):
+        pass
+
+    def test_application_form_post_with_main_form_dep_form(self):
+        self.login()
+        request = self.factory.post(reverse('application_form',
+          kwargs={
+              'orgname': self.org.slug,
+              'slug': self.application.slug,
+              'form_slug': self.app_form.slug
+              }),
+            data={
+              'address': 'Hse 2',
+              'town': 'Lagos',
+              'state': 'Lagos',
+              'country': 'Nigeria',
+              'living_with': 'ORPH',
+              'name': 'Bless God',
+              'email': 'b@b.com',
+              'contact_person_name': 'Ade',
+              'contact_person_phone_number': '+233542751610',
+              'contact_person_title': 'Manager',
+              })
+
+        request.user = self.user
+        self.session.process_request(request)
+        request.session.save()
+
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+
+        response = application_form(request, self.org.slug, self.application.slug, self.app_form.slug)
+        storage = get_messages(request)
+
+        lst = []
+        for message in storage:
+            lst.append(message)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual('Residence saved.', lst[0].__str__())
