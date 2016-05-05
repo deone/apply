@@ -8,16 +8,16 @@ from setup.models import Organization, Application, UserApplication
 class AppTest(TestCase):
 
     def setUp(self, *args, **kwargs):
-        user = User.objects.create_user('a@a.com', 'a@a.com', '12345')
-        user.first_name = 'Dayo'
-        user.last_name = 'Osikoya'
-        user.save()
-        organization = Organization.objects.create(name='Ecobank Ghana', slug='ecobank')
-        application = Application.objects.create(
-            organization=organization,
+        self.user = User.objects.create_user('a@a.com', 'a@a.com', '12345')
+        self.user.first_name = 'Dayo'
+        self.user.last_name = 'Osikoya'
+        self.user.save()
+        self.organization = Organization.objects.create(name='Ecobank Ghana', slug='ecobank')
+        self.application = Application.objects.create(
+            organization=self.organization,
             name='Account Opening Form',
             is_open=True,
             deadline=timezone.now()
             )
-        self.user_app = UserApplication.objects.create(user=user, application=application)
+        self.user_app = UserApplication.objects.create(user=self.user, application=self.application)
         settings.MEDIA_ROOT = '/Users/deone/src/apply/apply/ashesiundergraduate/tests/test_files/'
