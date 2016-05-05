@@ -12,12 +12,11 @@ class AppTest(TestCase):
         self.user.first_name = 'Dayo'
         self.user.last_name = 'Osikoya'
         self.user.save()
-        self.organization = Organization.objects.create(name='Ecobank Ghana', slug='ecobank')
+        self.organization = Organization.objects.create(name='Ashesi College', slug='ashesi')
         self.application = Application.objects.create(
             organization=self.organization,
-            name='Account Opening Form',
-            is_open=True,
-            deadline=timezone.now()
+            name='Undergraduate Application',
+            year='2016',
+            is_open=True
             )
         self.user_app = UserApplication.objects.create(user=self.user, application=self.application)
-        settings.MEDIA_ROOT = '/Users/deone/src/apply/apply/ashesiundergraduate/tests/test_files/'
