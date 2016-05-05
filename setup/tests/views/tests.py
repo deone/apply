@@ -19,8 +19,6 @@ class ViewsTests(AppTest):
     def setUp(self, *args, **kwargs):
         super(ViewsTests, self).setUp(*args, **kwargs)
         self.c = Client()
-        form = Form.objects.create(name='Residence')
-        self.app_form = ApplicationForm.objects.create(application=self.application, slug='residence', form=form)
 
     def login(self):
         self.c.post(reverse('login'), {'username': 'a@a.com', 'password': '12345'})
