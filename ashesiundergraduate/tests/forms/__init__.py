@@ -1,4 +1,4 @@
-from .. import AppTest
+from setup.tests import AppTest
 
 class FormsTest(AppTest):
 
