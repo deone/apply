@@ -8,27 +8,17 @@ from django.contrib.messages.storage.fallback import FallbackStorage
 from django.contrib.messages import get_messages
 
 from setup.models import *
+from setup.tests import AppTest
 from setup.views import application_form
 from payments.models import Payment
 from utils.getters import get_user_application, get_next_form_slug, get_initial_data
 from ashesiundergraduate.models import Citizenship, Residence
 
-class ViewsTests(TestCase):
+class ViewsTests(AppTest):
 
-    def setUp(self):
+    def setUp(self, *args, **kwargs):
+        super(ViewsTests, self).setUp(*args, **kwargs)
         self.c = Client()
-        self.user = User.objects.create_user('a@a.com', 'a@a.com', '12345')
-        self.user.first_name = 'Ade'
-        self.user.last_name = 'Olu'
-        self.user.save()
-        self.org = Organization.objects.create(name='Ashesi College', slug='ashesi')
-        self.application = Application.objects.create(
-            organization=self.org,
-            name='Undergraduate Application',
-            year='2016',
-            is_open=True
-            )
-        self.user_app = get_user_application(self.user, self.application)
         form = Form.objects.create(name='Residence')
         self.app_form = ApplicationForm.objects.create(application=self.application, slug='residence', form=form)
 
@@ -50,7 +40,7 @@ class ApplicationTests(ViewsTests):
         super(ApplicationTests, self).setUp(*args, **kwargs)
 
     def test_applicant_home_staff(self):
-        staff = Staff.objects.create(user=self.user, organization=self.org)
+        staff = Staff.objects.create(user=self.user, organization=self.organization)
         self.login()
         response = self.c.get(reverse('home'))
         self.assertEqual(response['location'], '/ashesi/admin/')
@@ -69,7 +59,7 @@ class ApplicationTests(ViewsTests):
         # self.assertEqual(current_site.name, 'Apply Central Demo')
 
         self.login()
-        response = self.c.get(reverse('application', kwargs={'orgname': self.org.slug, 'slug': self.application.slug}))
+        response = self.c.get(reverse('application', kwargs={'orgname': self.organization.slug, 'slug': self.application.slug}))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'ashesiundergraduate/index.html')
 
@@ -79,7 +69,7 @@ class ApplicationTests(ViewsTests):
         self.application.save()
 
         self.login()
-        url = '%s?token=kdfhdfldf' % reverse('application', kwargs={'orgname': self.org.slug, 'slug': self.application.slug})
+        url = '%s?token=kdfhdfldf' % reverse('application', kwargs={'orgname': self.organization.slug, 'slug': self.application.slug})
         response = self.c.get(url)
 
         payment = Payment.objects.get(user_application=self.user_app)
@@ -89,7 +79,7 @@ class ApplicationTests(ViewsTests):
 
     def test_success(self):
         self.login()
-        response = self.c.get(reverse('success', kwargs={'orgname': self.org.slug, 'slug': self.application.slug}))
+        response = self.c.get(reverse('success', kwargs={'orgname': self.organization.slug, 'slug': self.application.slug}))
         user_app = self.application.userapplication_set.all()[0]
 
         self.assertTrue(user_app.is_complete)
@@ -99,7 +89,7 @@ class ApplicationTests(ViewsTests):
     def test_application_form_get(self):
         self.login()
         response = self.c.get(reverse('application_form', kwargs={
-          'orgname': self.org.slug,
+          'orgname': self.organization.slug,
           'slug': self.application.slug,
           'form_slug': self.app_form.slug}))
 
@@ -164,7 +154,7 @@ class ApplicationFormTests(ViewsTests):
     def application_form_test(self, app_form, data):
         request = self.factory.post(reverse('application_form',
           kwargs={
-              'orgname': self.org.slug,
+              'orgname': self.organization.slug,
               'slug': self.application.slug,
               'form_slug': app_form.slug
               }), data=data)
@@ -176,7 +166,7 @@ class ApplicationFormTests(ViewsTests):
         messages = FallbackStorage(request)
         setattr(request, '_messages', messages)
 
-        response = application_form(request, self.org.slug, self.application.slug, app_form.slug)
+        response = application_form(request, self.organization.slug, self.application.slug, app_form.slug)
         storage = get_messages(request)
 
         lst = []

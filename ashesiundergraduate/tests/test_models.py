@@ -1,7 +1,7 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
 
+from setup.tests import AppTest
 from ..models import *
-from . import AppTest
 
 class ModelsTest(AppTest):
 

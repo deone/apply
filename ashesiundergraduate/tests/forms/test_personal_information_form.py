@@ -13,6 +13,7 @@ class PersonalInformationFormTest(FormsTest):
 
     def setUp(self, *args, **kwargs):
         super(PersonalInformationFormTest, self).setUp(*args, **kwargs)
+        settings.MEDIA_ROOT = '/Users/deone/src/apply/apply/ashesiundergraduate/tests/test_files/'
         self.image = os.path.join(settings.BASE_DIR, 'ashesiundergraduate/tests/test_files/Dayo_Osikoya.jpg')
         self.data = {
             'middle_name': 'J',
