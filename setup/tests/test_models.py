@@ -10,6 +10,15 @@ class ModelsTest(AppTest):
         staff = Staff.objects.create(user=self.user, organization=self.organization)
         self.assertEqual(staff.__str__(), 'Dayo Osikoya')
 
+    def test_application_without_year(self):
+        application = Application.objects.create(
+            organization=self.organization,
+            name='Undergraduate Application',
+            is_open=True
+            )
+
+        self.assertEqual(application.__str__(), 'Ashesi College Undergraduate Application')
+
     def test_form(self):
         self.assertEqual(self.form.__str__(), 'Residence')
 

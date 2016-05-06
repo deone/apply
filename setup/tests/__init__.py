@@ -16,7 +16,7 @@ class AppTest(TestCase):
         self.application = Application.objects.create(
             organization=self.organization,
             name='Undergraduate Application',
-            year='2016',
+            year=2016,
             is_open=True
             )
         self.user_app = UserApplication.objects.create(user=self.user, application=self.application)
