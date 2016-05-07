@@ -3,7 +3,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import User
 
-from setup.models import Organization, Application, UserApplication
+from setup.models import *
 
 class AppTest(TestCase):
 
@@ -16,7 +16,9 @@ class AppTest(TestCase):
         self.application = Application.objects.create(
             organization=self.organization,
             name='Undergraduate Application',
-            year='2016',
+            year=2016,
             is_open=True
             )
         self.user_app = UserApplication.objects.create(user=self.user, application=self.application)
+        self.form = Form.objects.create(name='Residence')
+        self.app_form = ApplicationForm.objects.create(application=self.application, slug='residence', form=self.form)
