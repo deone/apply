@@ -177,6 +177,7 @@ class ApplicationFormTests(ViewsTests):
         self.login()
         data = self.residence_form_data
         data.update(self.orphanage_form_data)
+        data.update({'living_with': 'ORPH'})
         response, lst = self.application_form_test(self.app_form, data)
 
         self.assertEqual(response.status_code, 302)
