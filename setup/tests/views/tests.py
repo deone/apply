@@ -10,8 +10,8 @@ from django.contrib.messages import get_messages
 from setup.models import *
 from setup.tests import AppTest
 from setup.views import application_form
-from payments.models import Payment
 from utils.getters import get_user_application, get_next_form_slug, get_initial_data
+from payments.models import Payment
 from ashesiundergraduate.models import Citizenship, Residence
 
 class ViewsTests(AppTest):
@@ -84,18 +84,6 @@ class ApplicationTests(ViewsTests):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'ashesiundergraduate/success.html')
 
-    def test_application_form_get(self):
-        self.login()
-        response = self.c.get(reverse('application_form', kwargs={
-          'orgname': self.organization.slug,
-          'slug': self.application.slug,
-          'form_slug': self.app_form.slug}))
-
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('form' in response.context)
-        self.assertTrue('form_name' in response.context)
-        self.assertTrue('dep_form' in response.context)
-
 class ApplicationFormTests(ViewsTests):
 
     def setUp(self, *args, **kwargs):
@@ -117,6 +105,18 @@ class ApplicationFormTests(ViewsTests):
               'contact_person_phone_number': '+233542751610',
               'contact_person_title': 'Manager',
               }
+
+    def test_application_form_get(self):
+        self.login()
+        response = self.c.get(reverse('application_form', kwargs={
+          'orgname': self.organization.slug,
+          'slug': self.application.slug,
+          'form_slug': self.app_form.slug}))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('form' in response.context)
+        self.assertTrue('form_name' in response.context)
+        self.assertTrue('dep_form' in response.context)
 
     def test_application_form_with_main_form_only_invalid(self):
         self.login()
