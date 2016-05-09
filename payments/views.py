@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.conf import settings
@@ -8,6 +9,7 @@ from setup.models import UserApplication
 import json
 import requests
 
+@login_required
 def index(request, pk):
     current_site = Site.objects.get_current()
     user_application = get_object_or_404(UserApplication, pk=pk)
