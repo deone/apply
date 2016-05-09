@@ -1,7 +1,18 @@
-from django.test import TestCase
+from django.test import TestCase, SimpleTestCase
 from django.core.urlresolvers import reverse
 
 from setup.tests.views.tests import ViewsTests
+
+from django.test import SimpleTestCase
+from django.apps import apps
+
+from .apps import StaffadminConfig 
+
+class TestApp(SimpleTestCase):
+
+    def test(self):
+        config = apps.get_app_config('staffadmin')
+        self.assertEqual(config.name, 'staffadmin')
 
 class StaffadminViewsTests(ViewsTests):
 

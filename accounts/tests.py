@@ -1,6 +1,15 @@
-from django.test import TestCase
+from django.test import TestCase, SimpleTestCase
+from django.apps import apps
+
+from .apps import AccountsConfig
 
 from accounts.forms import ApplyRegistrationForm
+
+class TestApp(SimpleTestCase):
+
+    def test(self):
+        config = apps.get_app_config('accounts')
+        self.assertEqual(config.name, 'accounts')
 
 class AccountsFormsTest(TestCase):
 
