@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^accounts/login/$', auth_views.login,
       {'authentication_form': LoginForm, 'template_name': 'registration/login.html'}, name='login'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^payments/', include('payments.urls', namespace='payments')),
+    url(r'^pay/', include('payments.urls', namespace='pay')),
     url(r'^(?P<orgname>[-.\w]+)/admin/', include('staffadmin.urls', namespace='staffadmin')),
     url(r'^(?P<orgname>[-.\w]+)/(?P<slug>[-.\w]+)/success/$', setup_views.success, name='success'),
     url(r'^(?P<orgname>[-.\w]+)/(?P<slug>[-.\w]+)/(?P<form_slug>[-.\w]+)/$', setup_views.application_form, name='application_form'),

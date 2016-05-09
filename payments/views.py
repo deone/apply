@@ -8,10 +8,7 @@ from setup.models import UserApplication
 import json
 import requests
 
-def index(request):
-    return render(request, 'payments/index.html', {})
-
-def pay(request, pk):
+def index(request, pk):
     current_site = Site.objects.get_current()
     user_application = get_object_or_404(UserApplication, pk=pk)
     org_name = user_application.application.organization.slug
