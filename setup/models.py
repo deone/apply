@@ -6,8 +6,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.utils.text import slugify
 
-from utils import AutoSlugField
-
 class Organization(models.Model):
     name = models.CharField(_('organization name'), max_length=50)
     slug = models.SlugField(_('slug'))
@@ -67,8 +65,12 @@ class Form(models.Model):
 
 class ApplicationForm(models.Model):
     application = models.ForeignKey(Application)
-    slug = AutoSlugField(populate_from='form.name', db_index=False, editable=False)
+    slug = models.SlugField(blank=True)
     form = models.ForeignKey(Form)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.form.name)
+        super(ApplicationForm, self).save(*args, **kwargs)
 
     def __str__(self):
         return '%s %s' % (self.application.get_name(), self.form.name)
