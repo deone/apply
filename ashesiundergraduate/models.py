@@ -42,8 +42,7 @@ class PersonalInformation(models.Model):
     year_applied = models.CharField(_('year applied'), max_length=4)
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES)
     photo = models.ImageField(upload_to=get_upload_path,
-        height_field='photo_height', width_field='photo_width',
-        help_text="File name must be in the format - Firstname_Lastname.jpg")
+        height_field='photo_height', width_field='photo_width')
     photo_height = models.CharField(_('photo height'), max_length=5)
     photo_width = models.CharField(_('photo width'), max_length=5)
 
