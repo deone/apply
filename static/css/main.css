@@ -260,3 +260,8 @@ label {
   padding-bottom: 30px;
   padding-left: 20px;
 }
+
+/* App Body */
+.app-body {
+  min-height: 650px;
+}
