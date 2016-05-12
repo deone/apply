@@ -10,6 +10,15 @@ html, body {
   border-radius: 0;
 }
 
+/* Search */
+.search-form {
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+.search-form .glyphicon-search {
+  font-size: 195%;
+}
+
 /* Nav */
 .navbar-default .navbar-nav > li > a:focus,
 .navbar-default .navbar-nav > li > a:hover {
