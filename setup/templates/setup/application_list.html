@@ -8,14 +8,39 @@
     <div class="page-header">
       <h2>My Applications</h2>
     </div>
-    <ul>
-    {% for user_app in user.userapplication_set.all %}
-      <li><a href="{{ user_app.application.get_absolute_url }}">{{ user_app.application }}</a></li>
-    {% empty %}
-      <p>You have no applications.</p>
-    {% endfor %}
-    </ul>
 
+    {% if user.userapplication_set.all %}
+      <table class="table table-hover">
+        <!-- <caption>Optional table caption</caption> -->
+        <thead>
+          <tr>
+            <th>Application Name</th>
+            <th>Fee (GHS)</th>
+            <th>Status</th>
+            <th>Deadline</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for userapp in user.userapplication_set.all %}
+            <tr {% if userapp.is_complete %}class="success"{% else %}class="warning"{% endif %}>
+              <td>
+                <a href="{{ userapp.application.get_absolute_url }}">
+                  {{ userapp.application.get_name }}
+                </a>
+              </td>
+              <td>
+                {{ userapp.application.fee }}
+              </td>
+              <td>{% if userapp.is_complete %}Complete{% else %}Incomplete{% endif %}</td>
+              <td>{{ userapp.application.deadline }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>You have no applications</p>
+    {% endif %}
+    
     <div class="page-header">
       <h2>Available Applications</h2>
     </div>
