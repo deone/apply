@@ -20,54 +20,52 @@
       <h2>Available Applications</h2>
     </div>
 
-    <form class="search-form" action="" method="get">
-      <div class="input-group">
-        <input type="text" class="form-control input-lg" name="q" placeholder="Search available applications">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="submit">
-            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-          </button>
-        </span>
-      </div>
-    </form>
+    {% if applications %}
+      <form class="search-form" action="" method="get">
+        <div class="input-group">
+          <input type="text" class="form-control input-lg" name="q" placeholder="Search available applications">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+          </span>
+        </div>
+      </form>
 
-    <table class="table">
-      <!-- <caption>Optional table caption</caption> -->
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <ul>
-    {% for application in applications %}
-      <li><a href="{{ application.get_absolute_url }}">{{ application }}</a></li>
-    {% endfor %}
-    </ul>
+      <table class="table table-hover">
+        <!-- <caption>Optional table caption</caption> -->
+        <thead>
+          <tr>
+            <th>Application Name</th>
+            <th>Is Open?</th>
+            <th>Fee (GHS)</th>
+            <th>Deadline</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for application in applications %}
+          <tr>
+            <td>
+              <a href="{% if application.is_open %}{{ application.get_absolute_url }}{% else %}#{% endif %}">
+                {{ application.get_name }}
+              </a>
+            </td>
+            <td>
+              {% if application.is_open %}
+                Yes
+              {% else %}
+                No
+              {% endif %}
+            </td>
+            <td>{{ application.fee }}</td>
+            <td>{{ application.deadline }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>There are no applications.</p>
+    {% endif %}
 
   </div>
 </div>
