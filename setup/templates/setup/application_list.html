@@ -3,100 +3,109 @@
 {% block page_title %}My Applications{% endblock %}
 
 {% block app_body %}
-<div class="mid width-90">
-  <div class="row">
+{% if user.is_authenticated %}
+  <div class="mid width-90">
+    <div class="row">
+        <div class="page-header">
+          <h2>My Applications</h2>
+        </div>
 
-    {% if user.is_authenticated %}
-      <div class="page-header">
-        <h2>My Applications</h2>
-      </div>
+        {% if user.userapplication_set.all %}
+          <table class="table table-hover">
+            <!-- <caption>Optional table caption</caption> -->
+            <thead>
+              <tr>
+                <th>Application Name</th>
+                <th>Fee (GHS)</th>
+                <th>Status</th>
+                <th>Deadline</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for userapp in user.userapplication_set.all %}
+                <tr {% if userapp.is_complete %}class="success"{% else %}class="warning"{% endif %}>
+                  <td>
+                    <a href="{{ userapp.application.get_absolute_url }}">
+                      {{ userapp.application.get_name }}
+                    </a>
+                  </td>
+                  <td>
+                    {{ userapp.application.fee }}
+                  </td>
+                  <td>{% if userapp.is_complete %}Complete{% else %}Incomplete{% endif %}</td>
+                  <td>{{ userapp.application.deadline }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p>You have no applications</p>
+        {% endif %}
+        
+        <div class="page-header">
+          <h2>Available Applications</h2>
+        </div>
 
-      {% if user.userapplication_set.all %}
-        <table class="table table-hover">
-          <!-- <caption>Optional table caption</caption> -->
-          <thead>
-            <tr>
-              <th>Application Name</th>
-              <th>Fee (GHS)</th>
-              <th>Status</th>
-              <th>Deadline</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for userapp in user.userapplication_set.all %}
-              <tr {% if userapp.is_complete %}class="success"{% else %}class="warning"{% endif %}>
+        {% if applications %}
+          <form class="search-form" action="" method="get">
+            <div class="input-group">
+              <input type="text" class="form-control input-lg" name="q" placeholder="Search available applications">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+              </span>
+            </div>
+          </form>
+
+          <table class="table table-hover">
+            <!-- <caption>Optional table caption</caption> -->
+            <thead>
+              <tr>
+                <th>Application Name</th>
+                <th>Is Open?</th>
+                <th>Fee (GHS)</th>
+                <th>Deadline</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for application in applications %}
+              <tr>
                 <td>
-                  <a href="{{ userapp.application.get_absolute_url }}">
-                    {{ userapp.application.get_name }}
+                  <a href="{% if application.is_open %}{{ application.get_absolute_url }}{% else %}#{% endif %}">
+                    {{ application.get_name }}
                   </a>
                 </td>
                 <td>
-                  {{ userapp.application.fee }}
+                  {% if application.is_open %}
+                    Yes
+                  {% else %}
+                    No
+                  {% endif %}
                 </td>
-                <td>{% if userapp.is_complete %}Complete{% else %}Incomplete{% endif %}</td>
-                <td>{{ userapp.application.deadline }}</td>
+                <td>{{ application.fee }}</td>
+                <td>{{ application.deadline }}</td>
               </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      {% else %}
-        <p>You have no applications</p>
-      {% endif %}
-      
-      <div class="page-header">
-        <h2>Available Applications</h2>
-      </div>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p>There are no applications.</p>
+        {% endif %}
 
-      {% if applications %}
-        <form class="search-form" action="" method="get">
-          <div class="input-group">
-            <input type="text" class="form-control input-lg" name="q" placeholder="Search available applications">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="submit">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-              </button>
-            </span>
-          </div>
-        </form>
-
-        <table class="table table-hover">
-          <!-- <caption>Optional table caption</caption> -->
-          <thead>
-            <tr>
-              <th>Application Name</th>
-              <th>Is Open?</th>
-              <th>Fee (GHS)</th>
-              <th>Deadline</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for application in applications %}
-            <tr>
-              <td>
-                <a href="{% if application.is_open %}{{ application.get_absolute_url }}{% else %}#{% endif %}">
-                  {{ application.get_name }}
-                </a>
-              </td>
-              <td>
-                {% if application.is_open %}
-                  Yes
-                {% else %}
-                  No
-                {% endif %}
-              </td>
-              <td>{{ application.fee }}</td>
-              <td>{{ application.deadline }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      {% else %}
-        <p>There are no applications.</p>
-      {% endif %}
-    {% else %}
-      Landing page content
-    {% endif %}
-
+    </div>
   </div>
-</div>
+{% else %}
+  <div class="intro row">
+    <p style="text-align: right; margin-top: 30px; margin-right: 30px;">
+      <span style="background: #fff; font-size: 200%;">
+        Apply Central was created to help organizations <br>collect data efficiently
+        and make filling <br>out application forms a beautiful <br>and engaging experience.
+        <br><br>We are passionate about eliminating <br>manual data entry and paper forms.<br><br>
+        <a href="{% url 'create_account' %}">Try our sample application form.</a><br><br></span>
+      <span style="font-size: 150%; background: #fff;">You may send feedback to <br>dayo@applycentral.co <br>or WhatsApp +233 54 275 1610.</span>
+    </p>
+  </div>
+{% endif %}
+
 {% endblock %}

@@ -10,6 +10,12 @@ html, body {
   border-radius: 0;
 }
 
+/* Landing Page */
+.intro {
+  background: url('../img/bg.jpg') no-repeat center center;
+  height: 650px;
+}
+
 /* Search */
 .search-form {
   margin-bottom: 40px;
@@ -244,4 +250,13 @@ label {
 }
 .tick {
   color: #5cb85c;
+}
+
+/* Footer */
+.footer {
+  background: #312c32;
+  color: #fff;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 20px;
 }
