@@ -3,11 +3,8 @@
 from __future__ import unicode_literals
 
 from django.db.models.fields import SlugField
-from django.utils.encoding import smart_text
-from django.utils.text import slugify
-from django import forms
 from django.utils.translation import ugettext_lazy as _
-
+from django import forms
 
 class AutoSlugField(SlugField):
     """
@@ -28,7 +25,7 @@ class AutoSlugField(SlugField):
         if default or not add or not self.populate_from:
             return default
 
-        inst = instance
+        inst = instance 
 
         for attr in self.populate_from.split('.'):
             value = getattr(inst, attr)
@@ -42,7 +39,7 @@ class AutoSlugField(SlugField):
         slug = slug[:self.max_length].strip('-')
 
         # Update the model’s attribute
-        setattr(instance, self.attname, slug)
+        setattr(instance, self.attname, slug) 
 
         return slug
 

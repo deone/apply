@@ -10,10 +10,45 @@ html, body {
   border-radius: 0;
 }
 
+/* Search */
+.search-form {
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+.search-form .glyphicon-search {
+  font-size: 195%;
+}
+
 /* Nav */
-.brand {
-  font-size: 150%;
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover {
   color: #fff;
+}
+.navbar-nav > li > a {
+  padding-top: 22px;
+  padding-bottom: 22px;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:focus,
+.navbar-default .navbar-nav > .open > a:hover {
+  background-color: transparent;
+  color: #fff;
+}
+.navbar {
+  min-height: 65px;
+}
+.headpad {
+  padding-top: 7px;
+}
+.brand {
+  font-size: 180%;
+  color: #fff;
+}
+.brand div, .brand p {
+  display: inline-block;
+}
+.brand p {
+  margin-left: .5em;
 }
 .org-header {
   color: #fff;
@@ -33,7 +68,7 @@ html, body {
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:visited {
-  color: #98dafc;
+  color: #fff;
 }
 .navbar-default .navbar-nav > li > a:visited {
   color: #fff;

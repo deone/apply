@@ -43,7 +43,6 @@ def process_forms(request, form_dict, data, dep_data, **kwargs):
 
     return main_form, dep_form, False
 
-@login_required
 def applicant_home(request):
     # Redirect staff if they ever land here after logging in.
     try:

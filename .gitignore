@@ -1,5 +1,6 @@
 *.pyc
 .*.swp
 .coverage
+*.bk
 htmlcov
 ashesiundergraduate/tests/test_files/
