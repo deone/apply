@@ -11,9 +11,15 @@ html, body {
 }
 
 /* Nav */
+.navbar {
+  min-height: 65px;
+}
 .brand {
-  font-size: 150%;
+  font-size: 180%;
   color: #fff;
+}
+.brand div, .brand p {
+  display: inline-block;
 }
 .org-header {
   color: #fff;
@@ -33,7 +39,7 @@ html, body {
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:visited {
-  color: #98dafc;
+  color: #fff;
 }
 .navbar-default .navbar-nav > li > a:visited {
   color: #fff;
