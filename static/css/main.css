@@ -11,8 +11,25 @@ html, body {
 }
 
 /* Nav */
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover {
+  color: #fff;
+}
+.navbar-nav > li > a {
+  padding-top: 22px;
+  padding-bottom: 22px;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:focus,
+.navbar-default .navbar-nav > .open > a:hover {
+  background-color: transparent;
+  color: #fff;
+}
 .navbar {
   min-height: 65px;
+}
+.headpad {
+  padding-top: 7px;
 }
 .brand {
   font-size: 180%;
@@ -20,6 +37,9 @@ html, body {
 }
 .brand div, .brand p {
   display: inline-block;
+}
+.brand p {
+  margin-left: .5em;
 }
 .org-header {
   color: #fff;
