@@ -11,7 +11,7 @@ from setup import views as setup_views
 urlpatterns = [
     url(r'^$', setup_views.applicant_home, name='home'),
     url(r'^admin/', admin.site.urls),
-    url(r'^logout/$', auth_views.logout, {'next_page': '/accounts/login/'}, name='logout'),
+    url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
     url(r'^accounts/create/$', ApplyRegistrationView.as_view(), name='create_account'),
     url(r'^accounts/login/$', auth_views.login,
       {'authentication_form': LoginForm, 'template_name': 'registration/login.html'}, name='login'),
