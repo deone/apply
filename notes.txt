@@ -28,8 +28,6 @@ Product
 
 Urgent
 ======
-- Fix page titles.
-- Make footer stick to the bottom of page at all times instead of using min-height.
 - Use the right queryset in passport details formset.
 - Give varying positive feedback based on application completion.
 - Make applycentral.co display landing page.

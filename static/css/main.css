@@ -4,6 +4,11 @@
 }
 html, body {
   font-family: 'Akkurat', sans-serif;
+  height: 100%;
+}
+body > .container-fluid {
+  height: auto;
+  min-height: 100%;
 }
 .header {
   margin-bottom: 0;
@@ -259,9 +264,5 @@ label {
   padding-top: 30px;
   padding-bottom: 30px;
   padding-left: 20px;
-}
-
-/* App Body */
-.app-body {
-  min-height: 650px;
+  position: relative;
 }
