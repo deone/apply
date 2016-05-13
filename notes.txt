@@ -1,7 +1,7 @@
 Business
 ========
-- We can get one of Challenges Worldwide voluteers to help with sales.
-- For applications with fees, we can take a percentage of fee. For those without fees, we can make money through advertising.
+- We can get one of Challenges Worldwide volunteers to help with sales.
+- For applications with fees, we will take a percentage of fee. For those without fees, we can make money through advertising.
 - For a start, encourage organizations with application fees to incentivize applicants by reducing the fee on Apply Central.
 
 Product
@@ -12,27 +12,29 @@ Product
 - Paylater.ng is a good model for Apply Central's homepage.
 - Use intercom for messaging.
 - Fix formset date display format. Validates wrongly when user clicks save on the form without changing the date. Ask about modifying formset initial data on StackOverflow.
-- Also ask about datepicker misbehaviour - If year is not selected, it uses the current year instead of whatever is set on the widget.
-- Don't forget to add a beautiful footer.
+- Also ask about datepicker misbehaviour - when editing dates, if year is not selected, it uses the current year instead of whatever is set on the widget.
 - Try to add queryset to forms just like formsets.
-- When creating applications, staff can make mistakes. Provide a view application form link with helpful messages instead of errors. e.g ZeroDivisionError means that the staff has not created the application forms.
-- Change all occurrences of 'dependence' and anything like it to 'child' for simplicity.
-- Add help-text and placeholders to form fields wherever neccessary.
-- Add 'Create Account' to login page. Do same for Create Account page.
+- When creating applications, staff can make mistakes. Provide a view application form link with helpful messages instead of errors. e.g ZeroDivisionError means that the staff has not created the application forms. Or better still, disable 'View Application Form' link until enough info has been provided to make it work properly.
 - We can add an app_name field to Application model to explicitly specify app name instead of inferring it from Organization short name and application name.
 - Think about having applicants sign in with social accounts - Google, Facebook, Twitter.
 - Email applicants after account creation and after completing application form.
 - Investigate projects like django-forms-builder and wagtail cms.
-- Staff should always access the app through /orgname/admin/ for proper login and redirection. If they log in at /accounts/login/ (without the next parameter), they would be redirected to LOGIN_REDIRECT_URL (/). Do not allow this to happen.
-- Style applicant and staff home. We can make list display like table rows complete with action columns. e.g. 'View Applications' and 'Download Files' for staff and completed status for applicants. We can also display whether application is open, the deadline if it is set and fee if application has a fee.
-- Staff can only see completed applications.
-- Add 'Forgot Password' feature.
 - Make photo dimensions a setting.
 - Ensure fee is provided if has_fee is checked. This would be important when staff are able to create applications.
-- Change passport details formset queryset.
-- Rename uploads in the correct format instead of having applicant's name them. Do this for all file uploads.
-- Use positive words for the completion feedback e.g. 'Almost Done' instead of 'Application Incomplete'. We can take this further by having different phrases based on the completion value.
 - There's a decorator function in django.test called modify_settings. We can use this in the test case that modifies the MEDIA_ROOT setting. There's also override_settings, this may be more appropriate.
-- Fix page titles.
 - Make exhaustive list of all possible use cases of Apply Central, much the same way Victor thought about it.
 - When you create sub-domains like ashesi.applycentral.net, also create www.ashesi.applycentral.net because people might type in 'www.'.
+
+
+Urgent
+======
+- Fix page titles.
+- Make footer stick to the bottom of page at all times instead of using min-height.
+- Use the right queryset in passport details formset.
+- Give varying positive feedback based on application completion.
+- Make applycentral.co display landing page.
+- Write compelling announcement.
+
+- Forgot password feature.
+- Page height should be the height of the longest column instead of setting a minimum height. And other columns should comply, background and all.
+- Ensure staff can see only completed applications.
