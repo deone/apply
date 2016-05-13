@@ -141,7 +141,11 @@ def application_form(request, orgname, slug, form_slug):
     else:
         main_form = form_class(obj=user_app, initial=data)
         if dependence_class:
-            dep_form = dependence_class(obj=None, initial=dep_data)
+            if dependence_type == 'formset':
+                dep_model = apps.get_model(registry_key, attr)
+                dep_form = dependence_class(obj=None, initial=dep_data, queryset=dep_model.objects.filter(passport_check__user_application=user_app))
+            else:
+                dep_form = dependence_class(obj=None, initial=dep_data)
     ###############################################
 
     ################## Template ###################
