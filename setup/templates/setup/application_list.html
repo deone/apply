@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
-{% block page_title %}My Applications{% endblock %}
+{% block page_title %}
+&ndash; {% if user.is_authenticated %}My Applications{% else %}Welcome{% endif %}
+{% endblock %}
 
 {% block app_body %}
 {% if user.is_authenticated %}
@@ -39,7 +41,7 @@
             </tbody>
           </table>
         {% else %}
-          <p>You have no applications</p>
+          <p>You have no applications.</p>
         {% endif %}
         
         <div class="page-header">

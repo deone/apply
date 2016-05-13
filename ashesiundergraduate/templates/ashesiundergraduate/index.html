@@ -1,6 +1,7 @@
 {% extends 'setup/application_detail.html' %}
 
 {% block application_form %}
-  <p><i>[Add application instructions here.]</i></p>
-  <a href="#" class="btn btn-primary btn-lg mid width-90" role="button">Start Application</a>
+  {% with user_application.application as app %}
+    <a href="{% url 'application_form' app.organization.slug app.slug 'personal-information' %}" class="btn btn-primary btn-lg" style="width: 100%" role="button">Start Application</a>
+  {% endwith %}
 {% endblock %}
