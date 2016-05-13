@@ -6,7 +6,7 @@ REGISTRY = {
         'citizenship': {'class': CitizenshipForm},
         'passport-details': {
           'class': PassportCheckForm,
-          'dependence': {'class': PassportDetailsFormSet, 'type': 'formset', 'attr': 'passportdetails'},
+          'dependence': {'class': PassportDetailsFormSet, 'type': 'formset', 'attr': 'passportdetails', 'queryset_key': 'passport_check__user_application'},
           },
         'residence': {
           'class': ResidenceForm,
