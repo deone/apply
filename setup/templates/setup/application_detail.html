@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 
-{% block page_title %}{{ user_application.application.get_name }} &mdash; {% block application_form_name %}{% endblock %}{% endblock %}
+{% block page_title %}&ndash; {{ user_application.application.get_name }}{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-theme.css' %}">
