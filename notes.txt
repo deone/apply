@@ -28,7 +28,6 @@ Product
 
 Urgent
 ======
-- Give varying positive feedback based on application completion.
 - Write and post compelling announcement.
 
 - Forgot password feature.

@@ -154,13 +154,40 @@ def application_form(request, orgname, slug, form_slug):
 
     ################## Template ###################
     # Context contains application, user_application and application_completion
+    completion = context['application_completion']
     context.update({
       'form_name': form_name,
       'form': main_form,
       'dep_form': dep_form,
+      'feedback': get_feedback(completion),
       })
 
     return render(request, template_name, context)
+
+def get_feedback(completion):
+    c = round(completion, 1)
+    if c == 0.0:
+        return "Let's get this started!"
+    if c == 0.1:
+        return 'Good job!'
+    if c == 0.2:
+        return 'Awesome!'
+    if c == 0.3:
+        return 'Keep going!'
+    if c == 0.4:
+        return 'Great job!'
+    if c == 0.5:
+        return "You're halfway!"
+    if c == 0.6:
+        return "Keep it up!"
+    if c == 0.7:
+        return "Cross your t's"
+    if c == 0.8:
+        return "Dot your i's"
+    if c == 0.9:
+        return 'Almost done...'
+    if c == 1.0:
+        return 'You made it!'
 
 @login_required
 def success(request, orgname, slug):
