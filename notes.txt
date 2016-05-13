@@ -29,8 +29,7 @@ Product
 Urgent
 ======
 - Give varying positive feedback based on application completion.
-- Make applycentral.co display landing page.
-- Write compelling announcement.
+- Write and post compelling announcement.
 
 - Forgot password feature.
 - Page height should be the height of the longest column instead of setting a minimum height. And other columns should comply, background and all.
