@@ -40,6 +40,7 @@ class BasePassportDetailsFormSet(forms.BaseModelFormSet):
         super(BasePassportDetailsFormSet, self).__init__(*args, **kwargs)
         self.forms[0].empty_permitted = False
 
+
     def add_fields(self, form, index):
         super(BasePassportDetailsFormSet, self).add_fields(form, index)
         form.fields['expiry_date'] = forms.DateField(widget=forms.TextInput(attrs={'class': 'form-control date'}))

@@ -141,7 +141,15 @@ def application_form(request, orgname, slug, form_slug):
     else:
         main_form = form_class(obj=user_app, initial=data)
         if dependence_class:
-            dep_form = dependence_class(obj=None, initial=dep_data)
+            if dependence_type == 'formset':
+                kwarg = {}
+                dep_model = apps.get_model(registry_key, attr)
+                queryset_key = dep.get('queryset_key', None)
+                if queryset_key is not None:
+                    kwarg[queryset_key] = user_app
+                dep_form = dependence_class(obj=None, initial=dep_data, queryset=dep_model.objects.filter(**kwarg))
+            else:
+                dep_form = dependence_class(obj=None, initial=dep_data)
     ###############################################
 
     ################## Template ###################
