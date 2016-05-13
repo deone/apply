@@ -7,12 +7,12 @@
 {% endif %}
 
 <div id="container">
-  <div id="topLoader">      
+  <div id="topLoader">
   </div>
 </div>
 
 {% if application_completion == 1 %}
-  <p class="bg-success width-90 mid">Application Complete!</p>
+  <p class="bg-success width-90 mid">{{ feedback }}</p>
 
   {% if not user_application.is_complete %}
     {% if user_application.application.has_fee %}
@@ -28,5 +28,5 @@
     {% endif %}
   {% endif %}
 {% else %}
-  <a class="btn btn-primary btn-lg width-90 disabled" role="button">Almost Done...</a>
+  <a class="btn btn-primary btn-lg width-90 disabled" role="button">{{ feedback }}</a>
 {% endif %}
