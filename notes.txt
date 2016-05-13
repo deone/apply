@@ -28,7 +28,6 @@ Product
 
 Urgent
 ======
-- Use the right queryset in passport details formset.
 - Give varying positive feedback based on application completion.
 - Make applycentral.co display landing page.
 - Write compelling announcement.

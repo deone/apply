@@ -5,8 +5,7 @@ from utils.getters import get_obj_from_form
 
 from ..models import DesiredMajor, Course
 
-class DesiredMajorForm(forms.ModelForm):
-    
+class DesiredMajorForm(forms.ModelForm): 
     class Meta:
         model = DesiredMajor
         exclude = ['user_application']
@@ -14,7 +13,8 @@ class DesiredMajorForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.user_application = get_obj_from_form(kwargs)
         super(DesiredMajorForm, self).__init__(*args, **kwargs)
-        self.fields['desired_major'] = forms.ModelChoiceField(Course.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
+        self.fields['desired_major'] = forms.ModelChoiceField(Course.objects.all(),
+            empty_label=_('Select'), widget=forms.Select(attrs={'class': 'form-control'}))
 
     def save(self, commit=True):
         data = self.cleaned_data
