@@ -28,5 +28,11 @@
     {% endif %}
   {% endif %}
 {% else %}
-  <a class="btn btn-primary btn-lg width-90 disabled" role="button">{{ feedback }}</a>
+  <a class="btn btn-primary btn-lg width-90 disabled" role="button">
+    {% if feedback %}
+      {{ feedback }}
+    {% else %}
+      Let's get this started!
+    {% endif %}
+  </a>
 {% endif %}
