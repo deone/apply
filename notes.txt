@@ -28,10 +28,6 @@ Product
 
 Urgent
 ======
-- Write and post compelling announcement.
-
-Apply Central is one data collection and processing service to rule them all.
-
 - Forgot password feature.
 - Page height should be the height of the longest column instead of setting a minimum height. And other columns should comply, background and all.
 - Ensure staff can see only completed applications.
