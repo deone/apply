@@ -22,6 +22,53 @@
   margin: 0 auto;
 }
 
+/* Sections */
+.sections {
+  padding: 0;
+  background: #b8d9f1;
+}
+.sections .nav {
+  padding: 0;
+}
+.sections .nav > li > a {
+  color: #312c32;
+  border-bottom: solid 1px #aaa;
+}
+.sections .nav > li.active {
+  border-left: solid 4px #daad86;
+  font-weight: bold;
+}
+.sections .nav > li.active {
+  background: #fff;
+}
+.sections .nav > li > a:hover {
+  background: #fff;
+}
+
+/* Progress */
+.progress {
+  background: #fafafa;
+  border-radius: 0;
+  margin-bottom: 0;
+  text-align: center;
+}
+.sections,
+.progress {
+  min-height: 900px;
+}
+.progress a.btn {
+  margin-top: 1em;
+}
+.progress .bg-success {
+  line-height: 3em;
+}
+
+/* Percentage Loader */
+#topLoader {
+  margin-bottom: 32px;
+  margin-top: 80px;
+}
+
 /* Widths */
 .width-90 {
   width: 90%;
@@ -42,6 +89,42 @@
 }
 .photo-field .help-text {
   font-size: 90%;
+}
+.tab-pane form {
+  width: 90%;
+}
+.main {
+  padding-top: 2.3em;
+}
+.photo {
+  margin-right: 1.7em;
+}
+.photo-field {
+  font-size: 90%;
+}
+.main form,
+.sections {
+  font-size: 97%;
+}
+.main form {
+  color: #777;
+}
+.date {
+  width: 92.95%;
+  display: inline-block;
+}
+#id_year_applied {
+  width: 15%;
+}
+.radio {
+  display: inline-block;
+  width: 80px;
+}
+
+/* Widgets */
+.ui-datepicker-trigger {
+  border: none;
+  background: none;
 }
 
 /* Feedback */

@@ -67,16 +67,18 @@
 {% endblock %}
 
 {% block app_body %}
-<div class="application row">
-  <div class="col-sm-2 sections">
-    {% include 'setup/_sections.html' %}
-  </div>
-  <div class="col-sm-7 main">
-    {% block application_form %}
-    {% endblock %}
-  </div>
-  <div class="col-sm-3 progress">
-    {% include '_progress.html' %}
+<div class="container-fluid">
+  <div class="application row">
+    <div class="col-sm-2 sections">
+      {% include 'setup/_sections.html' %}
+    </div>
+    <div class="col-sm-7 main">
+      {% block application_form %}
+      {% endblock %}
+    </div>
+    <div class="col-sm-3 progress">
+      {% include '_progress.html' %}
+    </div>
   </div>
 </div>
 {% endblock %}
