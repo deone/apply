@@ -3,6 +3,16 @@
   padding-top: 22px;
   padding-bottom: 22px;
 }
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover {
+  color: #fff;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:focus,
+.navbar-default .navbar-nav > .open > a:hover {
+  background-color: transparent;
+  color: #fff;
+}
 
 /* App Body */
 .mid {
@@ -61,6 +71,15 @@
 }
 .tick {
   color: #5cb85c;
+}
+
+/* Search */
+.search-form {
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+.search-form .glyphicon-search {
+  font-size: 195%;
 }
 
 /* Errors */
