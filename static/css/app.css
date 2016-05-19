@@ -21,9 +21,6 @@
 .mid {
   margin: 0 auto;
 }
-.account-form {
-  margin-top: 80px;
-}
 
 /* Widths */
 .width-90 {
@@ -34,12 +31,12 @@
 }
 
 /* Forms */
-.form-link {
-  display: block;
-  text-align: right;
-  line-height: 2.3em;
-  background: #eee;
-  padding-right: 16%;
+.account-form {
+  margin-top: 80px;
+  margin-bottom: 100px;
+}
+.account-form button {
+  margin-bottom: 10px;
 }
 .help-text {
   font-size: 82%;
