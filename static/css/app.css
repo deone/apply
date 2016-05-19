@@ -3,6 +3,9 @@
   padding-top: 22px;
   padding-bottom: 22px;
 }
+.navbar-toggle {
+  margin-top: 15px;
+}
 .navbar-default .navbar-nav > li > a:focus,
 .navbar-default .navbar-nav > li > a:hover {
   color: #fff;
@@ -18,12 +21,8 @@
 .mid {
   margin: 0 auto;
 }
-.sheet {
-  padding: 0 5em 3em 5em;
-  margin-top: 50px;
-  margin-bottom: 100px;
-  border: solid 1px #eee;
-  border-radius: 5px;
+.account-form {
+  margin-top: 80px;
 }
 
 /* Widths */
