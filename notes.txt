@@ -32,7 +32,7 @@ Product
 Urgent
 ======
 - Optimize UI for mobile and large screens.
-  - Fix thin input element on mobile screens.
+  - Fix thin input element on mobile screens. Make login and create account form non-horizontal.
   - Align progress widget center.
 
 - Forgot password feature.

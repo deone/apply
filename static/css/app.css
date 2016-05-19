@@ -3,3 +3,71 @@
   padding-top: 22px;
   padding-bottom: 22px;
 }
+
+/* App Body */
+.mid {
+  margin: 0 auto;
+}
+.sheet {
+  padding: 0 5em 3em 5em;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  border: solid 1px #eee;
+  border-radius: 5px;
+}
+
+/* Widths */
+.width-90 {
+  width: 90%;
+}
+.width-50 {
+  width: 50%;
+}
+
+/* Forms */
+.form-link {
+  display: block;
+  text-align: right;
+  line-height: 2.3em;
+  background: #eee;
+  padding-right: 16%;
+}
+.help-text {
+  font-size: 82%;
+  font-style: italic;
+  color: #777;
+}
+.photo-field .help-text {
+  font-size: 90%;
+}
+
+/* Feedback */
+.messages,
+.messages li {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.messages li.success {
+  color: #fff;
+  background: #5cb85c;
+}
+.messages {
+  list-style: none;
+  margin-top: 1em;
+}
+.messages li {
+  padding: .5em 0 .5em .5em;
+}
+.tick {
+  color: #5cb85c;
+}
+
+/* Errors */
+.errorlist {
+  color: #e62739;
+  font-size: 80%;
+  list-style: none;
+  padding-right: 1.3em;
+  text-align: right;
+}
