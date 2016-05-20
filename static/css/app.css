@@ -1,3 +1,7 @@
+.app-body {
+  margin-bottom: 100px;
+}
+
 /* Navbar Links */
 .navbar-nav > li > a {
   padding-top: 22px;
@@ -25,6 +29,9 @@ img {
 /* App Body */
 .mid {
   margin: 0 auto;
+}
+.app-body {
+  margin-bottom: 100px;
 }
 
 /* Sections */
@@ -67,8 +74,6 @@ img {
 .progress .bg-success {
   line-height: 3em;
 }
-
-/* Progress Indicator */
 #progress {
   margin: 0 auto;
   margin-top: 80px;
@@ -92,7 +97,6 @@ label {
 }
 .account-form {
   margin-top: 80px;
-  margin-bottom: 100px;
 }
 .help-text {
   font-size: 82%;
