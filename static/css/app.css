@@ -17,6 +17,11 @@
   color: #fff;
 }
 
+/* Images */
+img {
+  width: 100%;
+}
+
 /* App Body */
 .mid {
   margin: 0 auto;
@@ -78,6 +83,9 @@
 }
 
 /* Forms */
+label {
+  font-size: 90%;
+}
 .account-form {
   margin-top: 80px;
   margin-bottom: 100px;
@@ -102,9 +110,6 @@
 .main form,
 .sections {
   font-size: 97%;
-}
-.main form {
-  color: #777;
 }
 .date {
   width: 92.95%;
