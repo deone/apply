@@ -31,11 +31,7 @@ Product
 
 Urgent
 ======
-- Optimize UI for mobile and large screens.
-  - Align progress widget center.
-  - Make Personal Information photo responsive.
-
-- Create organization homepage.
-- Forgot password feature.
 - Page height should be the height of the longest column instead of setting a minimum height. And other columns should comply, background and all.
-- Ensure staff can see only completed applications.
+- Add 'Forgot password' feature.
+- Create organization homepage.
+- Ensure staff can see only completed applications. This can be a setting.

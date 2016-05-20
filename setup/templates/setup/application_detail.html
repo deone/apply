@@ -10,8 +10,9 @@
 
 {% block extra_js %}
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script src="{% static 'js/jquery.percentageloader-0.2.js' %}"></script>
+<script src="//cdn.rawgit.com/kimmobrunfeldt/progressbar.js/1.0.1/dist/progressbar.js"></script>
 <script>
+
   $(function() {
 
     $('.date').datepicker({
@@ -23,37 +24,37 @@
       yearRange: '-80:+10'
     });
 
-    var $topLoader = $("#topLoader").percentageLoader();
+    var bar = new ProgressBar.Circle(progress, {
+      color: '#aaa',
+      // This has to be the same size as the maximum width to
+      // prevent clipping
+      strokeWidth: 4,
+      trailWidth: 1,
+      easing: 'easeInOut',
+      duration: 1400,
+      text: {
+        autoStyleContainer: false
+      },
+      from: { color: '#aaa', width: 1 },
+      to: { color: '#b8d9f1', width: 4 },
+      // Set default step function for all animate calls
+      step: function(state, circle) {
+        circle.path.setAttribute('stroke', state.color);
+        circle.path.setAttribute('stroke-width', state.width);
 
-    var topLoaderRunning = false;
-
-    $topLoader.percentageLoader({onready: function () {
-
-      if (topLoaderRunning) {
-        return;
-      }
-      topLoaderRunning = true;
-
-      var kb = 0;
-      var totalKb = 999;
-
-      var animateFunc = function () {
-        kb += 17;
-        progress = kb / totalKb;
-        value = {{ application_completion }};
-
-        $topLoader.percentageLoader({progress: progress});
-
-        if (kb < totalKb && progress < value) {
-          setTimeout(animateFunc, 25);
+        var value = Math.round(circle.value() * 100);
+        if (value === 0) {
+          circle.setText('0%');
         } else {
-          topLoaderRunning = false;
+          circle.setText(value + '%');
         }
-      };
 
-      setTimeout(animateFunc, 25);
+      }
+    });
+    bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+    bar.text.style.fontSize = '2em';
 
-    }});
+    bar.animate({{ application_completion }});  // Number from 0.0 to 1.0
 
   });
 </script>

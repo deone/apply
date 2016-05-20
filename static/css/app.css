@@ -68,10 +68,14 @@ img {
   line-height: 3em;
 }
 
-/* Percentage Loader */
-#topLoader {
-  margin-bottom: 32px;
+/* Progress Indicator */
+#progress {
+  margin: 0 auto;
   margin-top: 80px;
+  margin-bottom: 80px;
+  width: 200px;
+  height: 200px;
+  position: relative;
 }
 
 /* Widths */
