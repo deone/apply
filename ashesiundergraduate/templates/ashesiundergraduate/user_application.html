@@ -18,13 +18,14 @@
     {% with user_application as ua %}
 
     <div class="top row no-gutter">
-      <div class="col-md-10">
-        <ul class="actions">
-          <li><a href="javascript:window.print()" title="Print"><i class="fa fa-print"></i> Print</a></li>
-          <li><a href="#"><i class="fa fa-file-excel-o"></i> Export to Excel</a></li>
-          <li><a href="#"><i class="fa fa-file-archive-o"></i> Download Files</a></li>
-        </ul>
+      <div class="col-md-3">
+        <div class="list-group">
+          <a class="list-group-item" href="javascript:window.print()" title="Print"><i class="fa fa-print"></i> Print</a>
+          <a class="list-group-item" href="#"><i class="fa fa-file-excel-o"></i> Export to Excel</a>
+          <a class="list-group-item" href="#"><i class="fa fa-file-archive-o"></i> Download Files</a>
+        </div>
       </div>
+      <div class="col-md-7"></div>
       <div class="col-md-2">
         {% thumbnail ua.personalinformation.photo "160x160" crop="center" as up %}
           <a href="{{ up.url }}" class="thumbnail">
