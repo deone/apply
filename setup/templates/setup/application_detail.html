@@ -35,8 +35,8 @@
       text: {
         autoStyleContainer: false
       },
-      from: { color: '#aaa', width: 1 },
-      to: { color: '#b8d9f1', width: 4 },
+      from: { color: '#b8d9f1', width: 1 },
+      to: { color: '#5cb85c', width: 4 },
       // Set default step function for all animate calls
       step: function(state, circle) {
         circle.path.setAttribute('stroke', state.color);
@@ -69,7 +69,7 @@
 
 {% block app_body %}
 <div class="container-fluid">
-  <div class="application row">
+  <div class="row">
     <div class="col-sm-2 sections">
       {% include 'setup/_sections.html' %}
     </div>
