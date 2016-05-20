@@ -33,26 +33,27 @@
 
 {% block application_form %}
 <div class="row">
-  <div class="col-xs-6 col-md-3 pull-right photo">
-    {% if user_application.personalinformation.photo %}
-      {% thumbnail user_application.personalinformation.photo "150x160" crop="center" as up %}
-        <a href="{{ up.url }}" class="thumbnail">
-          <img src="{{ up.url }}" width="{{ up.width }}" height="{{ up.height }}" title="{{ user_application.user.get_full_name }}">
-        </a>
-      {% endthumbnail %}
-    {% else %}
-      <a href="#" class="thumbnail">
-        <img src="holder.js/150x160?text=Your Photo Here" alt="">
-      </a>
-    {% endif %}
-  </div>
-</div>
-
-<div class="row">
   <form action="" method="post" class="form-horizontal mid width-90" enctype="multipart/form-data">
 
     {% csrf_token %}
     {{ form.non_field_errors }}
+
+    <div class="form-group">
+      <div class="col-md-9"></div>
+      <div class="col-md-3 photo">
+        {% if user_application.personalinformation.photo %}
+          {% thumbnail user_application.personalinformation.photo "150x160" crop="center" as up %}
+            <a href="{{ up.url }}" class="thumbnail">
+              <img src="{{ up.url }}" height="{{ up.height }}" title="{{ user_application.user.get_full_name }}">
+            </a>
+          {% endthumbnail %}
+        {% else %}
+          <a href="#" class="thumbnail">
+            <img src="holder.js/100px160?text=Your Photo Here" alt="">
+          </a>
+        {% endif %}
+      </div>
+    </div>
 
     <div class="form-group">
       <label for="id_first_name" class="col-sm-3 control-label">First Name</label>

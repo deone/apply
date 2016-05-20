@@ -1,0 +1,77 @@
+@font-face {
+  font-family: Akkurat;
+  src: url('../fonts/akkurat_regular.otf');
+}
+html, body {
+  font-family: 'Akkurat', sans-serif;
+  height: 100%;
+}
+.container-fluid {
+  height:100%;
+}
+
+/* Navbar */
+.navbar-default {
+  margin-bottom: 0;
+  background: #312c32;
+  border-radius: 0;
+  border: none;
+  min-height: 65px;
+}
+
+/* Landing Page */
+.intro {
+  height: 100%;
+  min-height: 100%;
+  padding: 10px;
+  color: #efefef;
+  background: url('../img/bg.jpg') no-repeat center center;
+}
+.intro p {
+  text-align: right;
+  margin-top: 30px;
+  margin-right: 30px;
+  color: #333;
+}
+.intro p span {
+  background: #fff;
+  font-size: 200%;
+}
+.intro p span.contact {
+  font-size: 150%;
+}
+
+/* Make all header links white (no matter the state) */
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a {
+  color: #fff;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:visited {
+  color: #fff;
+}
+.navbar-default .navbar-nav > li > a:visited {
+  color: #fff;
+}
+
+/* Logo & Branding */
+.brand {
+  font-size: 180%;
+}
+.brand div, .brand p {
+  display: inline-block;
+}
+.brand p {
+  margin-left: .5em;
+}
+
+/* Footer */
+.footer {
+  background: #312c32;
+  color: #fff;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 20px;
+  position: relative;
+}
+

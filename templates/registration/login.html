@@ -3,43 +3,44 @@
 {% block page_title %}&ndash; Log In{% endblock %}
 
 {% block app_body %}
-<div class="mid width-50 sheet">
+<div class="container-fluid">
   <div class="row">
-    <div class="page-header">
-      <h1>Log In</h1>
+    <div class="mid width-50 app-body">
+      <form action="" method="post" class="form-horizontal account-form">
+
+        <div class="page-header">
+          <h2>Log In</h2>
+        </div>
+
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="form-group">
+          {{ form.username.errors }}
+          <label for="email" class="col-sm-2 control-label">Email</label>
+          <div class="col-sm-10">
+            {{ form.username }}
+            <span class="help-text">{{ form.username.help_text }}</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          {{ form.password.errors }}
+          <label for="{{ form.password.id_for_label }}" class="col-sm-2 control-label">{{ form.password.label }}</label>
+          <div class="col-sm-10">
+            {{ form.password }}
+            <span class="help-text">{{ form.password.help_text }}</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-6">
+            <button type="submit" class="btn btn-primary">Log In</button>
+            <a class="btn btn-default" href="{% url 'create_account' %}">Create Account</a>
+          </div>
+        </div>
+      </form>
     </div>
-    <form action="" method="post" class="form-horizontal">
-
-      {% csrf_token %}
-      {{ form.non_field_errors }}
-
-      <div class="form-group">
-        {{ form.username.errors }}
-        <label for="email" class="col-sm-2 control-label">Email</label>
-        <div class="col-sm-10">
-          {{ form.username }}
-          <span class="help-text">{{ form.username.help_text }}</span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        {{ form.password.errors }}
-        <label for="{{ form.password.id_for_label }}" class="col-sm-2 control-label">{{ form.password.label }}</label>
-        <div class="col-sm-10">
-          {{ form.password }}
-          <span class="help-text">{{ form.password.help_text }}</span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-6">
-          <button type="submit" class="btn btn-primary">Log In</button>
-        </div>
-        <p class="col-sm-4">
-          <a class="form-link" href="{% url 'create_account' %}">Create Account</a>
-        </p>
-      </div>
-    </form>
   </div>
 </div>
 {% endblock %}

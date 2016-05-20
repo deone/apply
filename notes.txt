@@ -1,5 +1,8 @@
 Business
 ========
+- Sell the original idea.
+- Integrate Edem's idea by listing all forms that people are already processing through agents.
+
 - We can get one of Challenges Worldwide volunteers to help with sales.
 - For applications with fees, we will take a percentage of fee. For those without fees, we can make money through advertising.
 - For a start, encourage organizations with application fees to incentivize applicants by reducing the fee on Apply Central.
@@ -28,10 +31,7 @@ Product
 
 Urgent
 ======
-- Write and post compelling announcement.
-
-Apply Central is one data collection and processing service to rule them all.
-
-- Forgot password feature.
 - Page height should be the height of the longest column instead of setting a minimum height. And other columns should comply, background and all.
-- Ensure staff can see only completed applications.
+- Add 'Forgot password' feature.
+- Create organization homepage.
+- Ensure staff can see only completed applications. This can be a setting.
