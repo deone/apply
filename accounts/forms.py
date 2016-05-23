@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 
 from registration.forms import RegistrationForm
 
@@ -26,3 +26,6 @@ class ApplyRegistrationForm(RegistrationForm):
     def save(self, commit=False):
         self.instance.username = self.cleaned_data['email']
         return super(ApplyRegistrationForm, self).save()
+
+class ApplyPasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(label='Email', max_length=50, widget=forms.EmailInput(attrs={'class': 'form-control'}))

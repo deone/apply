@@ -98,6 +98,15 @@ label {
 .account-form {
   margin-top: 80px;
 }
+.password-reset-form {
+  margin-top: 20px;
+}
+.password-reset-form label {
+  margin-left: -1.1em;
+}
+.password-reset-form .col-sm-9 {
+  padding-right: 0;
+}
 .help-text {
   font-size: 82%;
   font-style: italic;

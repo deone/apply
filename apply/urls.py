@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 from accounts.views import ApplyRegistrationView
-from accounts.forms import LoginForm
+from accounts.forms import LoginForm, ApplyPasswordResetForm
 from setup import views as setup_views
 
 urlpatterns = [
@@ -15,7 +15,12 @@ urlpatterns = [
     url(r'^accounts/create/$', ApplyRegistrationView.as_view(), name='create_account'),
     url(r'^accounts/login/$', auth_views.login,
       {'authentication_form': LoginForm, 'template_name': 'registration/login.html'}, name='login'),
-    url(r'^accounts/password_reset/$', auth_views.password_reset, name='password_reset'),
+    url(r'^accounts/password_reset/$', auth_views.password_reset,
+      {
+        'template_name': 'accounts/password_reset_form.html',
+        'password_reset_form': ApplyPasswordResetForm,
+        },
+      name='password_reset'),
     url(r'^accounts/password_reset/done/$', auth_views.password_reset_done, name='password_reset_done'),
     url(r'^accounts/reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
       auth_views.password_reset_confirm, name='password_reset_confirm'),
