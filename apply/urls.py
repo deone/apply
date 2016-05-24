@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 from accounts.views import ApplyRegistrationView
-from accounts.forms import LoginForm, ApplyPasswordResetForm
+from accounts.forms import LoginForm, ApplyPasswordResetForm, ApplySetPasswordForm
 from setup import views as setup_views
 
 urlpatterns = [
@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^accounts/password_reset/done/$', auth_views.password_reset_done,
       {'template_name': 'accounts/password_reset_done.html'}, name='password_reset_done'),
     url(r'^accounts/reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-      auth_views.password_reset_confirm, {'template_name': 'accounts/password_reset_confirm.html'},
+      auth_views.password_reset_confirm, {'template_name': 'accounts/password_reset_confirm.html', 'set_password_form': ApplySetPasswordForm},
       name='password_reset_confirm'),
     url(r'^accounts/reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
     url(r'^pay/', include('payments.urls', namespace='pay')),
