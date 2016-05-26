@@ -1,8 +1,12 @@
+/* App Body */
 .app-body {
   margin-bottom: 100px;
 }
 h1 {
   font-size: 160%;
+}
+.org-home {
+  margin-top: 50px;
 }
 
 /* Navbar Links */
