@@ -6,10 +6,10 @@
 <div class="container-fluid">
   <div class="row">
     <div class="mid width-50 app-body">
-      <form action="" method="post" class="form-horizontal account-form">
+      <form method="post" class="form-horizontal account-form">
 
         <div class="page-header">
-          <h2>Log In</h2>
+          <h1>Log In</h1>
         </div>
 
         {% csrf_token %}
@@ -37,6 +37,11 @@
           <div class="col-sm-offset-2 col-sm-6">
             <button type="submit" class="btn btn-primary">Log In</button>
             <a class="btn btn-default" href="{% url 'create_account' %}">Create Account</a>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-6">
+            <a href="{% url 'password_reset' %}">Forgot Password?</a>
           </div>
         </div>
       </form>

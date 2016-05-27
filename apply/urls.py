@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 from accounts.views import ApplyRegistrationView
-from accounts.forms import LoginForm
+from accounts.forms import LoginForm, ApplyPasswordResetForm, ApplySetPasswordForm
 from setup import views as setup_views
 
 urlpatterns = [
@@ -15,7 +15,16 @@ urlpatterns = [
     url(r'^accounts/create/$', ApplyRegistrationView.as_view(), name='create_account'),
     url(r'^accounts/login/$', auth_views.login,
       {'authentication_form': LoginForm, 'template_name': 'registration/login.html'}, name='login'),
-    url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^accounts/password_reset/$', auth_views.password_reset,
+      {'template_name': 'accounts/password_reset_form.html', 'password_reset_form': ApplyPasswordResetForm},
+      name='password_reset'),
+    url(r'^accounts/password_reset/done/$', auth_views.password_reset_done,
+      {'template_name': 'accounts/password_reset_done.html'}, name='password_reset_done'),
+    url(r'^accounts/reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+      auth_views.password_reset_confirm, {'template_name': 'accounts/password_reset_confirm.html', 'set_password_form': ApplySetPasswordForm},
+      name='password_reset_confirm'),
+    url(r'^accounts/reset/done/$', auth_views.password_reset_complete,
+      {'template_name': 'accounts/password_reset_complete.html'}, name='password_reset_complete'),
     url(r'^pay/', include('payments.urls', namespace='pay')),
     url(r'^(?P<orgname>[-.\w]+)/admin/', include('staffadmin.urls', namespace='staffadmin')),
     url(r'^(?P<orgname>[-.\w]+)/(?P<slug>[-.\w]+)/success/$', setup_views.success, name='success'),

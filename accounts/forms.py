@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm
 
 from registration.forms import RegistrationForm
 
@@ -26,3 +26,10 @@ class ApplyRegistrationForm(RegistrationForm):
     def save(self, commit=False):
         self.instance.username = self.cleaned_data['email']
         return super(ApplyRegistrationForm, self).save()
+
+class ApplyPasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(label=_('Email'), max_length=50, widget=forms.EmailInput(attrs={'class': 'form-control'}))
+
+class ApplySetPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(label=_('New Password'), widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    new_password2 = forms.CharField(label=_('Confirm Password'), widget=forms.PasswordInput(attrs={'class': 'form-control'}))
