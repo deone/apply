@@ -13,210 +13,208 @@
 {% endblock %}
 
 {% block app_body %}
-<div class="container-fluid">
-  <div class="mid width-90 app-body">
-    {% with user_application as ua %}
+<div class="mid width-90 app-body">
+  {% with user_application as ua %}
 
-    <div class="top row no-gutter">
-      <div class="col-md-3">
-        <div class="list-group">
-          <a class="list-group-item" href="javascript:window.print()" title="Print"><i class="fa fa-print"></i> Print</a>
-          <a class="list-group-item" href="#"><i class="fa fa-file-excel-o"></i> Export to Excel</a>
-          <a class="list-group-item" href="#"><i class="fa fa-file-archive-o"></i> Download Files</a>
-        </div>
-      </div>
-      <div class="col-md-7"></div>
-      <div class="col-md-2">
-        {% thumbnail ua.personalinformation.photo "160x160" crop="center" as up %}
-          <a href="{{ up.url }}" class="thumbnail">
-            <img src="{{ up.url }}" width="{{ up.width }}" height="{{ up.height }}" title="{{ ua.user.get_full_name }}">
-          </a>
-        {% endthumbnail %}
+  <div class="top row no-gutter">
+    <div class="col-md-3">
+      <div class="list-group">
+        <a class="list-group-item" href="javascript:window.print()" title="Print"><i class="fa fa-print"></i> Print</a>
+        <a class="list-group-item" href="#"><i class="fa fa-file-excel-o"></i> Export to Excel</a>
+        <a class="list-group-item" href="#"><i class="fa fa-file-archive-o"></i> Download Files</a>
       </div>
     </div>
-
-    <div class="row">
-      <div class="page-header">
-        <h5>{{ ua.application.applicationform_set.all.0.form.name }}</h5>
-      </div>
+    <div class="col-md-7"></div>
+    <div class="col-md-2">
+      {% thumbnail ua.personalinformation.photo "160x160" crop="center" as up %}
+        <a href="{{ up.url }}" class="thumbnail">
+          <img src="{{ up.url }}" width="{{ up.width }}" height="{{ up.height }}" title="{{ ua.user.get_full_name }}">
+        </a>
+      {% endthumbnail %}
     </div>
-
-    <div class="row no-gutter">
-      <div class="col-md-2 data-cell">
-        <p class="label">First Name</p>
-        <p class="data">{{ ua.user.first_name }}</p>
-      </div>
-      <div class="col-md-2 data-cell">
-        <p class="label">Middle Name</span>
-        <p class="data">{{ ua.personalinformation.middle_name }}</p>
-      </div>
-      <div class="col-md-2 data-cell">
-        <p class="label">Last Name</span>
-        <p class="data">{{ ua.user.last_name }}</span>
-      </div>
-      <div class="col-md-2 data-cell">
-        <p class="label">Date Of Birth</span>
-        <p class="data">{{ ua.personalinformation.date_of_birth }}</span>
-      </div>
-      <div class="col-md-2 data-cell">
-        <p class="label">Primary Phone Number</span>
-        <p class="data">{{ ua.personalinformation.primary_phone_number }}</span>
-      </div>
-      <div class="col-md-2 data-cell">
-        <p class="label">Alternative Phone Number</span>
-        <p class="data">{{ ua.personalinformation.alternative_phone_number }}</span>
-      </div>
-    </div>
-
-    <div class="row no-gutter">
-      <div class="col-md-2 data-cell">
-        <p class="label">Gender</span>
-        <p class="data">
-        {% ifequal ua.personalinformation.gender 'M' %}
-          Male
-        {% else %}
-          Female
-        {% endifequal %}
-        </p>
-      </div>
-      <div class="col-md-2 data-cell">
-        <p class="label">Applied Before?</span>
-        <p class="data">
-        {% ifequal ua.personalinformation.applied_before True %}
-          Yes
-        {% else %}
-          No
-        {% endifequal %}
-        </p>
-      </div>
-
-      <div class="col-md-2 data-cell">
-        {% ifequal ua.personalinformation.applied_before True %}
-          <p class="label">Year Applied</span>
-          <p class="data">{{ ua.personalinformation.year_applied }}</p>
-        {% endifequal %}
-      </div>
-    </div>
-    <div class="row">
-      <div class="page-header">
-        <h5>{{ ua.application.applicationform_set.all.1.form.name }}</h5>
-      </div>
-    </div>
-
-    <div class="row no-gutter">
-      <div class="col-md-2 data-cell">
-        <p class="label">Country Of Citizenship</span>
-        <p class="data">{{ ua.citizenship.country_of_citizenship }}</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="page-header">
-        <h5>{{ ua.application.applicationform_set.all.2.form.name }}</h5>
-      </div>
-    </div>
-
-    <div class="row no-gutter">
-      {% ifequal ua.passportcheck.have_passport True %}
-        {% for pd in ua.passportcheck.passportdetails_set.all %}
-          <div class="col-md-2 {% if forloop.first %}left{% endif %} data-cell">
-            <p class="label">Passport Number</span>
-            <p class="data">
-              {{ pd.passport_number }}
-            </p>
-          </div>
-          <div class="col-md-2 data-cell">
-            <p class="label">Expiry Date</span>
-            <p class="data">
-              {{ pd.expiry_date }}
-            </p>
-          </div>
-        {% endfor %}
-      {% else %}
-        <div class="col-md-2 data-cell">
-          <p class="data">No passport</p>
-        </div>
-      {% endifequal %}
-    </div>
-
-    <div class="row">
-      <div class="page-header">
-        <h5>{{ ua.application.applicationform_set.all.3.form.name }}</h5>
-      </div>
-    </div>
-
-    <div class="row no-gutter">
-      <div class="col-md-4 data-cell">
-        <p class="label">Address</p>
-        <p class="data">{{ ua.residence.address }}</p>
-      </div>
-      <div class="col-md-2 data-cell">
-        <p class="label">Town</p>
-        <p class="data">{{ ua.residence.town }}</p>
-      </div>
-      <div class="col-md-2 data-cell">
-        <p class="label">State</p>
-        <p class="data">{{ ua.residence.state }}</p>
-      </div>
-      <div class="col-md-2 data-cell">
-        <p class="label">Country</p>
-        <p class="data">{{ ua.residence.country }}</p>
-      </div>
-      <div class="col-md-2 data-cell">
-      {% with ua.residence.living_with as lw %}
-        {% ifequal lw 'SELF' %}
-          <p class="label">Living</p>
-          <p class="data">By Myself</p>
-        {% endifequal %}
-        {% ifequal lw 'PG' %}
-          <p class="label">Living With</p>
-          <p class="row">Parent(s)/Guardian(s)</p>
-        {% endifequal %}
-        {% ifequal lw 'ORPH' %}
-          <p class="label">Living In An</p>
-          <p class="data">Orphanage</p>
-        {% endifequal %}
-      {% endwith %}
-      </div>
-    </div>
-
-    <div class="row no-gutter">
-      {% ifequal ua.residence.living_with 'ORPH' %}
-        {% with ua.residence.orphanage as orph %}
-          <div class="col-md-4 data-cell">
-            <p class="label">Name Of Orphanage</p>
-            <p class="data">{{ orph.name }}</p>
-          </div>
-          <div class="col-md-4 data-cell">
-            <p class="label">Contact Person &amp; Title</p>
-            <p class="data">{{ orph.contact_person_name }}, {{ orph.contact_person_title }}</p>
-          </div>
-          <div class="col-md-2 data-cell">
-            <p class="label">Phone Number</p>
-            <p class="data">{{ orph.contact_person_phone_number }}</p>
-          </div>
-          <div class="col-md-2 data-cell">
-            <p class="label">Email Address</p>
-            <p class="data">{{ orph.email }}</p>
-          </div>
-        {% endwith %}
-      {% endifequal %}
-    </div>
-
-    <div class="row">
-      <div class="page-header">
-        <h5>{{ ua.application.applicationform_set.all.4.form.name }}</h5>
-      </div>
-    </div>
-
-    <div class="row no-gutter">
-      <div class="col-md-4 data-cell">
-        <p class="label">Desired Major</p>
-        <p class="data">{{ ua.desiredmajor.desired_major.name }}</p>
-      </div>
-    </div>
-
-    {% endwith %}
   </div>
+
+  <div class="row">
+    <div class="page-header">
+      <h5>{{ ua.application.applicationform_set.all.0.form.name }}</h5>
+    </div>
+  </div>
+
+  <div class="row no-gutter">
+    <div class="col-md-2 data-cell">
+      <p class="label">First Name</p>
+      <p class="data">{{ ua.user.first_name }}</p>
+    </div>
+    <div class="col-md-2 data-cell">
+      <p class="label">Middle Name</span>
+      <p class="data">{{ ua.personalinformation.middle_name }}</p>
+    </div>
+    <div class="col-md-2 data-cell">
+      <p class="label">Last Name</span>
+      <p class="data">{{ ua.user.last_name }}</span>
+    </div>
+    <div class="col-md-2 data-cell">
+      <p class="label">Date Of Birth</span>
+      <p class="data">{{ ua.personalinformation.date_of_birth }}</span>
+    </div>
+    <div class="col-md-2 data-cell">
+      <p class="label">Primary Phone Number</span>
+      <p class="data">{{ ua.personalinformation.primary_phone_number }}</span>
+    </div>
+    <div class="col-md-2 data-cell">
+      <p class="label">Alternative Phone Number</span>
+      <p class="data">{{ ua.personalinformation.alternative_phone_number }}</span>
+    </div>
+  </div>
+
+  <div class="row no-gutter">
+    <div class="col-md-2 data-cell">
+      <p class="label">Gender</span>
+      <p class="data">
+      {% ifequal ua.personalinformation.gender 'M' %}
+        Male
+      {% else %}
+        Female
+      {% endifequal %}
+      </p>
+    </div>
+    <div class="col-md-2 data-cell">
+      <p class="label">Applied Before?</span>
+      <p class="data">
+      {% ifequal ua.personalinformation.applied_before True %}
+        Yes
+      {% else %}
+        No
+      {% endifequal %}
+      </p>
+    </div>
+
+    <div class="col-md-2 data-cell">
+      {% ifequal ua.personalinformation.applied_before True %}
+        <p class="label">Year Applied</span>
+        <p class="data">{{ ua.personalinformation.year_applied }}</p>
+      {% endifequal %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="page-header">
+      <h5>{{ ua.application.applicationform_set.all.1.form.name }}</h5>
+    </div>
+  </div>
+
+  <div class="row no-gutter">
+    <div class="col-md-2 data-cell">
+      <p class="label">Country Of Citizenship</span>
+      <p class="data">{{ ua.citizenship.country_of_citizenship }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="page-header">
+      <h5>{{ ua.application.applicationform_set.all.2.form.name }}</h5>
+    </div>
+  </div>
+
+  <div class="row no-gutter">
+    {% ifequal ua.passportcheck.have_passport True %}
+      {% for pd in ua.passportcheck.passportdetails_set.all %}
+        <div class="col-md-2 {% if forloop.first %}left{% endif %} data-cell">
+          <p class="label">Passport Number</span>
+          <p class="data">
+            {{ pd.passport_number }}
+          </p>
+        </div>
+        <div class="col-md-2 data-cell">
+          <p class="label">Expiry Date</span>
+          <p class="data">
+            {{ pd.expiry_date }}
+          </p>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="col-md-2 data-cell">
+        <p class="data">No passport</p>
+      </div>
+    {% endifequal %}
+  </div>
+
+  <div class="row">
+    <div class="page-header">
+      <h5>{{ ua.application.applicationform_set.all.3.form.name }}</h5>
+    </div>
+  </div>
+
+  <div class="row no-gutter">
+    <div class="col-md-4 data-cell">
+      <p class="label">Address</p>
+      <p class="data">{{ ua.residence.address }}</p>
+    </div>
+    <div class="col-md-2 data-cell">
+      <p class="label">Town</p>
+      <p class="data">{{ ua.residence.town }}</p>
+    </div>
+    <div class="col-md-2 data-cell">
+      <p class="label">State</p>
+      <p class="data">{{ ua.residence.state }}</p>
+    </div>
+    <div class="col-md-2 data-cell">
+      <p class="label">Country</p>
+      <p class="data">{{ ua.residence.country }}</p>
+    </div>
+    <div class="col-md-2 data-cell">
+    {% with ua.residence.living_with as lw %}
+      {% ifequal lw 'SELF' %}
+        <p class="label">Living</p>
+        <p class="data">By Myself</p>
+      {% endifequal %}
+      {% ifequal lw 'PG' %}
+        <p class="label">Living With</p>
+        <p class="row">Parent(s)/Guardian(s)</p>
+      {% endifequal %}
+      {% ifequal lw 'ORPH' %}
+        <p class="label">Living In An</p>
+        <p class="data">Orphanage</p>
+      {% endifequal %}
+    {% endwith %}
+    </div>
+  </div>
+
+  <div class="row no-gutter">
+    {% ifequal ua.residence.living_with 'ORPH' %}
+      {% with ua.residence.orphanage as orph %}
+        <div class="col-md-4 data-cell">
+          <p class="label">Name Of Orphanage</p>
+          <p class="data">{{ orph.name }}</p>
+        </div>
+        <div class="col-md-4 data-cell">
+          <p class="label">Contact Person &amp; Title</p>
+          <p class="data">{{ orph.contact_person_name }}, {{ orph.contact_person_title }}</p>
+        </div>
+        <div class="col-md-2 data-cell">
+          <p class="label">Phone Number</p>
+          <p class="data">{{ orph.contact_person_phone_number }}</p>
+        </div>
+        <div class="col-md-2 data-cell">
+          <p class="label">Email Address</p>
+          <p class="data">{{ orph.email }}</p>
+        </div>
+      {% endwith %}
+    {% endifequal %}
+  </div>
+
+  <div class="row">
+    <div class="page-header">
+      <h5>{{ ua.application.applicationform_set.all.4.form.name }}</h5>
+    </div>
+  </div>
+
+  <div class="row no-gutter">
+    <div class="col-md-4 data-cell">
+      <p class="label">Desired Major</p>
+      <p class="data">{{ ua.desiredmajor.desired_major.name }}</p>
+    </div>
+  </div>
+
+  {% endwith %}
 </div>
 {% endblock %}
