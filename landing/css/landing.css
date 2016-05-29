@@ -7,7 +7,8 @@ html, body {
   height: 100%;
 }
 .container-fluid {
-  height:100%;
+  height: auto;
+  min-height:100%;
 }
 
 /* Navbar */
@@ -18,20 +19,21 @@ html, body {
   border: none;
   min-height: 65px;
 }
+.navbar-toggle {
+  margin-top: 15px;
+}
 
 /* Landing Page */
 .intro {
   height: 100%;
   min-height: 100%;
   padding: 10px;
-  color: #efefef;
   background: url('../img/bg.jpg') no-repeat center center;
 }
 .intro p {
   text-align: right;
   margin-top: 30px;
   margin-right: 30px;
-  color: #333;
 }
 .intro p span {
   background: #fff;
