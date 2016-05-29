@@ -39,7 +39,7 @@
     {% block extra_js %}{% endblock %}
 
   </head>
-  <body>
+  <body {% block body_class %}{% endblock %}>
     <nav class="navbar navbar-default header">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -85,8 +85,10 @@
       </div>
     </nav> 
 
-    {% block app_body %}
-    {% endblock %}
+    <div class="container-fluid">
+      {% block app_body %}
+      {% endblock %}
+    </div>
 
     <footer class="footer">
       <p>&copy; 2016 Apply Central.</p>
