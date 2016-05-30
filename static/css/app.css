@@ -29,9 +29,9 @@ h1 {
 }
 
 /* Images */
-img {
+/* img {
   width: 100%;
-}
+} */
 
 /* App Body */
 .mid {
@@ -44,7 +44,6 @@ img {
 /* Sections */
 .sections {
   padding: 0;
-  background: #b8d9f1;
 }
 .sections .nav {
   padding: 0;
