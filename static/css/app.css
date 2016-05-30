@@ -65,20 +65,13 @@ img {
 }
 
 /* Progress */
-.progress {
-  background: #fafafa;
-  border-radius: 0;
-  margin-bottom: 0;
+.feedback {
   text-align: center;
 }
-.sections,
-.progress {
-  min-height: 900px;
-}
-.progress a.btn {
+.feedback a.btn {
   margin-top: 1em;
 }
-.progress .bg-success {
+.feedback .bg-success {
   line-height: 3em;
 }
 #progress {

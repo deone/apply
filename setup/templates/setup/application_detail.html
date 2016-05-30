@@ -94,28 +94,18 @@
       <div id="page-content-wrapper">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-8 main">
               <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+              {% block application_form %}
+              {% endblock %}
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4 feedback">
               {% include '_progress.html' %}
             </div>
           </div>
         </div>
       </div>
-      <!-- /#page-content-wrapper -->
     </div>
-    <!-- <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-2 sections">
-        </div>
-        <div class="col-sm-7 main">
-        </div>
-        <div class="col-sm-3 progress">
-          {% include '_progress.html' %}
-        </div>
-      </div>
-    </div> -->
   </body>
   <script>
     $("#menu-toggle").click(function(e) {
