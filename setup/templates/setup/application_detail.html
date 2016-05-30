@@ -1,82 +1,126 @@
-{% extends 'base.html' %}
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Apply Central {% block page_title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{% load staticfiles %}
+    {% load staticfiles %}
 
-{% block page_title %}&ndash; {{ user_application.application.get_name }}{% endblock %}
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicons/apple-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'favicons/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'favicons/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'favicons/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'favicons/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicons/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'favicons/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicons/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'favicons/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'favicons/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicons/manifest.json' %}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{% static 'favicons/ms-icon-144x144.png' %}">
+    <meta name="theme-color" content="#ffffff">
 
-{% block extra_css %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-theme.css' %}">
-{% endblock %}
+    <!-- CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/landing.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-theme.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/simple-sidebar.css' %}">
 
-{% block extra_js %}
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script src="//cdn.rawgit.com/kimmobrunfeldt/progressbar.js/1.0.1/dist/progressbar.js"></script>
-<script>
+    <!-- JS -->
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="//cdn.rawgit.com/kimmobrunfeldt/progressbar.js/1.0.1/dist/progressbar.js"></script>
+    <script>
 
-  $(function() {
+      $(function() {
 
-    $('.date').datepicker({
-      showOn: "both",
-      buttonImage: "{% static 'img/calendar.png' %}",
-      changeMonth: true,
-      changeYear: true,
-      dateFormat: 'dd-mm-yy',
-      yearRange: '-80:+10'
+        $('.date').datepicker({
+          showOn: "both",
+          buttonImage: "{% static 'img/calendar.png' %}",
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: 'dd-mm-yy',
+          yearRange: '-80:+10'
+        });
+
+        var bar = new ProgressBar.Circle(progress, {
+          color: '#aaa',
+          // This has to be the same size as the maximum width to
+          // prevent clipping
+          strokeWidth: 4,
+          trailWidth: 1,
+          easing: 'easeInOut',
+          duration: 1400,
+          text: {
+            autoStyleContainer: false
+          },
+          from: { color: '#b8d9f1', width: 1 },
+          to: { color: '#5cb85c', width: 4 },
+          // Set default step function for all animate calls
+          step: function(state, circle) {
+            circle.path.setAttribute('stroke', state.color);
+            circle.path.setAttribute('stroke-width', state.width);
+
+            var value = Math.round(circle.value() * 100);
+            if (value === 0) {
+              circle.setText('0%');
+            } else {
+              circle.setText(value + '%');
+            }
+
+          }
+        });
+
+        bar.text.style.fontSize = '3.5em';
+
+        bar.animate({{ application_completion }});  // Number from 0.0 to 1.0
+
+      });
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="sidebar-wrapper" class="sections">
+        {% include 'setup/_sections.html' %}
+      </div>
+      <div id="page-content-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-8">
+              <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+            </div>
+            <div class="col-lg-4">
+              {% include '_progress.html' %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /#page-content-wrapper -->
+    </div>
+    <!-- <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-2 sections">
+        </div>
+        <div class="col-sm-7 main">
+        </div>
+        <div class="col-sm-3 progress">
+          {% include '_progress.html' %}
+        </div>
+      </div>
+    </div> -->
+  </body>
+  <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
     });
-
-    var bar = new ProgressBar.Circle(progress, {
-      color: '#aaa',
-      // This has to be the same size as the maximum width to
-      // prevent clipping
-      strokeWidth: 4,
-      trailWidth: 1,
-      easing: 'easeInOut',
-      duration: 1400,
-      text: {
-        autoStyleContainer: false
-      },
-      from: { color: '#b8d9f1', width: 1 },
-      to: { color: '#5cb85c', width: 4 },
-      // Set default step function for all animate calls
-      step: function(state, circle) {
-        circle.path.setAttribute('stroke', state.color);
-        circle.path.setAttribute('stroke-width', state.width);
-
-        var value = Math.round(circle.value() * 100);
-        if (value === 0) {
-          circle.setText('0%');
-        } else {
-          circle.setText(value + '%');
-        }
-
-      }
-    });
-    bar.text.style.fontSize = '3.5em';
-
-    bar.animate({{ application_completion }});  // Number from 0.0 to 1.0
-
-  });
-</script>
-{% block page_js %}{% endblock %}
-{% endblock %}
-
-{% block org_header %}
-<ul class="nav navbar-nav">
-  <li><a href="{{ user_application.application.get_absolute_url }}">{{ user_application.application.get_name }} - Sample</a></li>
-</ul>
-{% endblock %}
-
-{% block app_body %}
-<div class="row">
-  <div class="col-sm-2 sections">
-    {% include 'setup/_sections.html' %}
-  </div>
-  <div class="col-sm-7 main">
-    {% block application_form %}
-    {% endblock %}
-  </div>
-  <div class="col-sm-3 progress">
-    {% include '_progress.html' %}
-  </div>
-</div>
-{% endblock %}
+  </script>
+</html>
