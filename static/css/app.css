@@ -12,7 +12,7 @@ h1 {
 /* Menu Toggle */
 #page-content-wrapper .navbar-toggle {
   border-color: #ddd;
-  float: left;
+  float: none;
 }
 #page-content-wrapper .navbar-toggle .icon-bar {
   border: solid 1px #eee;

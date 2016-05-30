@@ -33,3 +33,4 @@ Urgent
 ======
 - Ensure staff can see only completed applications. This can be a setting.
 - Make images 100% width.
+- Move sidebar styles into stylesheet.
