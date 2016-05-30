@@ -100,7 +100,7 @@ def application_index(request, orgname, slug):
             return redirect('success', orgname=orgname, slug=slug)
     ######################################################################
 
-    template_name = '%s%s%s' % (registry_key, '/', 'index.html')
+    template_name = '%s%s%s' % (registry_key, '/', 'index2.html')
 
     return render(request, template_name, context)
 
