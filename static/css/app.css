@@ -9,6 +9,15 @@ h1 {
   margin-top: 50px;
 }
 
+/* Menu Toggle */
+#page-content-wrapper .navbar-toggle {
+  border-color: #ddd;
+  float: left;
+}
+#page-content-wrapper .navbar-toggle .icon-bar {
+  border: solid 1px #eee;
+}
+
 /* Navbar Links */
 .navbar-nav > li > a {
   padding-top: 22px;

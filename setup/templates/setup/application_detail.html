@@ -116,7 +116,12 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-8 main">
-              <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+              <button id="menu-toggle" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
               {% block application_form %}
               {% endblock %}
             </div>

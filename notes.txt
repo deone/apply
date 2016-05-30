@@ -31,6 +31,5 @@ Product
 
 Urgent
 ======
-- Page height should be the height of the longest column instead of setting a minimum height. And other columns should comply, background and all.
-- Create organization homepage.
 - Ensure staff can see only completed applications. This can be a setting.
+- Make images 100% width.
