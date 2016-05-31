@@ -201,5 +201,5 @@ def success(request, orgname, slug):
         user_app.submit_date = timezone.now()
         user_app.save()
 
-        template = '%s%s%s' % (registry_key, '/', 'success.html')
-        return render(request, template, context)
+    template = '%s%s%s' % (registry_key, '/', 'success.html')
+    return render(request, template, context)
