@@ -89,17 +89,19 @@
   <body> 
     <div id="wrapper">
       <div id="sidebar-wrapper">
-        <div style="background: #312c32; padding: 15px;">
-          <a href="{% url 'home' %}" style="text-decoration: none;">
-            <h1 style="margin-top: 5px; margin-bottom: 15px; color: #fff;">
-              <span style="display; inline-block;"><img src="{% static 'img/logo.png' %}"/></span>
-              <span style="display; inline-block; margin-left: .3em;">Apply Central</span>
+        <div class="side-brand">
+          <a href="{% url 'home' %}">
+            <h1>
+              <span><img src="{% static 'img/logo.png' %}"/></span>
+              <span class="brand-text">Apply Central</span>
             </h1>
           </a>
-          <p style="padding-left: .5em; background: #777; padding-top: .4em; padding-bottom: .4em; border-radius: 5px; margin-bottom: 15px;">
-            <a style="color: #fff;" href="{{ user_application.application.get_absolute_url }}">{{ user_application.application.get_name }} - Sample</a>
-          </p>
-          <ul style="padding: 0; margin: 0; color: #fff; list-style: none;">
+          <a class="form-header" href="{{ user_application.application.get_absolute_url }}">
+            <p>
+              {{ user_application.application.get_name }} - Sample
+            </p>
+          </a>
+          <ul class="user-details">
           {% if user.is_authenticated %}
             <li>
               <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ user.get_full_name }}
