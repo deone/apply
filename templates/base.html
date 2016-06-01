@@ -39,6 +39,7 @@
     {% block extra_js %}{% endblock %}
 
   </head>
+  {% block app %}
   <body {% block body_class %}{% endblock %}>
     <nav class="navbar navbar-default">
       <div class="container-fluid">
@@ -95,4 +96,5 @@
     </footer>
 
   </body>
+  {% endblock %}
 </html>
