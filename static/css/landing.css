@@ -10,6 +10,9 @@ html, body {
   height: auto;
   min-height:100%;
 }
+.landing {
+  background: url('../img/bg.jpg') no-repeat center center;
+}
 
 /* Navbar */
 .navbar-default {
@@ -19,13 +22,13 @@ html, body {
   border: none;
   min-height: 65px;
 }
+.navbar-toggle {
+  margin-top: 15px;
+}
 
 /* Landing Page */
 .intro {
-  height: 100%;
-  min-height: 100%;
   padding: 10px;
-  background: url('../img/bg.jpg') no-repeat center center;
 }
 .intro p {
   text-align: right;

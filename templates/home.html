@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body_class %}class="landing"{% endblock %}
+
+{% block app_body %}
+<div class="intro row">
+  <p>
+    <span>
+      We created Apply Central to help organizations <br>collect data efficiently
+      and make filling <br>out application forms a beautiful <br>and engaging experience.
+      <br><br>We are passionate about eliminating <br>manual data entry and paper forms.<br><br>
+      <a href="{% url 'create_account' %}">Try out our sample application form<br><br></a>
+    </span>
+    <span class="contact">Got feedback?<br>dayo@applycentral.co <br>+233 54 275 1610</span>
+  </p>
+</div>
+{% endblock %}

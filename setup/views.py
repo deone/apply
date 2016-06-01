@@ -52,9 +52,12 @@ def applicant_home(request):
     else:
         return redirect('staffadmin:home', orgname=staff.organization.slug)
 
-    return render(request, 'setup/application_list.html', {
-      'applications': Application.objects.all(),
-      })
+    if request.user.is_authenticated():
+        return render(request, 'setup/application_list.html', {
+          'applications': Application.objects.all(),
+          })
+    else:
+        return render(request, 'home.html', {})
 
 class OrganizationDetail(DetailView):
     model = Organization
@@ -198,5 +201,5 @@ def success(request, orgname, slug):
         user_app.submit_date = timezone.now()
         user_app.save()
 
-        template = '%s%s%s' % (registry_key, '/', 'success.html')
-        return render(request, template, context)
+    template = '%s%s%s' % (registry_key, '/', 'success.html')
+    return render(request, template, context)

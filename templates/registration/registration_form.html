@@ -3,68 +3,66 @@
 {% block page_title %}&ndash; Create Account{% endblock %}
 
 {% block app_body %}
-<div class="container-fluid">
-  <div class="row">
-    <div class="mid width-50 app-body">
-      <form action="" method="post" class="form-horizontal account-form">
+<div class="row">
+  <div class="mid width-50 app-body">
+    <form action="" method="post" class="form-horizontal account-form">
 
-        <div class="page-header">
-          <h1>Create Account</h1>
+      <div class="page-header">
+        <h1>Create Account</h1>
+      </div>
+
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="form-group">
+        {{ form.first_name.errors }}
+        <label for="{{ form.first_name.id_for_label }}" class="col-sm-3 control-label">{{ form.first_name.label }}</label>
+        <div class="col-sm-9">
+          {{ form.first_name }}
         </div>
+      </div>
 
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-
-        <div class="form-group">
-          {{ form.first_name.errors }}
-          <label for="{{ form.first_name.id_for_label }}" class="col-sm-3 control-label">{{ form.first_name.label }}</label>
-          <div class="col-sm-9">
-            {{ form.first_name }}
-          </div>
+      <div class="form-group">
+        {{ form.last_name.errors }}
+        <label for="{{ form.last_name.id_for_label }}" class="col-sm-3 control-label">{{ form.last_name.label }}</label>
+        <div class="col-sm-9">
+          {{ form.last_name }}
         </div>
+      </div>
 
-        <div class="form-group">
-          {{ form.last_name.errors }}
-          <label for="{{ form.last_name.id_for_label }}" class="col-sm-3 control-label">{{ form.last_name.label }}</label>
-          <div class="col-sm-9">
-            {{ form.last_name }}
-          </div>
+      <div class="form-group">
+        {{ form.email.errors }}
+        <label for="{{ form.email.id_for_label }}" class="col-sm-3 control-label">{{ form.email.label }}</label>
+        <div class="col-sm-9">
+          {{ form.email }}
         </div>
+      </div>
 
-        <div class="form-group">
-          {{ form.email.errors }}
-          <label for="{{ form.email.id_for_label }}" class="col-sm-3 control-label">{{ form.email.label }}</label>
-          <div class="col-sm-9">
-            {{ form.email }}
-          </div>
+      <div class="form-group">
+        {{ form.password1.errors }}
+        <label for="{{ form.password1.id_for_label }}" class="col-sm-3 control-label">{{ form.password1.label }}</label>
+        <div class="col-sm-9">
+          {{ form.password1 }}
+          <span class="help-text">{{ form.password1.help_text }}</span>
         </div>
+      </div>
 
-        <div class="form-group">
-          {{ form.password1.errors }}
-          <label for="{{ form.password1.id_for_label }}" class="col-sm-3 control-label">{{ form.password1.label }}</label>
-          <div class="col-sm-9">
-            {{ form.password1 }}
-            <span class="help-text">{{ form.password1.help_text }}</span>
-          </div>
+      <div class="form-group">
+        {{ form.password2.errors }}
+        <label for="{{ form.password2.id_for_label }}" class="col-sm-3 control-label">{{ form.password2.label }}</label>
+        <div class="col-sm-9">
+          {{ form.password2 }}
+          <span class="help-text">{{ form.password2.help_text }}</span>
         </div>
+      </div>
 
-        <div class="form-group">
-          {{ form.password2.errors }}
-          <label for="{{ form.password2.id_for_label }}" class="col-sm-3 control-label">{{ form.password2.label }}</label>
-          <div class="col-sm-9">
-            {{ form.password2 }}
-            <span class="help-text">{{ form.password2.help_text }}</span>
-          </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-7">
+          <button type="submit" class="btn btn-primary">Create Account</button>
+          <a class="btn btn-default" href="{% url 'login' %}">Log In</a>
         </div>
-
-        <div class="form-group">
-          <div class="col-sm-offset-3 col-sm-7">
-            <button type="submit" class="btn btn-primary">Create Account</button>
-            <a class="btn btn-default" href="{% url 'login' %}">Log In</a>
-          </div>
-        </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 </div>
 {% endblock %}

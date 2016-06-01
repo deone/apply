@@ -6,6 +6,7 @@
 
 {% block extra_css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui-theme.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/simple-sidebar.css' %}">
 {% endblock %}
 
 {% block extra_js %}
@@ -51,6 +52,7 @@
 
       }
     });
+
     bar.text.style.fontSize = '3.5em';
 
     bar.animate({{ application_completion }});  // Number from 0.0 to 1.0
@@ -60,25 +62,60 @@
 {% block page_js %}{% endblock %}
 {% endblock %}
 
-{% block org_header %}
-<ul class="nav navbar-nav">
-  <li><a href="{{ user_application.application.get_absolute_url }}">{{ user_application.application.get_name }} - Sample</a></li>
-</ul>
-{% endblock %}
-
-{% block app_body %}
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-2 sections">
-      {% include 'setup/_sections.html' %}
+{% block app %}
+<body>
+  <div id="wrapper">
+    <div id="sidebar-wrapper">
+      <div class="side-brand">
+        <a href="{% url 'home' %}">
+          <h1>
+            <span><img src="{% static 'img/logo.png' %}"/></span>
+            <span class="brand-text">Apply Central</span>
+          </h1>
+        </a>
+        <a class="form-header" href="{{ user_application.application.get_absolute_url }}">
+          <p>
+            {{ user_application.application.get_name }} - Sample
+          </p>
+        </a>
+        <ul class="user-details">
+        {% if user.is_authenticated %}
+          <li>
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ user.get_full_name }}
+            <a href="{% url 'logout' %}" class="pull-right btn btn-primary btn-xs" role="button">Logout</a>
+          </li>
+        {% endif %}
+        </ul>
+      </div>
+      <div class="sections">
+        {% include 'setup/_sections.html' %}
+      </div>
     </div>
-    <div class="col-sm-7 main">
-      {% block application_form %}
-      {% endblock %}
-    </div>
-    <div class="col-sm-3 progress">
-      {% include '_progress.html' %}
+    <div id="page-content-wrapper"> 
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-9 main">
+            <button id="menu-toggle" class="navbar-toggle">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            {% block application_form %}
+            {% endblock %}
+          </div>
+          <div class="col-lg-3 feedback">
+            {% include '_progress.html' %}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</body>
+<script>
+  $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+  });
+</script>
 {% endblock %}
