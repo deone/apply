@@ -118,7 +118,8 @@ h1 {
 .feedback a.btn {
   margin-top: 1em;
 }
-.feedback .bg-success {
+.feedback .bg-success,
+.feedback .bg-primary {
   line-height: 3em;
 }
 #progress {
@@ -131,6 +132,9 @@ h1 {
 }
 
 /* Widths */
+.width-100 {
+  width: 100%;
+}
 .width-90 {
   width: 90%;
 }

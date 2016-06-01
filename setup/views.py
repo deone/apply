@@ -170,7 +170,7 @@ def application_form(request, orgname, slug, form_slug):
 def get_feedback(completion):
     c = round(completion, 1)
     if c == 0.0:
-        return "Let's get this started!"
+        return "Start"
     if c == 0.1:
         return 'Good job!'
     if c == 0.2:
@@ -180,7 +180,7 @@ def get_feedback(completion):
     if c == 0.4:
         return 'Great job!'
     if c == 0.5:
-        return "You're halfway!"
+        return "Hurray! You're halfway"
     if c == 0.6:
         return "Keep it up!"
     if c == 0.7:
@@ -190,7 +190,7 @@ def get_feedback(completion):
     if c == 0.9:
         return 'Almost done...'
     if c == 1.0:
-        return 'You made it!'
+        return 'Review form before submitting'
 
 @login_required
 def success(request, orgname, slug):
@@ -202,4 +202,9 @@ def success(request, orgname, slug):
         user_app.save()
 
     template = '%s%s%s' % (registry_key, '/', 'success.html')
+
+    context.update({
+      'feedback': get_feedback(context['application_completion']),
+    })
+
     return render(request, template, context)

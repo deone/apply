@@ -9,28 +9,22 @@
 <div id="progress">
 </div>
 
-{% if application_completion == 1 %}
-  <p class="bg-success width-90 mid">{{ feedback }}</p>
+{% if not user_application.is_complete %}
+  <p class="{% if application_completion == 1 %}bg-success{% else %}bg-primary{% endif %} mid">{{ feedback }}</p>
+{% endif %}
 
+{% if application_completion == 1 %}
   {% if not user_application.is_complete %}
     {% if user_application.application.has_fee %}
-      <a href="{% url 'pay:index' user_application.pk %}" class="btn btn-success btn-lg width-90" role="button">
+      <a href="{% url 'pay:index' user_application.pk %}" class="btn btn-success btn-lg width-100" role="button">
         Pay Fee
       </a>
     {% else %}
       {% with user_application.application.organization.slug as org_slug %}
-        <a href="{% url 'success' org_slug user_application.application.slug %}" class="btn btn-success btn-lg width-90" role="button">
+        <a href="{% url 'success' org_slug user_application.application.slug %}" class="btn btn-success btn-lg width-100" role="button">
           Submit
         </a>
       {% endwith %}
     {% endif %}
   {% endif %}
-{% else %}
-  <a class="btn btn-primary btn-lg width-90 disabled" role="button">
-    {% if feedback %}
-      {{ feedback }}
-    {% else %}
-      Let's get this started!
-    {% endif %}
-  </a>
 {% endif %}

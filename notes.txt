@@ -33,16 +33,15 @@ Urgent
 ======
 - Ensure staff can see only completed applications. This can be a setting.
 - Make images 100% width.
-- Add some sort of 'Review Form' feature.
 - Add longer_username app.
 - Investigate how we were able to get an application completion above 100%.
 - Investigate why calendar icon goes to next line on Firefox.
-- Why does the textual feedback not show after redirecting from payment gateway but shows up when user clicks on the sections.
 
 
 Business
 ========
 - Proposal
-- Business Cards
 - Contract
 - Slide Deck
+- Business Cards
+- Advertise online, starting with Facebook. Get prospects to contact us instead of trying out demo.
