@@ -75,9 +75,10 @@ h1 {
 }
 
 /* Images */
-/* img {
+.org-home img,
+.photo {
   width: 100%;
-} */
+}
 
 /* App Body */
 .mid {
