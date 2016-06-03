@@ -32,7 +32,6 @@ Product
 Urgent
 ======
 - Ensure staff can see only completed applications. This can be a setting.
-- Add longer_username app.
 - Investigate how we were able to get an application completion above 100%.
 - Investigate why calendar icon goes to next line on Firefox.
 
