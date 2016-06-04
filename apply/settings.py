@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'ashesiundergraduate',
     'sorl.thumbnail',
     'staffadmin',
+    'longer_username',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -151,6 +152,8 @@ MEDIA_URL = '/media/'
 SITE_ID = 1
 
 THUMBNAIL_DEBUG = True
+
+USERNAME_LENGTH = 100
 
 # Registration
 ACCOUNT_ACTIVATION_DAYS = 7
