@@ -40,7 +40,7 @@
 
     <div class="form-group">
       <div class="col-md-9"></div>
-      <div class="col-md-3 photo">
+      <div class="col-md-3">
         {% if user_application.personalinformation.photo %}
           {% thumbnail user_application.personalinformation.photo "150x160" crop="center" as up %}
             <a href="{{ up.url }}" class="thumbnail">
