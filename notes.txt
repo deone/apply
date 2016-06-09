@@ -1,12 +1,3 @@
-Business
-========
-- Sell the original idea.
-- Integrate Edem's idea by listing all forms that people are already processing through agents.
-
-- We can get one of Challenges Worldwide volunteers to help with sales.
-- For applications with fees, we will take a percentage of fee. For those without fees, we can make money through advertising.
-- For a start, encourage organizations with application fees to incentivize applicants by reducing the fee on Apply Central.
-
 Product
 =======
 - Make sure applicants are unable to fill an application that is not open. Check the is_open flag in both templates and views.
@@ -28,23 +19,139 @@ Product
 - Make exhaustive list of all possible use cases of Apply Central, much the same way Victor thought about it.
 - When you create sub-domains like ashesi.applycentral.net, also create www.ashesi.applycentral.net because people might type in 'www.'.
 
-
 Urgent
 ======
 - Ensure staff can see only completed applications. This can be a setting.
 - Investigate how we were able to get an application completion above 100%.
-- Investigate why calendar icon goes to next line on Firefox.
-
+- Use Growth Hackers font and background color.
 - Implement application deadline functionality.
+- Make progress area look like a widget instead of a sidebar. We can also ensure that it is always in view even when a user scrolls down that page in the case of a long page. Background should flow throughout the main area and progress should sit on the background.
 
 
-Business
-========
-- Business Cards
-- Contract
-- Slide Deck
+
 
 Publicity Ideas
 ===============
 - Radio
 - Advertise online, starting with Facebook. Get prospects to contact us instead of trying out demo.
+
+Strategy
+========
+- Talk to organizations. Get their buy-in. Sign them up.
+- Do not talk to organizations. Just list their forms and publicize.
+- List forms that do not require organization buy-in. e.g. Registrar-General. Be ready to do all the logistics behind this to please applicants.
+
+Business
+========
+- Sell the original idea.
+- Integrate Edem's idea by listing all forms that people are already processing through agents.
+- We can get one of Challenges Worldwide volunteers to help with sales.
+- For applications with fees, we will take a percentage of fee. For those without fees, we can make money through advertising.
+- For a start, encourage organizations with application fees to incentivize applicants by reducing the fee on Apply Central.
+- Start a blog.
+- Create social media accounts.
+
+Sales Tips
+==========
+- Sell the innovation, not the product.
+- Create a market.
+- Sell organizational transformation.
+- Sell the possibility of building a successful business.
+- Sell automation, digitization and the benefits of electronic data.
+- We need to make a list of the intangible things our product will bring into our customers’ lives. e.g. relief from stress, better organizations, increased productivity, faster decision making.
+- Start totally free for a number of applications in the beginning. 'Free' means we cover their payment charges for that quantity of applications. 
+- Don't forget to let prospect know that you can solve all their problems with technology. Always ask about other pain points.
+
+Proposal Changes
+================
+- Replace pricing information in proposal with starting free. And remove contract signing.
+- Should we just mention one fee in the proposal instead of giving payment company charges info?
+
+Helpful Sales Articles
+======================
+http://blog.close.io/objection-management-2-common-in-saas-sales
+http://blog.close.io/engineer-sales-lessons
+https://blog.kissmetrics.com/how-saas-marketing-is-different/
+https://blog.kissmetrics.com/only-one-saas-strategy/
+https://blog.kissmetrics.com/9-saas-companies/
+http://www.inc.com/mick-hollison/why-b2b-saas-sales-is-way-more-b2c-than-you-think.html
+https://www.helpscout.net/blog/growth-hacking/
+https://www.quicksprout.com/the-definitive-guide-to-growth-hacking/
+https://blog.kissmetrics.com/dropbox-hacked-growth/
+https://blog.kissmetrics.com/hoffmans-advice-for-entrepreneurs/
+https://blog.kissmetrics.com/4-killer-marketing-mistakes/
+https://blog.kissmetrics.com/saas-is-not-a-product/
+http://www.forbes.com/sites/neilpatel/2014/11/04/8-powerful-tips-that-will-improve-your-saas-conversions/#5f0b0a96626f
+https://blog.kissmetrics.com/scalable-sales-models/
+
+Not Read
+========
+https://www.quicksprout.com/the-definitive-guide-to-growth-hacking/
+https://blog.kissmetrics.com/how-to-calculate-lifetime-value/
+http://neilpatel.com/2014/09/30/7-proven-strategies-to-increase-your-blogs-traffic-by-206/ - Send this to Dziffa.
+https://hbr.org/2010/07/stop-trying-to-delight-your-customers
+http://www.forentrepreneurs.com/saas-sales-compensation-plan/
+
+Take a look
+===========
+https://www.talkable.com/
+
+Traction channels for Ghana
+===========================
+- Physical visits
+- Radio publicity
+- Social media ads
+- Content marketing - blogs, videos.
+- Can we organize events to promote Apply Central? Build mailing list with this.
+- Event suggestions
+  * tech innovation in various spheres of life.
+  * the state of education and the role of technology in improving education delivery.
+  * a weekly or fortnightly event dedicated to exploring how our lives are being improved with technology.
+- Can we build a sales force with the event attendees?
+- Ask for testimonials.
+
+Think about this
+================
+Plan A - Talk to organizations and sign them up.
+Plan B - Develop a useful service to develop traction from consumer side while Plan A is being implemented.
+
+Site tips
+=========
+- Add 'See a demo' functionality to home page.
+- Home page video detailing the problem and the solution.
+- Write a pdf about digital data and its benefits and use this to collect emails and build a mailing list.
+- Add 'How It Works', 'Benefits' and 'Comparison' pages to site. 
+
+Documents
+=========
+- Business Cards
+- Contract
+- Presentation Slides
+- Pitch Slides
+
+Weekly Schedule
+===============
+Monday - Read, read and read about sales. Build list and contact prospects.
+Tuesday - Seek investment. Apply for jobs. Build list and contact prospects.
+Wednesday - Work on Apply Central code. Build list and contact prospects.
+Thursday - Do non-Apply Central work. Build list and contact prospects.
+Friday - Visit prospects in person. Do presentations and demos.
+Saturday - Read, read and read about sales. Build list and contact prospects.
+
+Pitch Deck Tips
+===============
+- Throw in a quote in the beginning
+  It has become appallingly obvious that our technology has exceeded our humanity.
+  – Albert Einstein
+
+  There can be economy only where there is efficiency.
+  - Benjamin Disraeli
+
+
+- Tell a story
+- Infuse humour
+- Add kickass background image
+- Specify team members and why they have what it takes to succeed
+- Specify how you intend to make money
+- Add projected revenue and ARR
+- Ask for money

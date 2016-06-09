@@ -26,7 +26,7 @@
     </div>
     <div class="col-md-7"></div>
     <div class="col-md-2">
-      {% thumbnail ua.personalinformation.photo "160x160" crop="center" as up %}
+      {% thumbnail ua.personalinformation.photo "150x160" crop="center" as up %}
         <a href="{{ up.url }}" class="thumbnail">
           <img src="{{ up.url }}" width="{{ up.width }}" height="{{ up.height }}" title="{{ ua.user.get_full_name }}">
         </a>
