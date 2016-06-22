@@ -25,7 +25,9 @@ Urgent
 - Investigate how we were able to get an application completion above 100%.
 - Use Growth Hackers font and background color.
 - Implement application deadline functionality.
-- Make progress area look like a widget instead of a sidebar. We can also ensure that it is always in view even when a user scrolls down that page in the case of a long page. Background should flow throughout the main area and progress should sit on the background.
+
+- Make progress area look like a widget instead of a sidebar. We can also ensure that it is always in view even when a user scrolls down in the case of a long page. Background should flow throughout the main area and progress should sit on the background.
+- Move accounts urls into accounts/urls.py.
 
 
 
@@ -38,14 +40,13 @@ Publicity Ideas
 Strategy
 ========
 - Talk to organizations. Get their buy-in. Sign them up.
-- Do not talk to organizations. Just list their forms and publicize.
+- Just list their forms and publicize. List all organization forms that can be downloaded online from anywhere. List them in such a way that users would not have to do repetitive applications. Then talk to them later.
 - List forms that do not require organization buy-in. e.g. Registrar-General. Be ready to do all the logistics behind this to please applicants.
 
 Business
 ========
 - Sell the original idea.
 - Integrate Edem's idea by listing all forms that people are already processing through agents.
-- We can get one of Challenges Worldwide volunteers to help with sales.
 - For applications with fees, we will take a percentage of fee. For those without fees, we can make money through advertising.
 - For a start, encourage organizations with application fees to incentivize applicants by reducing the fee on Apply Central.
 - Start a blog.
@@ -61,6 +62,7 @@ Sales Tips
 - We need to make a list of the intangible things our product will bring into our customers’ lives. e.g. relief from stress, better organizations, increased productivity, faster decision making.
 - Start totally free for a number of applications in the beginning. 'Free' means we cover their payment charges for that quantity of applications. 
 - Don't forget to let prospect know that you can solve all their problems with technology. Always ask about other pain points.
+
 
 Proposal Changes
 ================
@@ -114,6 +116,7 @@ Think about this
 ================
 Plan A - Talk to organizations and sign them up.
 Plan B - Develop a useful service to develop traction from consumer side while Plan A is being implemented.
+  - Build a (OLX, Tonaton, Craigslist) for schools. Competition and attracting students seems to be the ultimate pain point for private schools (creche - university).
 
 Site tips
 =========
