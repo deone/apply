@@ -79,13 +79,13 @@ def application_index(request, orgname, slug):
         pk = current_site.pk
         if pk == 1:
             current_site.name = 'Apply Central Dev'
-            current_site.domain = 'localhost:8000'
+            current_site.domain = 'localhost:7000'
         elif pk == 2:
             current_site.name = 'Apply Central Demo'
             current_site.domain = 'demo.applycentral.net'
         elif pk == 3:
             current_site.name = 'Apply Central'
-            current_site.domain = 'applycentral.net'
+            current_site.domain = 'applycentral.co'
         current_site.save()
 
     registry_key, application, user_app, context = get_form_variables(request.user, orgname, slug)
