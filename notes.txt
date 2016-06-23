@@ -28,6 +28,7 @@ Urgent
 
 - Make progress area look like a widget instead of a sidebar. We can also ensure that it is always in view even when a user scrolls down in the case of a long page. Background should flow throughout the main area and progress should sit on the background.
 - Move accounts urls into accounts/urls.py.
+- Display textual completion feedback on application homepage too.
 
 
 
