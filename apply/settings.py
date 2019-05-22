@@ -25,7 +25,7 @@ SECRET_KEY = '_97p3pytysctbcby#+y4d)d1%xr=w(aab!$+di*z2+*yiq&qkm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['apply-deone.c9users.io']
 
 
 # Application definition
@@ -85,6 +85,9 @@ WSGI_APPLICATION = 'apply.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        },
         'NAME': 'applydb',
         'USER': 'applyadmin',
         'PASSWORD': 'applypass',
@@ -92,7 +95,6 @@ DATABASES = {
         'PORT': '3306'
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
